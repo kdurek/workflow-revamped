@@ -5,9 +5,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      mon: ['Montserrat', 'sans-serif'],
+      // mon: ['Montserrat', 'sans-serif'],
       // heb: ["Heebo", "sans-serif"],
-      // pop: ["Poppins", "sans-serif"],
+      sans: ['Poppins', 'sans-serif'],
     },
     colors: {
       transparent: 'transparent',
