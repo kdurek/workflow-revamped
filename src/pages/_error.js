@@ -10,7 +10,6 @@ const CustomError = ({statusCode}) => {
 
 CustomError.getInitialProps = ({res, err}) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  console.log(typeof statusCode);
   return {statusCode};
 };
 
