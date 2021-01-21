@@ -1,58 +1,37 @@
-<!-- Please update value of CHANGE_ME  -->
+<!-- HEADER -->
 
-<h1 align="center">CHANGE_ME</h1>
+<h1 align="center">Workflow Revamped</h1>
 
-<div align="center">
-   Solution for a challenge from  <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
-</div>
+<h2 align="center">
+  Work Assistant
+</h2>
 
-<div align="center">
-  <h3>
-    <a href="CHANGE_ME">
-      Demo
-    </a>
-    <span> | </span>
-    <a href="CHANGE_ME">
-      Solution
-    </a>
-    <span> | </span>
-    <a href="CHANGE_ME">
-      Challenge
-    </a>
-  </h3>
-</div>
-
+<hr>
 <!-- TABLE OF CONTENTS -->
 
 ## Table of Contents
 
 - [Overview](#overview)
-  - [User Stories](#user-stories)
-  - [Built With](#built-with)
-- [Features](#features)
+- [Built With](#built-with)
 - [How to use](#how-to-use)
+  - [Environment variables](#environment-variables)
 
 <!-- OVERVIEW -->
 
 ## Overview
 
-<!-- In this devchallenge i learned how to actually create reusable component, storybook and tailwind -->
+This app is made to ease me and my coworkers work
 
-### User Stories
+<!-- BUILT WITH -->
 
-- [x] Example story
-
-### Built With
+## Built With
 
 - [NextJS](https://nextjs.org/)
 - [Tailwind](https://tailwindcss.com/)
 - [Firebase](https://firebase.google.com/)
   <!-- - [Storybook](https://storybook.js.org/) -->
-  <!-- - [API](CHANGE_ME) -->
 
-## Features
-
-This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](CHANGE_ME) was to build an application to complete the given user stories.
+<!-- HOW TO USE -->
 
 ## How To Use
 
@@ -60,19 +39,17 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone CHANGE_ME
+$ git clone https://github.com/durashere/workflow-revamped
 
 # Install dependencies
-$ npm install
-$ yarn
+$ npm install | yarn
 
 # Run the app
-$ npm run dev
-yarn dev
+$ npm run dev | yarn dev
 ```
 
-
-#### firebase.js
+<!-- ENVIRONMENT VARIABLES -->
+## Environment variables
 ```shell
 NEXT_PUBLIC_FIREBASE_API_KEY=
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
