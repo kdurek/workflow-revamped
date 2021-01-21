@@ -1,26 +1,6 @@
 <!-- HEADER -->
-
 <h1 align="center">Workflow Revamped</h1>
-
-<h2 align="center">
-  Work Assistant
-</h2>
-
-<hr>
-<!-- TABLE OF CONTENTS -->
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Built With](#built-with)
-- [How to use](#how-to-use)
-  - [Environment variables](#environment-variables)
-
-<!-- OVERVIEW -->
-
-## Overview
-
-This app is made to ease me and my coworkers work
+<p align="center">Ease your job</p>
 
 <!-- BUILT WITH -->
 
