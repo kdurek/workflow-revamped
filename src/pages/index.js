@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import DefaultLayout from '../components/layouts/DefaultLayout';
-import HomePage from '../components/templates/HomePage';
+import Dashboard from '../components/templates/Dashboard';
 
 const Index = () => {
   return (
     <DefaultLayout>
       <Head>
-        <title>NextJS Boilerplate</title>
+        <title>Dashboard</title>
       </Head>
-      <HomePage />
+      <Dashboard />
     </DefaultLayout>
   );
 };
