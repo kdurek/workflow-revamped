@@ -5,7 +5,7 @@ import Footer from '../modules/Footer';
 
 const DefaultLayout = ({children}) => {
   return (
-    <div>
+    <div className="w-screen h-screen p-4 bg-gray-700">
       <Header />
       {children}
       <Footer />
