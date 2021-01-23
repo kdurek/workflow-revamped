@@ -20,7 +20,7 @@ const Header = () => {
       <button
         onClick={async () => {
           await firebaseClient.auth().signOut();
-          window.location.href = '/';
+          window.location.href = '/login';
         }}
       >
         Logout
