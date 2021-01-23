@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import '../styles/tailwind.css';
+import '../src/styles/tailwind.css';
 
-import {AuthProvider} from '../context/auth';
+import {AuthProvider} from '../src/context/auth';
 
 const CustomApp = ({Component, pageProps}) => {
   return (

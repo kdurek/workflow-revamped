@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import nookies from 'nookies';
-import DefaultLayout from '../components/layouts/DefaultLayout';
-import Dashboard from '../components/templates/Dashboard';
-import {firebaseAdmin} from '../../firebaseAdmin';
+import DefaultLayout from '../src/components/layouts/DefaultLayout';
+import Dashboard from '../src/components/templates/Dashboard';
+import {firebaseAdmin} from '../firebaseAdmin';
 
 const Index = () => {
   return (

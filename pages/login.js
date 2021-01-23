@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import AuthLayout from '../components/layouts/AuthLayout';
-import Login from '../components/templates/Login';
+import AuthLayout from '../src/components/layouts/AuthLayout';
+import Login from '../src/components/templates/Login';
 
 const login = () => {
   return (
