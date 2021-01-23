@@ -4,9 +4,11 @@ import Footer from '../modules/Footer';
 
 const AuthLayout = ({children}) => {
   return (
-    <div className="container grid h-screen mx-auto place-content-center">
-      {children}
-      <Footer />
+    <div className="grid h-screen mx-auto bg-gray-800 place-content-center">
+      <div className="container">
+        {children}
+        <Footer />
+      </div>
     </div>
   );
 };
