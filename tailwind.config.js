@@ -37,7 +37,11 @@ module.exports = {
       pink: colors.pink,
       rose: colors.rose,
     },
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        pancake: 'auto 1fr auto',
+      },
+    },
   },
   variants: {
     extend: {},
