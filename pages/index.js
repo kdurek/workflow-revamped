@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import nookies from 'nookies';
 import DefaultLayout from '../src/components/layouts/DefaultLayout';
-import Dashboard from '../src/components/templates/Dashboard';
+import DashboardPage from '../src/components/templates/DashboardPage';
 import {firebaseAdmin} from '../firebaseAdmin';
 
 const Index = () => {
@@ -10,7 +10,7 @@ const Index = () => {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <Dashboard />
+      <DashboardPage />
     </DefaultLayout>
   );
 };

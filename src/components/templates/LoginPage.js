@@ -3,7 +3,7 @@ import {firebaseClient} from '../../../firebaseClient';
 import Button from '../elements/Button';
 import Input from '../elements/Input';
 
-const Login = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
 
@@ -42,4 +42,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

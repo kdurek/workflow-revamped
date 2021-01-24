@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import AuthLayout from '../src/components/layouts/AuthLayout';
-import Login from '../src/components/templates/Login';
+import LoginPage from '../src/components/templates/LoginPage';
 
 const login = () => {
   return (
@@ -8,7 +8,7 @@ const login = () => {
       <Head>
         <title>Login</title>
       </Head>
-      <Login />
+      <LoginPage />
     </AuthLayout>
   );
 };
