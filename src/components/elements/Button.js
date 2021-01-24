@@ -6,10 +6,10 @@ const Button = ({primary, fullWidth, onClick, type, className, children}) => {
       onClick={onClick}
       type={type}
       className={classNames(
-        `border rounded-xl py-2 px-8 focus:outline-none font-medium ${className}`,
+        `border rounded-xl py-2 px-8 font-medium transform hover:scale-95 transition-all ${className}`,
         {
-          'border-blue-700 bg-blue-700 text-white hover:bg-blue-800 hover:border-blue-800 hover:text-opacity-40 transition-all duration-300': primary,
-          'border-white bg-transparent text-white': !primary,
+          'border-blue-600 bg-blue-600 text-coolGray-100 hover:bg-blue-700 hover:border-blue-700': primary,
+          'border-coolGray-600 hover:border-coolGray-700 bg-transparent text-coolGray-600 hover:text-coolGray-700': !primary,
           'w-full': fullWidth,
         }
       )}

@@ -12,16 +12,16 @@ const Input = ({
 }) => {
   return (
     <div className={`${className}`}>
-      <label className="text-sm font-medium text-white">{label}</label>
-      <div className="flex items-center gap-4 p-4 border border-white rounded-xl">
-        <span className="text-white material-icons">{icon}</span>
+      <label className="text-sm font-medium text-coolGray-600">{label}</label>
+      <div className="flex items-center gap-4 p-4 border border-coolGray-600 rounded-xl">
+        <span className="text-coolGray-600 material-icons">{icon}</span>
         {multiline ? (
           <textarea
-            rows={3}
+            rows={6}
             value={value}
             onChange={onChange}
             placeholder={placeholder}
-            className="w-full text-white placeholder-white focus:outline-none"
+            className="w-full bg-transparent placeholder-coolGray-400 text-coolGray-600"
           />
         ) : (
           <input
@@ -29,7 +29,7 @@ const Input = ({
             value={value}
             onChange={onChange}
             placeholder={placeholder}
-            className="w-full text-white placeholder-white placeholder-opacity-50 bg-transparent focus:outline-none"
+            className="w-full bg-transparent placeholder-coolGray-400 text-coolGray-600"
           />
         )}
       </div>
