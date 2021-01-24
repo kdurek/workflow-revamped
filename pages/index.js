@@ -4,9 +4,9 @@ import DefaultLayout from '../src/components/layouts/DefaultLayout';
 import DashboardPage from '../src/components/templates/DashboardPage';
 import {firebaseAdmin} from '../firebaseAdmin';
 
-const Index = () => {
+const Index = ({user}) => {
   return (
-    <DefaultLayout>
+    <DefaultLayout user={user}>
       <Head>
         <title>Dashboard</title>
       </Head>
@@ -25,7 +25,7 @@ export const getServerSideProps = async ctx => {
     // console.log('token:', token);
 
     return {
-      props: {email, uid},
+      props: {user: {email, uid}},
     };
   } catch (err) {
     // either the `token` cookie didn't exist
