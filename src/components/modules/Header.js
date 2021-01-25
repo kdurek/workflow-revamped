@@ -31,104 +31,103 @@ const Header = ({user}) => {
   };
 
   return (
-    <header>
-      <div className="flex justify-between mb-4">
-        <nav className="relative flex justify-end w-full md:justify-between">
-          <div className="hidden gap-2 md:flex md:gap-4 lg:gap-8">
-            <NavItem href="/">Dashboard</NavItem>
-            <NavItem href="/templates">Templates</NavItem>
-            <NavItem href="/toners">Toners</NavItem>
-          </div>
-          <div className="flex items-center">
-            <p className="px-2 font-medium">{user.email}</p>
-            <button onClick={() => setMenuOpen(true)} className="block md:hidden">
-              <span className="p-2 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-200">
-                menu
-              </span>
-            </button>
-            <button onClick={() => setProfileOpen(true)} className="hidden md:block">
-              <span className="p-2 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-200">
-                account_circle
-              </span>
-            </button>
-            <Transition
-              show={profileOpen}
-              enter="duration-150 ease-out"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="duration-100 ease-in"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <div className="absolute top-0 right-0">
-                <div className="flex flex-col bg-white shadow rounded-xl">
-                  <div className="flex items-center">
-                    <p className="px-2 font-medium">{user.email}</p>
-                    <button onClick={() => setProfileOpen(false)} className="self-end">
-                      <span className="p-1 m-1 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-200">
-                        close
-                      </span>
-                    </button>
-                  </div>
-                  <div className="space-y-1">
-                    {/* <NavItemMobile href="/">Dashboard</NavItemMobile>
-                    <NavItemMobile href="/templates">Templates</NavItemMobile>
-                    <NavItemMobile href="/toners">Toners</NavItemMobile> */}
-                  </div>
-                  <button
-                    onClick={async () => {
-                      await firebaseClient.auth().signOut();
-                      window.location.href = '/login';
-                    }}
-                    className="px-5 py-3 text-red-600 rounded-b-lg bg-coolGray-100 hover:bg-coolGray-200"
-                  >
-                    <span className="pr-2 align-middle material-icons">exit_to_app</span>
-                    Logout
+    <header className="flex justify-between mb-4">
+      {/* MENU DESKTOP */}
+      <nav className="relative flex justify-end w-full md:justify-between">
+        <div className="hidden gap-2 md:flex md:gap-4 lg:gap-8">
+          <NavItem href="/">Dashboard</NavItem>
+          <NavItem href="/templates">Templates</NavItem>
+          <NavItem href="/toners">Toners</NavItem>
+        </div>
+        <div className="flex items-center">
+          <p className="px-2 font-medium text-coolGray-600">{user.email}</p>
+          <button onClick={() => setProfileOpen(true)} className="hidden md:block">
+            <span className="p-2 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-200">
+              account_circle
+            </span>
+          </button>
+          <Transition
+            show={profileOpen}
+            enter="duration-150 ease-out"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="duration-100 ease-in"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <div className="absolute top-0 right-0">
+              <div className="flex flex-col bg-white shadow rounded-xl">
+                <div className="flex items-center">
+                  <p className="px-2 font-medium text-coolGray-600">{user.email}</p>
+                  <button onClick={() => setProfileOpen(false)} className="self-end">
+                    <span className="p-1 m-1 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-200">
+                      close
+                    </span>
                   </button>
                 </div>
+                <div className="space-y-1">
+                  {/* <NavItemMobile href="/">Dashboard</NavItemMobile>
+                    <NavItemMobile href="/templates">Templates</NavItemMobile>
+                    <NavItemMobile href="/toners">Toners</NavItemMobile> */}
+                </div>
+                <button
+                  onClick={async () => {
+                    await firebaseClient.auth().signOut();
+                    window.location.href = '/login';
+                  }}
+                  className="px-5 py-3 text-red-600 rounded-b-lg bg-coolGray-100 hover:bg-coolGray-200"
+                >
+                  <span className="pr-2 align-middle material-icons">exit_to_app</span>
+                  Logout
+                </button>
               </div>
-            </Transition>
-          </div>
-        </nav>
-      </div>
-      {/* MENU MOBILE */}
-      <Transition
-        show={menuOpen}
-        enter="duration-150 ease-out"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="duration-100 ease-in"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
-        <nav className="absolute inset-x-0 top-0 p-2 md:hidden">
-          <div className="flex flex-col bg-white shadow rounded-xl">
-            <div className="flex items-center justify-end">
-              <p className="pl-2 font-medium">{user.email}</p>
-              <button onClick={() => setMenuOpen(false)} className="self-end">
-                <span className="p-2 m-2 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-200">
-                  close
-                </span>
-              </button>
             </div>
-            <div className="space-y-1">
-              <NavItemMobile href="/">Dashboard</NavItemMobile>
-              <NavItemMobile href="/templates">Templates</NavItemMobile>
-              <NavItemMobile href="/toners">Toners</NavItemMobile>
-            </div>
-            <button
-              onClick={async () => {
-                await firebaseClient.auth().signOut();
-                window.location.href = '/login';
-              }}
-              className="px-5 py-3 text-red-600 rounded-b-lg bg-coolGray-100 hover:bg-coolGray-200"
-            >
-              <span className="pr-2 align-middle material-icons">exit_to_app</span>
-              Logout
-            </button>
-          </div>
-        </nav>
-      </Transition>
+          </Transition>
+          <button onClick={() => setMenuOpen(true)} className="block md:hidden">
+            <span className="p-2 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-200">
+              menu
+            </span>
+          </button>
+          {/* MENU MOBILE */}
+          <Transition
+            show={menuOpen}
+            enter="duration-150 ease-out"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="duration-100 ease-in"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <nav className="absolute inset-x-0 top-0 z-10 -m-2 md:hidden">
+              <div className="flex flex-col bg-white shadow rounded-xl">
+                <div className="flex items-center justify-end">
+                  <p className="pl-2 font-medium text-coolGray-600">{user.email}</p>
+                  <button onClick={() => setMenuOpen(false)} className="self-end">
+                    <span className="p-2 m-2 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-200">
+                      close
+                    </span>
+                  </button>
+                </div>
+                <div className="space-y-1">
+                  <NavItemMobile href="/">Dashboard</NavItemMobile>
+                  <NavItemMobile href="/templates">Templates</NavItemMobile>
+                  <NavItemMobile href="/toners">Toners</NavItemMobile>
+                </div>
+                <button
+                  onClick={async () => {
+                    await firebaseClient.auth().signOut();
+                    window.location.href = '/login';
+                  }}
+                  className="px-5 py-3 text-red-600 rounded-b-lg bg-coolGray-100 hover:bg-coolGray-200"
+                >
+                  <span className="pr-2 align-middle material-icons">exit_to_app</span>
+                  Logout
+                </button>
+              </div>
+            </nav>
+          </Transition>
+        </div>
+      </nav>
     </header>
   );
 };
