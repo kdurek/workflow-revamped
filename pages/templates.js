@@ -4,13 +4,13 @@ import DefaultLayout from '../src/components/layouts/DefaultLayout';
 import TemplatesPage from '../src/components/templates/TemplatesPage';
 import {firebaseAdmin} from '../firebaseAdmin';
 
-const Templates = ({user}) => {
+const Templates = ({user, cmsList}) => {
   return (
     <DefaultLayout user={user}>
       <Head>
         <title>Templates</title>
       </Head>
-      <TemplatesPage />
+      <TemplatesPage cmsList={cmsList} />
     </DefaultLayout>
   );
 };
@@ -24,8 +24,12 @@ export const getServerSideProps = async ctx => {
 
     // console.log('token:', token);
 
+    const cmsList = await (await firebaseAdmin.firestore().collection('cmss').get()).docs.map(doc =>
+      doc.data()
+    );
+
     return {
-      props: {user: {email, uid}},
+      props: {user: {email, uid}, cmsList},
     };
   } catch (err) {
     // either the `token` cookie didn't exist

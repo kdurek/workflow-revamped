@@ -1,16 +1,15 @@
 import {useState} from 'react';
 import classNames from 'classnames';
 import Card from '../elements/Card';
-import Generator from '../modules/Generator';
-import cmss from '../../../cmss.json';
+import TemplatesGenerator from '../modules/TemplatesGenerator';
 
-const Templates = () => {
-  const [activeTemplate, setActiveTemplate] = useState(cmss[0]);
+const Templates = ({cmsList}) => {
+  const [activeTemplate, setActiveTemplate] = useState(cmsList[0]);
 
   return (
     <div className="grid grid-cols-6 gap-4">
-      <Card className="">
-        {cmss.map((cms, i) => (
+      <Card className="space-y-2">
+        {cmsList.map((cms, i) => (
           <button
             key={i}
             onClick={() => setActiveTemplate(cms)}
@@ -19,12 +18,12 @@ const Templates = () => {
               {'bg-coolGray-400 hover:bg-coolGray-400': activeTemplate === cms}
             )}
           >
-            <p className="">{cms.name}</p>
+            {cms.name}
           </button>
         ))}
       </Card>
       <Card className="col-span-5">
-        <Generator activeTemplate={activeTemplate} />
+        <TemplatesGenerator activeTemplate={activeTemplate} />
       </Card>
     </div>
   );
