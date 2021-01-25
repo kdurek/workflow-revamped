@@ -2,7 +2,7 @@ import Head from 'next/head';
 import nookies from 'nookies';
 import DefaultLayout from '../src/components/layouts/DefaultLayout';
 import TemplatesPage from '../src/components/templates/TemplatesPage';
-import {firebaseAdmin} from '../firebaseAdmin';
+import firebaseAdmin from '../firebaseAdmin';
 
 const Templates = ({user, cmsList}) => {
   return (

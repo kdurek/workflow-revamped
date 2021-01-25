@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import Link from 'next/link';
 import {Transition} from '@headlessui/react';
-import {firebaseClient} from '../../../firebaseClient';
+import firebaseClient from '../../../firebaseClient';
 
 const Header = ({user}) => {
   const [menuOpen, setMenuOpen] = useState(false);

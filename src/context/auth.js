@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext, createContext} from 'react';
 import nookies from 'nookies';
-import {firebaseClient} from '../../firebaseClient';
+import firebaseClient from '../../firebaseClient';
 
 export const AuthContext = createContext(null);
 

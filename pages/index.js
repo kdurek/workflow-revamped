@@ -2,7 +2,7 @@ import Head from 'next/head';
 import nookies from 'nookies';
 import DefaultLayout from '../src/components/layouts/DefaultLayout';
 import DashboardPage from '../src/components/templates/DashboardPage';
-import {firebaseAdmin} from '../firebaseAdmin';
+import firebaseAdmin from '../firebaseAdmin';
 
 const Index = ({user}) => {
   return (

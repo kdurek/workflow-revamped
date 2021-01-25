@@ -1,7 +1,6 @@
 import firebaseClient from 'firebase/app';
-// import 'firebase/firestore';
-// import 'firebase/storage';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 if (typeof window !== 'undefined' && !firebaseClient.apps.length) {
   firebaseClient.initializeApp({
@@ -17,15 +16,4 @@ if (typeof window !== 'undefined' && !firebaseClient.apps.length) {
   window.firebase = firebaseClient;
 }
 
-// const auth = firebaseClient.auth();
-// const db = firebase.firestore();
-// const now = firebaseClient.firestore.Timestamp.now();
-// const storage = firebase.storage();
-
-export {
-  firebaseClient,
-  // auth,
-  // db,
-  // now,
-  // storage,
-};
+export default firebaseClient;

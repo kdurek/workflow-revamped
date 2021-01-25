@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {firebaseClient} from '../../../firebaseClient';
+import firebaseClient from '../../../firebaseClient';
 import Button from '../elements/Button';
 import Input from '../elements/Input';
 
