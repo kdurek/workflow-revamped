@@ -11,14 +11,14 @@ const LoginPage = () => {
     <div className="container">
       <form>
         <Input
-          icon={'mail'}
+          leftIcon={'mail'}
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder={'Email'}
         />
         <Input
           type={'password'}
-          icon={'lock'}
+          leftIcon={'lock'}
           value={pass}
           onChange={e => setPass(e.target.value)}
           placeholder={'Password'}
