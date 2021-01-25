@@ -75,7 +75,7 @@ const Header = ({user}) => {
                     await firebaseClient.auth().signOut();
                     window.location.href = '/login';
                   }}
-                  className="px-5 py-3 text-red-600 rounded-b-lg bg-coolGray-100 hover:bg-coolGray-200"
+                  className="px-5 py-3 text-red-600 rounded-b-xl bg-coolGray-100 hover:bg-coolGray-200"
                 >
                   <span className="pr-2 align-middle material-icons">exit_to_app</span>
                   Logout
@@ -118,7 +118,7 @@ const Header = ({user}) => {
                     await firebaseClient.auth().signOut();
                     window.location.href = '/login';
                   }}
-                  className="px-5 py-3 text-red-600 rounded-b-lg bg-coolGray-100 hover:bg-coolGray-200"
+                  className="px-5 py-3 text-red-600 rounded-b-xl bg-coolGray-100 hover:bg-coolGray-200"
                 >
                   <span className="pr-2 align-middle material-icons">exit_to_app</span>
                   Logout
