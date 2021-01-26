@@ -14,8 +14,8 @@ const Templates = ({cmsList}) => {
             key={i}
             onClick={() => setActiveTemplate(cms)}
             className={classNames(
-              'w-full py-3 font-medium text-center transition-all rounded-xl transform text-coolGray-600 hover:bg-coolGray-200',
-              {'bg-coolGray-400 hover:bg-coolGray-400': activeTemplate === cms}
+              'w-full py-3 font-medium text-center transition-all rounded-xl transform text-coolGray-600 hover:bg-blue-200',
+              {'bg-blue-300 hover:bg-blue-300': activeTemplate === cms}
             )}
           >
             {cms.name}
