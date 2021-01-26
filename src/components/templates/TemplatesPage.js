@@ -7,8 +7,8 @@ const Templates = ({cmsList}) => {
   const [activeTemplate, setActiveTemplate] = useState(cmsList[0]);
 
   return (
-    <div className="grid grid-cols-6 gap-4">
-      <Card className="space-y-2">
+    <div className="flex gap-4">
+      <Card className="space-y-2 w-96">
         {cmsList.map((cms, i) => (
           <button
             key={i}
@@ -22,7 +22,7 @@ const Templates = ({cmsList}) => {
           </button>
         ))}
       </Card>
-      <Card className="col-span-5">
+      <Card className="w-full">
         <TemplatesGenerator activeTemplate={activeTemplate} />
       </Card>
     </div>
