@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply bg-coolGray-100;
+  }
+
   input {
     @apply outline-none appearance-none focus:outline-none;
   }
