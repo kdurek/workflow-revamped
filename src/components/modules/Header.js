@@ -2,10 +2,27 @@ import {useState} from 'react';
 import ActiveLink from '../elements/ActiveLink';
 import {Transition} from '@headlessui/react';
 import firebaseClient from '../../../firebaseClient';
+import Input from '../elements/Input';
 
 const Header = ({user}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [userNameEditOpen, setUserNameEditOpen] = useState(false);
+  const [userName, setUserName] = useState(user.name);
+
+  const updateProfile = newName => {
+    firebaseClient
+      .auth()
+      .currentUser.updateProfile({
+        displayName: newName,
+      })
+      .then(function () {
+        // Update successful.
+      })
+      .catch(function (error) {
+        // An error happened.
+      });
+  };
 
   const NavItem = ({href, children}) => {
     return (
@@ -65,11 +82,24 @@ const Header = ({user}) => {
                     </span>
                   </button>
                 </div>
-                <div className="space-y-1">
-                  {/* <NavItemMobile href="/">Dashboard</NavItemMobile>
-                    <NavItemMobile href="/templates">Templates</NavItemMobile>
-                    <NavItemMobile href="/toners">Toners</NavItemMobile> */}
-                </div>
+                {!userNameEditOpen ? (
+                  <button onClick={() => setUserNameEditOpen(true)}>{userName}</button>
+                ) : (
+                  <form
+                    onSubmit={e => {
+                      e.preventDefault();
+                      updateProfile(userName);
+                      setUserNameEditOpen(false);
+                    }}
+                    className="flex justify-center"
+                  >
+                    <Input
+                      label="Name"
+                      onChange={e => setUserName(e.target.value)}
+                      className="w-5/6 mb-2"
+                    />
+                  </form>
+                )}
                 <button
                   onClick={async () => {
                     await firebaseClient.auth().signOut();

@@ -22,10 +22,17 @@ export const getServerSideProps = async ctx => {
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const {uid, email} = token;
 
+    const name = await firebaseAdmin
+      .auth()
+      .getUser(uid)
+      .then(userRecord => userRecord.displayName || 'undefined')
+      .catch(error => {
+        console.log('Error fetching user data:', error);
+      });
     // console.log('token:', token);
 
     return {
-      props: {user: {email, uid}},
+      props: {user: {name, email, uid}},
     };
   } catch (err) {
     // either the `token` cookie didn't exist

@@ -4,13 +4,13 @@ import DefaultLayout from '../src/components/layouts/DefaultLayout';
 import TemplatesPage from '../src/components/templates/TemplatesPage';
 import firebaseAdmin from '../firebaseAdmin';
 
-const Templates = ({user, cmsList}) => {
+const Templates = ({user, cmsList, config}) => {
   return (
     <DefaultLayout user={user}>
       <Head>
         <title>Templates</title>
       </Head>
-      <TemplatesPage cmsList={cmsList} />
+      <TemplatesPage cmsList={cmsList} user={user} config={config} />
     </DefaultLayout>
   );
 };
@@ -22,14 +22,25 @@ export const getServerSideProps = async ctx => {
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const {uid, email} = token;
 
+    const name = await firebaseAdmin
+      .auth()
+      .getUser(uid)
+      .then(userRecord => userRecord.displayName || 'undefined')
+      .catch(error => {
+        console.log('Error fetching user data:', error);
+      });
     // console.log('token:', token);
 
     const cmsList = await (await firebaseAdmin.firestore().collection('cmss').get()).docs.map(doc =>
       doc.data()
     );
 
+    const config = await (
+      await firebaseAdmin.firestore().collection('config').get()
+    ).docs.map(doc => doc.data());
+
     return {
-      props: {user: {email, uid}, cmsList},
+      props: {user: {name, email, uid}, cmsList, config: config[0]},
     };
   } catch (err) {
     // either the `token` cookie didn't exist
