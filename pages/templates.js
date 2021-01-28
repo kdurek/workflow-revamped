@@ -31,9 +31,9 @@ export const getServerSideProps = async ctx => {
       });
     // console.log('token:', token);
 
-    const cmsList = await (await firebaseAdmin.firestore().collection('cmss').get()).docs.map(doc =>
-      doc.data()
-    );
+    const cmsList = await (
+      await firebaseAdmin.firestore().collection('cmss').orderBy('name').get()
+    ).docs.map(doc => doc.data());
 
     const config = await (
       await firebaseAdmin.firestore().collection('config').get()
