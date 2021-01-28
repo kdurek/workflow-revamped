@@ -5,7 +5,7 @@ import Footer from '../modules/Footer';
 
 const DefaultLayout = ({user, children}) => {
   return (
-    <div className="container grid w-screen max-h-screen p-4 mx-auto grid-rows-pancake">
+    <div className="container grid min-h-screen p-4 mx-auto grid-rows-pancake">
       <Header user={user} />
       {children}
       <Footer />
