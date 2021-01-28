@@ -2,36 +2,38 @@ import classNames from 'classnames';
 
 const Input = ({
   type = 'text',
-  leftIcon,
-  rightIcon,
+  fullWidth,
   disabled,
   readOnly,
   value,
   onChange,
   onFocus,
-  label,
-  placeholder,
+  label = 'Label',
   className,
 }) => {
-  const icon = <span className="text-coolGray-600 material-icons">{leftIcon || rightIcon}</span>;
-
   return (
-    <div className={`${className}`}>
-      <label className="text-sm font-medium text-coolGray-600">{label}</label>
-      <div className="flex items-center gap-4 p-4 border border-coolGray-600 rounded-xl">
-        {leftIcon && icon}
-        <input
-          type={type}
-          disabled={disabled}
-          readOnly={readOnly}
-          value={value}
-          onChange={onChange}
-          onFocus={onFocus}
-          placeholder={placeholder}
-          className="w-full bg-transparent placeholder-coolGray-400 text-coolGray-600"
-        />
-        {rightIcon && icon}
-      </div>
+    <div className={`relative floating-input ${className}`}>
+      <input
+        type={type}
+        disabled={disabled}
+        readOnly={readOnly}
+        value={value}
+        onChange={onChange}
+        onFocus={onFocus}
+        id={label}
+        className={classNames(
+          'h-12 py-4 w-full focus:ring-1 transition-all duration-300 px-3 bg-transparent shadow-inner bg-coolGray-100 rounded-xl text-coolGray-600 focus:outline-none placeholder-transparent'
+        )}
+        placeholder={label}
+        autoComplete="off"
+      />
+
+      <label
+        htmlFor={label}
+        className="absolute top-0 left-0 h-full px-3 py-3 transition-all duration-300 origin-left transform pointer-events-none text-coolGray-400"
+      >
+        {label}
+      </label>
     </div>
   );
 };

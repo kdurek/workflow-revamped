@@ -17,9 +17,9 @@ const TextArea = ({
   className,
 }) => {
   return (
-    <div className={`${className}`}>
-      <label className="text-sm font-medium text-coolGray-600">{label}</label>
-      <div className="flex items-center gap-4 p-4 border border-coolGray-600 rounded-xl">
+    <div className={`rounded-xl px-3 bg-coolGray-100 shadow-inner ${className}`}>
+      <label className="text-xs text-coolGray-400">{label}</label>
+      <div className="flex items-center gap-4 py-1 rounded-xl">
         <textarea
           rows={rows || countRows(value)}
           disabled={disabled}
@@ -30,7 +30,9 @@ const TextArea = ({
           placeholder={placeholder}
           className={classNames(
             'w-full bg-transparent placeholder-coolGray-400 text-coolGray-600',
-            {'resize-none': !resizable}
+            {
+              'resize-none': !resizable,
+            }
           )}
         />
       </div>
