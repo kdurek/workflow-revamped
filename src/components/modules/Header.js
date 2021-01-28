@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import Link from 'next/link';
+import ActiveLink from '../elements/ActiveLink';
 import {Transition} from '@headlessui/react';
 import firebaseClient from '../../../firebaseClient';
 
@@ -9,24 +9,24 @@ const Header = ({user}) => {
 
   const NavItem = ({href, children}) => {
     return (
-      <Link href={href}>
-        <p className="font-medium transition-all transform cursor-pointer hover:scale-105 md:text-2xl lg:text-3xl text-coolGray-600">
+      <ActiveLink href={href}>
+        <p className="font-medium transition-all transform cursor-pointer hover:scale-105 md:text-1xl lg:text-2xl text-coolGray-600">
           {children}
         </p>
-      </Link>
+      </ActiveLink>
     );
   };
 
   const NavItemMobile = ({href, children}) => {
     return (
-      <Link href={href}>
+      <ActiveLink href={href}>
         <button
           onClick={() => setMenuOpen(false)}
-          className="w-full py-3 text-xl font-medium text-center transition-all transform text-coolGray-600 hover:bg-coolGray-50"
+          className="w-full py-3 text-center transition-all transform text-coolGray-600 hover:bg-coolGray-50"
         >
-          <p className="px-5">{children}</p>
+          {children}
         </button>
-      </Link>
+      </ActiveLink>
     );
   };
 
@@ -34,7 +34,7 @@ const Header = ({user}) => {
     <header className="flex justify-between mb-4">
       {/* MENU DESKTOP */}
       <nav className="relative flex justify-end w-full md:justify-between">
-        <div className="hidden gap-2 md:flex md:gap-4 lg:gap-8">
+        <div className="items-baseline hidden gap-2 md:flex md:gap-4 lg:gap-6">
           <NavItem href="/">Dashboard</NavItem>
           <NavItem href="/templates">Templates</NavItem>
           <NavItem href="/toners">Toners</NavItem>
