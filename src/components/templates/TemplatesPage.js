@@ -8,7 +8,7 @@ const Templates = ({cmsList, user, config}) => {
 
   return (
     <div className="flex gap-4">
-      <Card className="w-40 space-y-2 md:w-96">
+      <Card className="w-40 md:w-96">
         <TemplatesMenu
           cmsList={cmsList}
           activeTemplate={activeTemplate}
