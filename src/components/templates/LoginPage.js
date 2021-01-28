@@ -10,18 +10,12 @@ const LoginPage = () => {
   return (
     <div className="container">
       <form>
-        <Input
-          leftIcon={'mail'}
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          placeholder={'Email'}
-        />
+        <Input value={email} onChange={e => setEmail(e.target.value)} label={'Email'} />
         <Input
           type={'password'}
-          leftIcon={'lock'}
           value={pass}
           onChange={e => setPass(e.target.value)}
-          placeholder={'Password'}
+          label={'Password'}
           className="mt-4"
         />
         <Button
