@@ -4,6 +4,17 @@ import {Transition} from '@headlessui/react';
 import firebaseClient from '../../../firebaseClient';
 import Input from '../elements/Input';
 
+const navItems = [
+  {
+    label: 'Dashboard',
+    path: '/',
+  },
+  {
+    label: 'Templates',
+    path: '/templates',
+  },
+];
+
 const Header = ({user}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -24,9 +35,9 @@ const Header = ({user}) => {
       });
   };
 
-  const NavItem = ({href, children}) => {
+  const NavItem = ({path, children}) => {
     return (
-      <ActiveLink href={href}>
+      <ActiveLink href={path}>
         <p className="font-medium transition-all transform cursor-pointer hover:scale-105 md:text-1xl lg:text-2xl text-coolGray-600">
           {children}
         </p>
@@ -34,9 +45,9 @@ const Header = ({user}) => {
     );
   };
 
-  const NavItemMobile = ({href, children}) => {
+  const NavItemMobile = ({path, children}) => {
     return (
-      <ActiveLink href={href}>
+      <ActiveLink href={path}>
         <button
           onClick={() => setMenuOpen(false)}
           className="w-full py-3 text-center transition-all transform text-coolGray-600 hover:bg-coolGray-50"
@@ -52,9 +63,11 @@ const Header = ({user}) => {
       {/* MENU DESKTOP */}
       <nav className="relative flex justify-end w-full md:justify-between">
         <div className="items-baseline hidden gap-2 md:flex md:gap-4 lg:gap-6">
-          <NavItem href="/">Dashboard</NavItem>
-          <NavItem href="/templates">Templates</NavItem>
-          <NavItem href="/toners">Toners</NavItem>
+          {navItems.map((item, i) => (
+            <NavItem key={i} path={item.path}>
+              {item.label}
+            </NavItem>
+          ))}
         </div>
         <div className="flex items-center">
           <p className="px-2 font-medium text-coolGray-600">{user.email}</p>
@@ -139,9 +152,11 @@ const Header = ({user}) => {
                   </button>
                 </div>
                 <div className="space-y-1">
-                  <NavItemMobile href="/">Dashboard</NavItemMobile>
-                  <NavItemMobile href="/templates">Templates</NavItemMobile>
-                  <NavItemMobile href="/toners">Toners</NavItemMobile>
+                  {navItems.map((item, i) => (
+                    <NavItemMobile key={i} path={item.path}>
+                      {item.label}
+                    </NavItemMobile>
+                  ))}
                 </div>
                 <button
                   onClick={async () => {
