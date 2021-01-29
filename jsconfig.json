@@ -8,7 +8,7 @@
       "@/templates/*": ["src/components/templates/*"],
       "@/context/*": ["src/context/*"],
       "@/styles/*": ["src/styles/*"],
-      "@/utils/*": ["src/components/utils/*"]
+      "@/utils/*": ["src/utils/*"]
     }
   }
 }
