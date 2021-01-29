@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import ActiveLink from '../elements/ActiveLink';
+import ActiveLink from '@/elements/ActiveLink';
 import {Transition} from '@headlessui/react';
-import firebaseClient from '../../../firebaseClient';
-import Input from '../elements/Input';
+import firebaseClient from 'firebaseClient';
+import Input from '@/elements/Input';
 
 const navItems = [
   {

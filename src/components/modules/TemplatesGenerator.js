@@ -1,11 +1,11 @@
 import {useState} from 'react';
-import Button from '../elements/Button';
-import TextArea from '../elements/TextArea';
-import copyToClipboard from '../../utils/copyToClipboard';
-import generatePassword from '../../utils/generatePassword';
-import normalizeNumber from '../../utils/normalizeNumber';
-import sendEmail from '../../utils/sendEmail';
-import Input from '../elements/Input';
+import Button from '@/elements/Button';
+import TextArea from '@/elements/TextArea';
+import copyToClipboard from '@/utils/copyToClipboard';
+import generatePassword from '@/utils/generatePassword';
+import normalizeNumber from '@/utils/normalizeNumber';
+import sendEmail from '@/utils/sendEmail';
+import Input from '@/elements/Input';
 
 const TemplatesGenerator = ({activeTemplate, user, config}) => {
   const [login, setLogin] = useState('');

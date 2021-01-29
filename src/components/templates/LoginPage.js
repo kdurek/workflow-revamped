@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import firebaseClient from '../../../firebaseClient';
-import Button from '../elements/Button';
-import Input from '../elements/Input';
+import firebaseClient from 'firebaseClient';
+import Button from '@/elements/Button';
+import Input from '@/elements/Input';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
