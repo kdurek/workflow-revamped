@@ -13,6 +13,10 @@ const navItems = [
     label: 'Templates',
     path: '/templates',
   },
+  {
+    label: 'Toners',
+    path: '/toners',
+  },
 ];
 
 const Header = ({user}) => {
