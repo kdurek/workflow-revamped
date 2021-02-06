@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import Card from '@/elements/Card';
 import TemplatesMenu from '@/modules/TemplatesMenu';
 import TemplatesGenerator from '@/modules/TemplatesGenerator';
+import Card from '@/elements/Card';
 
-const Templates = ({cmsList, user, config}) => {
+const TemplatesPage = ({cmsList, user, config}) => {
   const [activeTemplate, setActiveTemplate] = useState(cmsList[0]);
 
   return (
@@ -22,4 +22,4 @@ const Templates = ({cmsList, user, config}) => {
   );
 };
 
-export default Templates;
+export default TemplatesPage;

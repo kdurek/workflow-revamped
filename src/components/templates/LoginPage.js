@@ -1,11 +1,20 @@
 import {useState} from 'react';
-import firebaseClient from 'firebaseClient';
+import {useRouter} from 'next/router';
+import {useAuth} from '@/context/AuthContext';
 import Button from '@/elements/Button';
 import Input from '@/elements/Input';
 
 const LoginPage = () => {
+  const router = useRouter();
+  const auth = useAuth();
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
+
+  const onSubmit = () => {
+    return auth.signIn(email, pass).then(() => {
+      router.push(window.location.pathname);
+    });
+  };
 
   return (
     <div className="container">
@@ -21,10 +30,9 @@ const LoginPage = () => {
         <Button
           primary
           fullWidth
-          onClick={async e => {
+          onClick={e => {
             e.preventDefault();
-            await firebaseClient.auth().signInWithEmailAndPassword(email, pass);
-            window.location.href = '/';
+            onSubmit();
           }}
           type="submit"
           className="mt-4 font-semibold"
