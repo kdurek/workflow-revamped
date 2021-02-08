@@ -7,16 +7,16 @@ import Card from '@/elements/Card';
 const getColor = color => {
   switch (color) {
     case 'Black':
-      return 'gray-400';
+      return 'bg-gray-400';
     case 'Cyan':
-      return 'cyan-200';
+      return 'bg-cyan-200';
     case 'Magenta':
-      return 'fuchsia-200';
+      return 'bg-fuchsia-200';
     case 'Yellow':
-      return 'yellow-200';
+      return 'bg-yellow-200';
 
     default:
-      return 'white';
+      return 'bg-transparent';
   }
 };
 
@@ -37,9 +37,9 @@ const Toner = ({toner}) => {
         <span className="text-lg font-bold">{toner.brand}</span>
         <div className="flex items-center gap-2 mt-4">
           <div
-            className={`relative flex flex-col items-center justify-center p-5 rounded-xl shadow bg-${
-              toner && getColor(toner.color)
-            }`}
+            className={`relative flex flex-col items-center justify-center p-5 rounded-xl shadow ${getColor(
+              toner.color
+            )}`}
           >
             <span className="absolute font-bold cursor-default">{toner.amount}</span>
           </div>
