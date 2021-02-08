@@ -11,6 +11,9 @@ const Templates = () => {
   const [config, setConfig] = useState();
   const [cmsList, setCmsList] = useState();
 
+  console.log(config);
+  console.log(user);
+
   useEffect(() => {
     firebaseClient
       .firestore()
@@ -26,8 +29,8 @@ const Templates = () => {
       .collection('config')
       .onSnapshot(snapshot => {
         const data = [];
-        snapshot.forEach(doc => data.push({...doc.data(), id: doc.id}));
-        setConfig(data);
+        snapshot.forEach(doc => data.push(doc.data()));
+        setConfig(data[0]);
       });
   }, []);
 
