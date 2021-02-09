@@ -1,10 +1,10 @@
 import Card from '@/elements/Card';
+import OutOfStock from '@/modules/OutOfStock';
 
-const Dashboard = () => {
+const Dashboard = ({tonersList}) => {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      <Card className="">Qucik Use</Card>
-      <Card className="">Last pieces</Card>
+      <OutOfStock tonersList={tonersList} />
     </div>
   );
 };
