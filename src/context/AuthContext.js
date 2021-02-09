@@ -7,10 +7,6 @@ import AuthLayout from '@/layouts/AuthLayout';
 
 const AuthContext = createContext({user: {}});
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
 export const AuthProvider = ({children}) => {
   const router = useRouter();
 
@@ -102,7 +98,6 @@ export const AuthProvider = ({children}) => {
   );
 };
 
-// export function AuthProvider({children}) {
-//   const auth = useAuthProvider();
-//   return <AuthContext.Provider value={auth}>{loading && children}</AuthContext.Provider>;
-// }
+export const useAuth = () => {
+  return useContext(AuthContext);
+};

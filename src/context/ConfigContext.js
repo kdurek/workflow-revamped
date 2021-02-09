@@ -4,27 +4,24 @@ import firebaseClient from 'firebaseClient';
 export const ConfigContext = createContext();
 
 export function ConfigProvider({children}) {
-  const [config, setConfig] = useState([]);
+  const [config, setConfig] = useState();
 
-  // useEffect(() => {
-  //   setConfig(initConfig);
-  // }, []);
-
-  // const [config, setConfig] = useState({exampleConfigKey: 'exampleConfigValue'});
-
-  useEffect(async () => {
-    setConfig(
-      (await firebaseClient.firestore().collection('config').get()).docs.map(doc => doc.data())
-    );
-    // setConfig(
-    //   await (await firebaseAdmin.firestore().collection('config').get()).docs.map(doc => doc.data())
-    // );
+  useEffect(() => {
+    firebaseClient
+      .firestore()
+      .collection('config')
+      .onSnapshot(snapshot => {
+        const data = [];
+        snapshot.forEach(doc => data.push(doc.data()));
+        setConfig(data[0]);
+      });
   }, []);
 
-  return <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>;
+  const value = {config};
+
+  return <ConfigContext.Provider value={value}>{children}</ConfigContext.Provider>;
 }
 
 export const useConfig = () => {
-  const state = useContext(ConfigContext);
-  return state;
+  return useContext(ConfigContext);
 };

@@ -3,7 +3,7 @@ import TemplatesMenu from '@/modules/TemplatesMenu';
 import TemplatesGenerator from '@/modules/TemplatesGenerator';
 import Card from '@/elements/Card';
 
-const TemplatesPage = ({cmsList, user, config}) => {
+const TemplatesPage = ({cmsList, user}) => {
   const [activeTemplate, setActiveTemplate] = useState(cmsList[0]);
 
   return (
@@ -16,7 +16,7 @@ const TemplatesPage = ({cmsList, user, config}) => {
         />
       </Card>
       <Card className="w-full">
-        <TemplatesGenerator activeTemplate={activeTemplate} user={user} config={config} />
+        <TemplatesGenerator activeTemplate={activeTemplate} user={user} />
       </Card>
     </div>
   );

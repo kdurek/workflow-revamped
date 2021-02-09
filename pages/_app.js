@@ -2,11 +2,14 @@ import '@/styles/tailwind.css';
 
 import PropTypes from 'prop-types';
 import {AuthProvider} from '@/context/AuthContext';
+import {ConfigProvider} from '@/context/ConfigContext';
 
 const CustomApp = ({Component, pageProps}) => {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <ConfigProvider>
+        <Component {...pageProps} />
+      </ConfigProvider>
     </AuthProvider>
   );
 };
