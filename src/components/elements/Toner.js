@@ -3,6 +3,7 @@ import {Transition} from '@headlessui/react';
 import firebaseClient from 'firebaseClient';
 import Button from '@/elements/Button';
 import Card from '@/elements/Card';
+import {useAuth} from '@/context/AuthContext';
 
 const getColor = color => {
   switch (color) {
@@ -21,11 +22,15 @@ const getColor = color => {
 };
 
 const Toner = ({toner}) => {
+  const {user} = useAuth();
+
   const [cardHover, setCardHover] = useState(false);
 
   const onUse = id => {
-    const decrement = firebaseClient.firestore.FieldValue.increment(-1);
-    firebaseClient.firestore().collection('toners').doc(id).update({amount: decrement});
+    if (user.role === 'admin') {
+      const decrement = firebaseClient.firestore.FieldValue.increment(-1);
+      firebaseClient.firestore().collection('toners').doc(id).update({amount: decrement});
+    }
   };
 
   return (
