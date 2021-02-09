@@ -2,6 +2,7 @@ import {useState, useEffect, useContext, createContext} from 'react';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
 import firebaseClient from 'firebaseClient';
+import {ConfigProvider} from '@/context/ConfigContext';
 import LoginPage from '@/templates/LoginPage';
 import AuthLayout from '@/layouts/AuthLayout';
 
@@ -84,16 +85,18 @@ export const AuthProvider = ({children}) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading
-        ? children
-        : user === false && (
-            <AuthLayout>
-              <Head>
-                <title>Login</title>
-              </Head>
-              <LoginPage />
-            </AuthLayout>
-          )}
+      <ConfigProvider>
+        {!loading
+          ? children
+          : user === false && (
+              <AuthLayout>
+                <Head>
+                  <title>Login</title>
+                </Head>
+                <LoginPage />
+              </AuthLayout>
+            )}
+      </ConfigProvider>
     </AuthContext.Provider>
   );
 };
