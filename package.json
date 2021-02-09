@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "deploy": "git pull && next build && pm2 restart workflow-revamped",
     "start": "next start"
   },
   "dependencies": {
