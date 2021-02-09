@@ -14,7 +14,7 @@ class CustomDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        <body className="bg-coolGray-100">
           <Main />
           <NextScript />
         </body>
