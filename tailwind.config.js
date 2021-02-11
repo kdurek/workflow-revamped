@@ -44,7 +44,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderRadius: ['first', 'last'],
+    },
   },
   plugins: [],
 };
