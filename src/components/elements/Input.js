@@ -12,7 +12,12 @@ const Input = ({
   className,
 }) => {
   return (
-    <div className={`relative floating-input ${className}`}>
+    <div
+      className={classNames(`relative floating-input ${className}`, {
+        'w-full': fullWidth,
+        'w-48': !fullWidth,
+      })}
+    >
       <input
         type={type}
         disabled={disabled}
@@ -22,7 +27,7 @@ const Input = ({
         onFocus={onFocus}
         id={label}
         className={classNames(
-          'h-12 py-4 w-full focus:ring-1 transition-all duration-300 px-3 bg-transparent shadow-inner bg-coolGray-100 rounded-xl text-coolGray-600 focus:outline-none placeholder-transparent'
+          'h-12 py-4 w-full focus:ring-2 transition-all duration-300 px-3 bg-transparent shadow-inner bg-coolGray-100 rounded-xl text-coolGray-600 focus:outline-none placeholder-transparent'
         )}
         placeholder={label}
         autoComplete="off"
