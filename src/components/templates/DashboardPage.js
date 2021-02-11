@@ -1,4 +1,3 @@
-import Card from '@/elements/Card';
 import OutOfStock from '@/modules/OutOfStock';
 
 const Dashboard = ({tonersList}) => {

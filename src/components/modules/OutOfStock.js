@@ -1,6 +1,6 @@
 import Button from '@/elements/Button';
 import Card from '@/elements/Card';
-import copyToClipboard from 'src/utils/copyToClipboard';
+import copyToClipboard from '@/utils/copyToClipboard';
 
 const formatToCopyable = tonersList => {
   let data = [];
