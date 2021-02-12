@@ -52,7 +52,7 @@ const Select = ({label, fullWidth, value, setValue, options}) => {
         )}
       </div>
       {open && (
-        <div className="absolute inset-x-0 top-0 z-10 shadow-inner rounded-xl mt-14 bg-coolGray-100">
+        <div className="absolute inset-x-0 top-0 z-10 border shadow-inner border-coolGray-200 rounded-xl mt-14 bg-coolGray-100">
           {uniqueOptions.map(option => (
             <button
               key={option}
