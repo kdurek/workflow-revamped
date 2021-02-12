@@ -14,6 +14,7 @@ const Templates = () => {
     firebaseClient
       .firestore()
       .collection('cmss')
+      .orderBy('name')
       .onSnapshot(snapshot => {
         const data = [];
         snapshot.forEach(doc => data.push({...doc.data(), id: doc.id}));
