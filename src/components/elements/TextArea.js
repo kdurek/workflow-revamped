@@ -5,6 +5,7 @@ const countRows = content => {
 };
 
 const TextArea = ({
+  fullWidth,
   resizable,
   rows,
   disabled,
@@ -17,7 +18,12 @@ const TextArea = ({
   className,
 }) => {
   return (
-    <div className={`rounded-xl px-3 bg-coolGray-100 shadow-inner ${className}`}>
+    <div
+      className={classNames(`rounded-xl px-3 bg-coolGray-100 shadow-inner ${className}`, {
+        'w-full': fullWidth,
+        'w-48': !fullWidth,
+      })}
+    >
       <label className="text-xs text-coolGray-400">{label}</label>
       <div className="flex items-center gap-4 py-1 rounded-xl">
         <textarea
@@ -28,12 +34,11 @@ const TextArea = ({
           onChange={onChange}
           onFocus={onFocus}
           placeholder={placeholder}
-          className={classNames(
-            'w-full bg-transparent placeholder-coolGray-400 text-coolGray-600',
-            {
-              'resize-none': !resizable,
-            }
-          )}
+          className={classNames('bg-transparent placeholder-coolGray-400 text-coolGray-600', {
+            'resize-none': !resizable,
+            'w-full': fullWidth,
+            'w-48': !fullWidth,
+          })}
         />
       </div>
     </div>
