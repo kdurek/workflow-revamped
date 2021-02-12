@@ -7,8 +7,8 @@ const TemplatesPage = ({cmsList, user}) => {
   const [activeTemplate, setActiveTemplate] = useState(cmsList[0]);
 
   return (
-    <div className="flex gap-4">
-      <Card className="w-40 md:w-96">
+    <div className="flex flex-col gap-4 md:flex-row">
+      <Card className="h-48 overflow-scroll md:h-full md:w-96">
         <TemplatesMenu
           cmsList={cmsList}
           activeTemplate={activeTemplate}
