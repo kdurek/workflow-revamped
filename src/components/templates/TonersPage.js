@@ -11,20 +11,23 @@ const TonersPage = ({tonersList}) => {
 
   return (
     <div>
-      <Card className="flex flex-wrap gap-4 md:flex-nowrap">
+      <Card className="grid grid-cols-2 grid-rows-2 gap-4 md:grid-rows-1 md:grid-cols-6">
         <Input
           fullWidth
           value={search}
           onChange={e => setSearch(e.target.value)}
           label={'Search'}
+          className="col-span-2 md:col-span-4"
         />
         <Select
+          fullWidth
           label={'Color'}
           value={filterColor}
           setValue={setFilterColor}
           options={tonersList}
         />
         <Select
+          fullWidth
           label={'Brand'}
           value={filterBrand}
           setValue={setFilterBrand}

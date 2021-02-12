@@ -28,12 +28,14 @@ ${user.name}`;
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <Input
+        fullWidth
         label="Login"
         value={login}
         onChange={e => setLogin(e.target.value)}
         placeholder="Enter user login..."
       />
       <Input
+        fullWidth
         readOnly
         label="Password"
         value={password}
@@ -42,8 +44,8 @@ ${user.name}`;
           e.target.select();
         }}
       />
-      <TextArea readOnly label="Preview" value={pattern} className="md:col-span-2" />
-      <Input label="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
+      <TextArea fullWidth readOnly label="Preview" value={pattern} className="md:col-span-2" />
+      <Input fullWidth label="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
       <Button
         primary
         onClick={() =>
