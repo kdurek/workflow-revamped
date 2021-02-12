@@ -12,28 +12,29 @@ const TemplatesGenerator = ({activeTemplate, user}) => {
   const {config} = useConfig();
 
   const [login, setLogin] = useState('');
+  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password] = useState(() => generatePassword(true, true, true, true, 15));
 
-  const pattern = `(Credentials to ${activeTemplate.name})
+  const emailPattern = `(Credentials to ${activeTemplate.name})
 
 Login: ${login || '[XXXXX]'}
-Password: ${password}
 
 Link: ${activeTemplate.link}
 
 Best regards
 ${user.name}`;
 
+  const smsPattern = `(Credentials to ${activeTemplate.name})
+
+Password: ${password}
+
+Best regards
+${user.name}`;
+
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      <Input
-        fullWidth
-        label="Login"
-        value={login}
-        onChange={e => setLogin(e.target.value)}
-        placeholder="Enter user login..."
-      />
+      <Input fullWidth label="Login" value={login} onChange={e => setLogin(e.target.value)} />
       <Input
         fullWidth
         readOnly
@@ -44,19 +45,26 @@ ${user.name}`;
           e.target.select();
         }}
       />
-      <TextArea fullWidth readOnly label="Preview" value={pattern} className="md:col-span-2" />
+      <TextArea fullWidth readOnly label="Preview" value={emailPattern} className="md:col-span-2" />
+      <Input fullWidth label="Email" value={email} onChange={e => setEmail(e.target.value)} />
       <Input fullWidth label="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
+      <Button
+        primary
+        onClick={() => sendEmail(email, `Credentials to ${activeTemplate.name}`, emailPattern)}
+      >
+        Send Email
+      </Button>
       <Button
         primary
         onClick={() =>
           sendEmail(
             `${normalizeNumber(phone)}@${config.sms_domain}`,
             `Credentials to ${activeTemplate.name}`,
-            pattern
+            smsPattern
           )
         }
       >
-        Send Email
+        Send SMS
       </Button>
     </div>
   );
