@@ -8,7 +8,7 @@ const TemplatesPage = ({cmsList, user}) => {
 
   return (
     <div className="flex flex-col gap-4 md:flex-row">
-      <Card className="h-48 overflow-scroll md:h-full md:w-96">
+      <Card className="h-48 overflow-auto md:h-full md:w-96">
         <TemplatesMenu
           cmsList={cmsList}
           activeTemplate={activeTemplate}
