@@ -29,7 +29,11 @@ const Toner = ({toner}) => {
   const onUse = id => {
     if (user.role === 'admin') {
       const decrement = firebaseClient.firestore.FieldValue.increment(-1);
-      firebaseClient.firestore().collection('toners').doc(id).update({amount: decrement});
+      firebaseClient
+        .firestore()
+        .collection(`toners${user.location}`)
+        .doc(id)
+        .update({amount: decrement});
     }
   };
 
