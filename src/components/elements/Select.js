@@ -1,6 +1,6 @@
 import {useState, useRef} from 'react';
 import classNames from 'classnames';
-import useOnClickOutside from '../hooks/useOnClickOutside';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
 
 const Select = ({label, fullWidth, value, setValue, options}) => {
   const [open, setOpen] = useState(false);
@@ -13,8 +13,6 @@ const Select = ({label, fullWidth, value, setValue, options}) => {
     setValue(option);
     setOpen(false);
   };
-
-  const uniqueOptions = [...new Set(options.map(option => option[label.toLowerCase()]))];
 
   return (
     <div
@@ -53,7 +51,7 @@ const Select = ({label, fullWidth, value, setValue, options}) => {
       </div>
       {open && (
         <div className="absolute inset-x-0 top-0 z-10 border shadow-inner border-coolGray-200 rounded-xl mt-14 bg-coolGray-100">
-          {uniqueOptions.map(option => (
+          {options.map(option => (
             <button
               key={option}
               onClick={() => onOptionClicked(option)}

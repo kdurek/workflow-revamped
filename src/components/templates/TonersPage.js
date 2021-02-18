@@ -25,14 +25,14 @@ const TonersPage = ({printersList, tonersList, tonersUnset}) => {
           label={'Brand'}
           value={filterBrand}
           setValue={setFilterBrand}
-          options={tonersList}
+          options={['Xerox', 'HP']}
         />
         <Select
           fullWidth
           label={'Color'}
           value={filterColor}
           setValue={setFilterColor}
-          options={tonersList}
+          options={['Black', 'Cyan', 'Magenta', 'Yellow']}
         />
       </Card>
 
