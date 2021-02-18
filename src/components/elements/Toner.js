@@ -39,11 +39,10 @@ const Toner = ({toner}) => {
 
   return (
     <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
-      <Card className="flex flex-col group text-coolGray-600">
+      <Card className="flex flex-col group text-coolGray-600 bg-coolGray-100">
         <div className="flex justify-between">
           <span className="text-3xl font-bold">{toner.code}</span>
         </div>
-        <span className="text-lg font-bold">{toner.brand}</span>
         <div className="flex items-center gap-2 mt-4">
           <div
             className={`relative flex flex-col items-center justify-center p-5 rounded-xl shadow ${getColor(
