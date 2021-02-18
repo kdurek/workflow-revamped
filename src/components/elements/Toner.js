@@ -45,7 +45,7 @@ const Toner = ({toner}) => {
         </div>
         <div className="flex items-center gap-2 mt-4">
           <div
-            className={`relative flex flex-col items-center justify-center p-5 rounded-xl shadow ${getColor(
+            className={`flex flex-col items-center justify-center p-6 rounded-xl shadow ${getColor(
               toner.color
             )}`}
           >
