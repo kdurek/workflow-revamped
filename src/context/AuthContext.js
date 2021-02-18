@@ -12,16 +12,14 @@ export const AuthProvider = ({children}) => {
   const router = useRouter();
 
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
 
   const signIn = (email, password) => {
     return firebaseClient
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(response => {
-        setUser(response.user);
-        getUserAdditionalData(user);
-        return response.user;
+        prepareUser(response.user);
       })
       .catch(error => {
         return {error};
@@ -35,11 +33,14 @@ export const AuthProvider = ({children}) => {
       .then(() => {
         setUser(false);
         router.reload();
+      })
+      .catch(error => {
+        return {error};
       });
   };
 
-  const getUserAdditionalData = user => {
-    return firebaseClient
+  const prepareUser = user => {
+    firebaseClient
       .firestore()
       .collection('users')
       .doc(user.uid)
@@ -47,16 +48,18 @@ export const AuthProvider = ({children}) => {
       .then(userData => {
         if (userData.data()) {
           setUser(userData.data());
+          setAuthenticated(true);
         }
+      })
+      .catch(error => {
+        return {error};
       });
   };
 
   useEffect(() => {
     const unsubscribe = firebaseClient.auth().onAuthStateChanged(user => {
       if (user) {
-        setUser(user);
-        getUserAdditionalData(user);
-        setLoading(false);
+        prepareUser(user);
       } else {
         setUser(false);
       }
@@ -86,7 +89,7 @@ export const AuthProvider = ({children}) => {
   return (
     <AuthContext.Provider value={value}>
       <ConfigProvider>
-        {!loading
+        {authenticated
           ? children
           : user === false && (
               <AuthLayout>
