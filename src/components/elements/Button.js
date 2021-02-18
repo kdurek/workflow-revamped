@@ -6,11 +6,12 @@ const Button = ({primary, fullWidth, onClick, type, className, children}) => {
       onClick={onClick}
       type={type}
       className={classNames(
-        `rounded-xl py-2 px-8 font-medium transform focus:scale-95 duration-300 shadow hover:shadow-lg transition-all ${className}`,
+        `rounded-xl h-12 uppercase font-medium duration-300 hover:shadow-lg transition-all focus:ring-2 ${className}`,
         {
           'bg-blue-400 text-white hover:bg-blue-500': primary,
           'bg-transparent text-coolGray-600': !primary,
           'w-full': fullWidth,
+          'w-48': !fullWidth,
         }
       )}
     >
