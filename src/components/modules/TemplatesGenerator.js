@@ -14,7 +14,7 @@ const TemplatesGenerator = ({activeTemplate, user}) => {
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [password] = useState(() => generatePassword(true, true, true, true, 15));
+  const [password, setPassword] = useState(() => generatePassword(true, true, true, true, 15));
 
   const emailPattern = `(Credentials to ${activeTemplate.name})
 
@@ -35,27 +35,40 @@ ${user.name}`;
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <Input fullWidth label="Login" value={login} onChange={e => setLogin(e.target.value)} />
-      <Input
-        fullWidth
-        readOnly
-        label="Password"
-        value={password}
-        onFocus={e => {
-          copyToClipboard(e.target.value);
-          e.target.select();
-        }}
-      />
+      <div className="flex gap-2">
+        <Input
+          fullWidth
+          readOnly
+          label="Password"
+          value={password}
+          onFocus={e => {
+            copyToClipboard(e.target.value);
+            e.target.select();
+          }}
+        />
+        {/* <button
+          onClick={() => setPassword(generatePassword(true, true, true, true, 15))}
+          className="flex items-center h-12 p-3 transition-all duration-300 shadow-inner rounded-xl bg-coolGray-100 hover:bg-coolGray-200 focus:ring-2"
+        >
+          <span className="text-coolGray-600 material-icons">cached</span>
+        </button> */}
+        <Button square>
+          <span className="text-coolGray-600 material-icons">cached</span>
+        </Button>
+      </div>
       <TextArea fullWidth readOnly label="Preview" value={emailPattern} className="md:col-span-2" />
       <Input fullWidth label="Email" value={email} onChange={e => setEmail(e.target.value)} />
       <Input fullWidth label="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
       <Button
         primary
+        fullWidth
         onClick={() => sendEmail(email, `Credentials to ${activeTemplate.name}`, emailPattern)}
       >
         Send Email
       </Button>
       <Button
         primary
+        fullWidth
         onClick={() =>
           sendEmail(
             `${normalizeNumber(phone)}@${config.sms_domain}`,
