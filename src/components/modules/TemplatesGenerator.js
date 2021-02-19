@@ -46,13 +46,7 @@ ${user.name}`;
             e.target.select();
           }}
         />
-        {/* <button
-          onClick={() => setPassword(generatePassword(true, true, true, true, 15))}
-          className="flex items-center h-12 p-3 transition-all duration-300 shadow-inner rounded-xl bg-coolGray-100 hover:bg-coolGray-200 focus:ring-2"
-        >
-          <span className="text-coolGray-600 material-icons">cached</span>
-        </button> */}
-        <Button square>
+        <Button square onClick={() => setPassword(generatePassword(true, true, true, true, 15))}>
           <span className="text-coolGray-600 material-icons">cached</span>
         </Button>
       </div>
