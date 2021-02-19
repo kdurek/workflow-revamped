@@ -1,17 +1,18 @@
 import classNames from 'classnames';
 
-const Button = ({primary, fullWidth, onClick, type, className, children}) => {
+const Button = ({primary, square, fullWidth, onClick, type, className, children}) => {
   return (
     <button
       onClick={onClick}
       type={type}
       className={classNames(
-        `rounded-xl h-12 uppercase font-medium duration-300 hover:shadow-lg transition-all focus:ring-2 ${className}`,
+        `flex items-center justify-center rounded-xl h-12 uppercase font-medium duration-300 transition-all focus:ring-2 ${className}`,
         {
-          'bg-blue-400 text-white hover:bg-blue-500': primary,
-          'bg-transparent text-coolGray-600': !primary,
+          'bg-blue-400 text-white hover:bg-blue-500 hover:shadow-lg': primary,
+          'bg-coolGray-100 hover:bg-coolGray-200 shadow-inner text-coolGray-600': !primary,
           'w-full': fullWidth,
-          'w-48': !fullWidth,
+          'w-48': !square && !fullWidth,
+          'w-12 h-12 p-3': square,
         }
       )}
     >
