@@ -1,9 +1,11 @@
 import {useState} from 'react';
 import {Transition} from '@headlessui/react';
+import classNames from 'classnames';
 import firebaseClient from 'firebaseClient';
 import Button from '@/elements/Button';
 import Card from '@/elements/Card';
 import {useAuth} from '@/context/AuthContext';
+import Modal from './Modal';
 
 const getColor = color => {
   switch (color) {
@@ -38,36 +40,34 @@ const Toner = ({toner}) => {
   };
 
   return (
-    <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
-      <Card className="flex flex-col group text-coolGray-600 bg-coolGray-100">
-        <div className="flex justify-between">
-          <span className="text-3xl font-bold">{toner.code}</span>
-        </div>
-        <div className="flex items-center gap-2 mt-4">
-          <div
-            className={`flex flex-col items-center justify-center p-6 rounded-xl shadow ${getColor(
-              toner.color
-            )}`}
+    <Modal
+      submit={() => onUse(toner.id)}
+      submitLabel={'yes'}
+      buttonLabel={
+        <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
+          <Card
+            className={classNames('flex items-center text-coolGray-600 gap-4 bg-coolGray-100', {
+              'bg-blue-200': cardHover,
+            })}
           >
-            <span className="absolute font-bold cursor-default">{toner.amount}</span>
-          </div>
-          <Transition
-            show={cardHover}
-            enter="duration-300 ease-out"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="duration-300 ease-in"
-            leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95"
-            className="w-full"
-          >
-            <Button onClick={() => onUse(toner.id)} primary fullWidth>
-              Use
-            </Button>
-          </Transition>
+            <div
+              className={`flex flex-col items-center justify-center p-4 rounded-xl shadow ${getColor(
+                toner.color
+              )}`}
+            >
+              <span className="absolute font-bold cursor-pointer">{toner.amount}</span>
+            </div>
+            <span className="text-2xl font-medium">{toner.code}</span>
+          </Card>
         </div>
-      </Card>
-    </div>
+      }
+      buttonClass="h-full w-full"
+      // onClick={() => onUse(toner.id)}
+    >
+      <p className="text-2xl text-center text-coolGray-600">
+        Are you sure you want to use {toner.code}?
+      </p>
+    </Modal>
   );
 };
 

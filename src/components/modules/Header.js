@@ -13,8 +13,8 @@ const navItems = [
     path: '/templates',
   },
   {
-    label: 'Toners',
-    path: '/toners',
+    label: 'Printers',
+    path: '/printers',
   },
 ];
 
@@ -27,7 +27,7 @@ const Header = () => {
   const NavItem = ({path, children}) => {
     return (
       <ActiveLink href={path}>
-        <p className="font-medium transition-all transform cursor-pointer hover:scale-105 md:text-1xl lg:text-2xl text-coolGray-600">
+        <p className="text-xl font-medium transition-all transform cursor-pointer hover:scale-105 md:text-2xl lg:text-3xl text-coolGray-600">
           {children}
         </p>
       </ActiveLink>
@@ -51,7 +51,7 @@ const Header = () => {
     <header className="flex justify-between mb-4">
       {/* MENU DESKTOP */}
       <nav className="relative flex justify-end w-full md:justify-between">
-        <div className="items-baseline hidden gap-2 md:flex md:gap-4 lg:gap-6">
+        <div className="items-baseline hidden gap-2 md:flex md:gap-4">
           {navItems.map((item, i) => (
             <NavItem key={i} path={item.path}>
               {item.label}
