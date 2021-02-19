@@ -10,7 +10,7 @@ const Printers = ({printer, tonersList, tonersUnset, filterSearch, filterBrand, 
     printer.model.toLowerCase().includes(filterSearch.toLowerCase()) ||
     filteredToners.find(toner => toner.code.toLowerCase().includes(filterSearch.toLowerCase()));
 
-  return filterString && filteredToners ? (
+  return filterString && filteredToners.length ? (
     <Printer
       printer={printer}
       filteredToners={filteredToners}
