@@ -18,20 +18,16 @@ const Select = ({label, fullWidth, value, setValue, options}) => {
     <div
       ref={ref}
       className={classNames(
-        'relative h-12 rounded-xl  bg-coolGray-100 transition-all duration-300',
+        'relative h-12 rounded-xl bg-coolGray-100 transition-all duration-300',
         {
           'bg-coolGray-200': value !== '',
           'w-full': fullWidth,
-          'w-48': !fullWidth,
+          'w-full md:w-48': !fullWidth,
           'ring-2': focus,
         }
       )}
     >
-      <div
-        className={classNames('flex items-center h-full justify-between w-48', {
-          'w-full': fullWidth,
-        })}
-      >
+      <div className={classNames('flex items-center h-full justify-between')}>
         <button
           onClick={() => setOpen(!open)}
           onFocus={() => setFocus(true)}
@@ -40,11 +36,11 @@ const Select = ({label, fullWidth, value, setValue, options}) => {
             'flex items-center justify-between w-full h-full px-3 shadow-inner rounded-xl bg-coolGray-100 hover:bg-coolGray-200'
           )}
         >
-          <span>{value || label}</span>
+          {value || label}
           {value === '' && <span className="rounded-xl material-icons">expand_more</span>}
         </button>
         {value !== '' && (
-          <button onClick={() => setValue('')} className="">
+          <button onClick={() => setValue('')}>
             <span className="h-full p-3 rounded-xl material-icons bg-coolGray-200">close</span>
           </button>
         )}
@@ -56,8 +52,7 @@ const Select = ({label, fullWidth, value, setValue, options}) => {
               key={option}
               onClick={() => onOptionClicked(option)}
               className={classNames(
-                'w-full h-full p-3 text-left hover:bg-coolGray-200 first:rounded-t-xl last:rounded-b-xl hover:shadow-inner',
-                {'w-full': fullWidth}
+                'w-full h-full p-3 text-left hover:bg-coolGray-200 first:rounded-t-xl last:rounded-b-xl hover:shadow-inner'
               )}
             >
               {option}

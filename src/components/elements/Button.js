@@ -11,7 +11,7 @@ const Button = ({primary, square, fullWidth, onClick, type, className, children}
           'bg-blue-400 text-white hover:bg-blue-500 hover:shadow-lg': primary,
           'bg-coolGray-100 hover:bg-coolGray-200 shadow-inner': !primary,
           'w-full': fullWidth,
-          'w-48': !square && !fullWidth,
+          'w-full md:w-48': !square && !fullWidth,
           'w-12 h-12 p-3': square,
         }
       )}

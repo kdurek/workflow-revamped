@@ -11,7 +11,7 @@ const PrintersPage = ({printersList, tonersList, tonersUnset}) => {
 
   return (
     <div>
-      <Card className="grid grid-cols-2 grid-rows-2 gap-4 rounded-xl md:grid-rows-1 md:grid-cols-6">
+      <Card className="flex flex-col gap-4 md:flex-row">
         <Input
           fullWidth
           value={filterSearch}
@@ -20,14 +20,12 @@ const PrintersPage = ({printersList, tonersList, tonersUnset}) => {
           className="col-span-2 md:col-span-4"
         />
         <Select
-          fullWidth
           label={'Brand'}
           value={filterBrand}
           setValue={setFilterBrand}
           options={['Xerox', 'HP']}
         />
         <Select
-          fullWidth
           label={'Color'}
           value={filterColor}
           setValue={setFilterColor}
