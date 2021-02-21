@@ -5,6 +5,7 @@ import Button from '@/elements/Button';
 import Input from '@/elements/Input';
 import Modal from '@/elements/Modal';
 import Select from '@/elements/Select';
+import Square from './Square';
 
 const getColor = color => {
   switch (color) {
@@ -64,13 +65,10 @@ const PrinterEdit = ({printer, filteredToners, tonersUnset}) => {
           {filteredToners.map(toner => (
             <div key={toner.id} className="flex flex-col gap-2 ">
               <div className="flex items-center gap-4">
-                <div
-                  className={`flex flex-col items-center justify-center p-4 rounded-xl shadow ${getColor(
-                    toner.color
-                  )}`}
-                >
-                  <span className="absolute font-medium cursor-default">{toner.amount}</span>
-                </div>
+                <Square p={4} className="bg-coolGray-200">
+                  {toner.amount}
+                </Square>
+
                 <p className="font-medium">{`${toner.code}`}</p>
                 <button
                   onClick={() =>

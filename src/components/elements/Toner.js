@@ -1,11 +1,10 @@
 import {useState} from 'react';
-import {Transition} from '@headlessui/react';
 import classNames from 'classnames';
 import firebaseClient from 'firebaseClient';
-import Button from '@/elements/Button';
-import Card from '@/elements/Card';
 import {useAuth} from '@/context/AuthContext';
-import Modal from './Modal';
+import Card from '@/elements/Card';
+import Modal from '@/elements/Modal';
+import Square from '@/elements/Square';
 
 const getColor = color => {
   switch (color) {
@@ -46,27 +45,20 @@ const Toner = ({toner}) => {
       buttonLabel={
         <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
           <Card
-            className={classNames('flex items-center text-coolGray-600 gap-4 bg-coolGray-100', {
+            className={classNames('flex items-center gap-4 p-8 bg-coolGray-100', {
               'bg-blue-200': cardHover,
             })}
           >
-            <div
-              className={`flex flex-col items-center justify-center p-4 rounded-xl shadow ${getColor(
-                toner.color
-              )}`}
-            >
-              <span className="absolute font-bold cursor-pointer">{toner.amount}</span>
-            </div>
+            <Square p={4} className={`${getColor(toner.color)}`}>
+              {toner.amount}
+            </Square>
             <span className="text-2xl font-medium">{toner.code}</span>
           </Card>
         </div>
       }
       buttonClass="h-full w-full"
-      // onClick={() => onUse(toner.id)}
     >
-      <p className="text-2xl text-center text-coolGray-600">
-        Are you sure you want to use {toner.code}?
-      </p>
+      <p className="text-2xl text-center ">Are you sure you want to use {toner.code}?</p>
     </Modal>
   );
 };
