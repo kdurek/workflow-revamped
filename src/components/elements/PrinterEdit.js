@@ -42,11 +42,11 @@ const PrinterEdit = ({printer, filteredToners, tonersUnset}) => {
     user.role === 'admin' && (
       <Modal
         buttonLabel={<span className="align-middle material-icons">more_vert</span>}
-        buttonClass="text-coolGray-600 h-12 hover:bg-coolGray-200 transition-all duration-300 rounded-xl"
+        buttonClass=" h-12 hover:bg-coolGray-200 transition-all duration-300 rounded-xl"
         submit={onEdit}
       >
         <div className="flex flex-col gap-4">
-          <p className="text-4xl text-coolGray-600">Details</p>
+          <p className="text-4xl ">Details</p>
           <Select
             fullWidth
             label={'Brand'}
@@ -60,9 +60,9 @@ const PrinterEdit = ({printer, filteredToners, tonersUnset}) => {
             value={editModel}
             onChange={e => setEditModel(e.target.value)}
           />
-          <p className="text-4xl text-coolGray-600">Toners</p>
+          <p className="text-4xl ">Toners</p>
           {filteredToners.map(toner => (
-            <div key={toner.id} className="flex flex-col gap-2 text-coolGray-600">
+            <div key={toner.id} className="flex flex-col gap-2 ">
               <div className="flex items-center gap-4">
                 <div
                   className={`flex flex-col items-center justify-center p-4 rounded-xl shadow ${getColor(
@@ -83,7 +83,7 @@ const PrinterEdit = ({printer, filteredToners, tonersUnset}) => {
                       })
                   }
                 >
-                  <span className="p-1 m-1 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-50">
+                  <span className="p-1 m-1 align-middle rounded-xl material-icons hover:bg-coolGray-50">
                     close
                   </span>
                 </button>

@@ -34,7 +34,7 @@ const TextArea = ({
           onChange={onChange}
           onFocus={onFocus}
           placeholder={placeholder}
-          className={classNames('bg-transparent placeholder-coolGray-400 text-coolGray-600', {
+          className={classNames('bg-transparent placeholder-coolGray-400 ', {
             'resize-none': !resizable,
             'w-full': fullWidth,
             'w-48': !fullWidth,

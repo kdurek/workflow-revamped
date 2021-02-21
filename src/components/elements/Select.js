@@ -18,7 +18,7 @@ const Select = ({label, fullWidth, value, setValue, options}) => {
     <div
       ref={ref}
       className={classNames(
-        'relative h-12 rounded-xl text-coolGray-600 bg-coolGray-100 transition-all duration-300',
+        'relative h-12 rounded-xl  bg-coolGray-100 transition-all duration-300',
         {
           'bg-coolGray-200': value !== '',
           'w-full': fullWidth,

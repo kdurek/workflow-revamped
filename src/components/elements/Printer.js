@@ -6,7 +6,7 @@ const Printer = ({printer, filteredToners, tonersUnset}) => {
   return (
     <Card className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <span className="text-4xl font-bold text-coolGray-600">{`${printer.brand} ${printer.model}`}</span>
+        <span className="text-4xl font-bold">{`${printer.brand} ${printer.model}`}</span>
         <PrinterEdit printer={printer} filteredToners={filteredToners} tonersUnset={tonersUnset} />
       </div>
       {filteredToners.length ? (
@@ -20,7 +20,7 @@ const Printer = ({printer, filteredToners, tonersUnset}) => {
             ))}
         </div>
       ) : (
-        <p className="text-xl font-medium text-coolGray-600">
+        <p className="text-xl font-medium">
           No toners are associated to this printer, assign some!
         </p>
       )}

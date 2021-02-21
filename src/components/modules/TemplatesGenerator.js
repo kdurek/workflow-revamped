@@ -47,7 +47,7 @@ ${user.name}`;
           }}
         />
         <Button square onClick={() => setPassword(generatePassword(true, true, true, true, 15))}>
-          <span className="text-coolGray-600 material-icons">cached</span>
+          <span className=" material-icons">cached</span>
         </Button>
       </div>
       <TextArea fullWidth readOnly label="Preview" value={emailPattern} className="md:col-span-2" />

@@ -27,7 +27,7 @@ const Header = () => {
   const NavItem = ({path, children}) => {
     return (
       <ActiveLink href={path}>
-        <p className="text-xl font-medium transition-all transform cursor-pointer hover:scale-105 md:text-2xl lg:text-3xl text-coolGray-600">
+        <p className="text-xl font-medium transition-all transform cursor-pointer hover:scale-105 md:text-2xl lg:text-3xl ">
           {children}
         </p>
       </ActiveLink>
@@ -39,7 +39,7 @@ const Header = () => {
       <ActiveLink href={path}>
         <button
           onClick={() => setMenuOpen(false)}
-          className="w-full py-3 text-center transition-all transform text-coolGray-600 hover:bg-coolGray-50"
+          className="w-full py-3 text-center transition-all transform  hover:bg-coolGray-50"
         >
           {children}
         </button>
@@ -59,9 +59,9 @@ const Header = () => {
           ))}
         </div>
         <div className="flex items-center">
-          <p className="px-2 font-medium text-coolGray-600">{user.name}</p>
+          <p className="px-2 font-medium ">{user.name}</p>
           <button onClick={() => setProfileOpen(true)} className="hidden md:block">
-            <span className="p-2 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-50">
+            <span className="p-2 align-middle rounded-xl  material-icons hover:bg-coolGray-50">
               account_circle
             </span>
           </button>
@@ -77,9 +77,9 @@ const Header = () => {
             <div className="absolute top-0 right-0 z-50">
               <div className="flex flex-col bg-white shadow rounded-xl">
                 <div className="flex items-center justify-end">
-                  <p className="px-2 font-medium text-coolGray-600">{user.name}</p>
+                  <p className="px-2 font-medium ">{user.name}</p>
                   <button onClick={() => setProfileOpen(false)}>
-                    <span className="p-1 m-1 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-50">
+                    <span className="p-1 m-1 align-middle rounded-xl  material-icons hover:bg-coolGray-50">
                       close
                     </span>
                   </button>
@@ -97,7 +97,7 @@ const Header = () => {
             </div>
           </Transition>
           <button onClick={() => setMenuOpen(true)} className="block md:hidden">
-            <span className="p-2 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-50">
+            <span className="p-2 align-middle rounded-xl  material-icons hover:bg-coolGray-50">
               menu
             </span>
           </button>
@@ -114,9 +114,9 @@ const Header = () => {
             <nav className="absolute inset-x-0 top-0 z-50 -m-2 md:hidden">
               <div className="flex flex-col bg-white shadow rounded-xl">
                 <div className="flex items-center justify-end">
-                  <p className="pl-2 font-medium text-coolGray-600">{user.name}</p>
+                  <p className="pl-2 font-medium ">{user.name}</p>
                   <button onClick={() => setMenuOpen(false)} className="self-end">
-                    <span className="p-2 m-2 align-middle rounded-xl text-coolGray-600 material-icons hover:bg-coolGray-50">
+                    <span className="p-2 m-2 align-middle rounded-xl  material-icons hover:bg-coolGray-50">
                       close
                     </span>
                   </button>

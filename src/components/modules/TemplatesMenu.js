@@ -7,7 +7,7 @@ const TemplatesMenu = ({cmsList, activeTemplate, setActiveTemplate}) => {
         <div
           key={i}
           className={classNames(
-            'flex transition-all transform rounded-xl text-coolGray-600 hover:bg-coolGray-50 hover:shadow-sm',
+            'flex transition-all transform rounded-xl  hover:bg-coolGray-50 hover:shadow-sm',
             {
               'bg-coolGray-100 hover:bg-coolGray-100 shadow-inner hover:shadow-inner':
                 activeTemplate === cms,

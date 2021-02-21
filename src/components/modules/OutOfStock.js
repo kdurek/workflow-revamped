@@ -13,10 +13,10 @@ const formatToCopyable = tonersList => {
 const OutOfStock = ({tonersList}) => {
   return (
     <Card>
-      <div className="text-xl font-medium text-center text-coolGray-600">
+      <div className="text-xl font-medium text-center ">
         Nearly or out of stock, please resupply
       </div>
-      <div className="my-4 divide-y text-coolGray-600 divide-coolGray-200 divide-solid">
+      <div className="my-4 divide-y  divide-coolGray-200 divide-solid">
         {tonersList.map((toner, i) => (
           <div key={i} className="flex items-center gap-4 py-2">
             <div
