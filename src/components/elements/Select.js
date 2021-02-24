@@ -46,13 +46,13 @@ const Select = ({label, fullWidth, value, setValue, options}) => {
         )}
       </div>
       {open && (
-        <div className="absolute inset-x-0 top-0 z-10 border shadow-inner border-coolGray-200 rounded-xl mt-14 bg-coolGray-100">
+        <div className="absolute inset-x-0 top-0 z-10 overflow-auto shadow-inner max-h-48 scrollbar-thumb-coolGray-300 scrollbar scrollbar-thumb-rounded-xl rounded-xl mt-14 bg-coolGray-100">
           {options.map(option => (
             <button
               key={option}
               onClick={() => onOptionClicked(option)}
               className={classNames(
-                'w-full h-full p-3 text-left hover:bg-coolGray-200 first:rounded-t-xl last:rounded-b-xl hover:shadow-inner'
+                'w-full p-3 text-left hover:bg-coolGray-200 first:rounded-t-xl last:rounded-b-xl hover:shadow-inner'
               )}
             >
               {option}
