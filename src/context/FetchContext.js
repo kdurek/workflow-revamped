@@ -8,7 +8,7 @@ const FetchProvider = ({children}) => {
   const [session] = useSession();
 
   if (session) {
-    axios.defaults.baseURL = process.env.BACKEND_URL;
+    axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
     axios.defaults.headers.common['Authorization'] = `Bearer ${session.accessToken}`;
     axios.defaults.headers.post['Content-Type'] = 'application/json';
   }

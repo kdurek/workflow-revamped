@@ -3,7 +3,7 @@ import Providers from 'next-auth/providers';
 import axios from 'axios';
 
 const getUserFromTheAPIServer = async token => {
-  const {data} = await axios.get(`${process.env.BACKEND_URL}/users/getuserfromtoken`, {
+  const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/getuserfromtoken`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -18,7 +18,7 @@ export default NextAuth({
       name: 'Credentials',
       authorize: async credentials => {
         try {
-          const user = await axios.post(`${process.env.BACKEND_URL}/users/login`, {
+          const user = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login`, {
             password: credentials.password,
             email: credentials.email,
           });
