@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import Footer from '@/modules/Footer';
+
+import Footer from '@/layouts/Footer';
 
 const AuthLayout = ({children}) => {
   return (

@@ -1,8 +1,9 @@
 import {useState, useRef} from 'react';
 import classNames from 'classnames';
+
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 
-const Select = ({label, fullWidth, value, setValue, options}) => {
+const Select = ({fullWidth, label, options, setValue, value}) => {
   const [open, setOpen] = useState(false);
   const [focus, setFocus] = useState(false);
 

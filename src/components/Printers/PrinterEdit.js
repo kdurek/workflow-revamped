@@ -1,11 +1,10 @@
 import {useState} from 'react';
-import firebaseClient from 'firebaseClient';
-import {useAuth} from '@/context/AuthContext';
-import Button from '@/elements/Button';
-import Input from '@/elements/Input';
-import Modal from '@/elements/Modal';
-import Select from '@/elements/Select';
-import Square from './Square';
+
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import Modal from '@/components/Modal';
+import Select from '@/components/Select';
+import Square from '@/components/Square';
 
 const getColor = color => {
   switch (color) {
@@ -24,17 +23,15 @@ const getColor = color => {
 };
 
 const PrinterEdit = ({printer, filteredToners, tonersUnset}) => {
-  const {user} = useAuth();
-
   const [editModel, setEditModel] = useState(printer.model);
   const [editBrand, setEditBrand] = useState(printer.brand);
   const [editToners, setEditToners] = useState('');
 
   const onEdit = () => {
-    firebaseClient.firestore().collection(`printers${user.location}`).doc(printer.id).update({
-      brand: editBrand,
-      model: editModel,
-    });
+    // firebaseClient.firestore().collection(`printers${user.location}`).doc(printer.id).update({
+    //   brand: editBrand,
+    //   model: editModel,
+    // });
     setEditBrand(editBrand);
     setEditModel(editModel);
   };
@@ -72,13 +69,13 @@ const PrinterEdit = ({printer, filteredToners, tonersUnset}) => {
                 <p className="font-medium">{`${toner.code}`}</p>
                 <button
                   onClick={() =>
-                    firebaseClient
-                      .firestore()
-                      .collection(`printers${user.location}`)
-                      .doc(printer.id)
-                      .update({
-                        toners: firebaseClient.firestore.FieldValue.arrayRemove(toner.id),
-                      })
+                    // firebaseClient
+                    //   .firestore()
+                    //   .collection(`printers${user.location}`)
+                    //   .doc(printer.id)
+                    //   .update({
+                    //     toners: firebaseClient.firestore.FieldValue.arrayRemove(toner.id),
+                    //   })
                   }
                 >
                   <span className="p-1 m-1 align-middle rounded-xl material-icons hover:bg-coolGray-50">
@@ -100,15 +97,15 @@ const PrinterEdit = ({printer, filteredToners, tonersUnset}) => {
               <Button
                 onClick={() => {
                   editToners !== '' &&
-                    firebaseClient
-                      .firestore()
-                      .collection(`printers${user.location}`)
-                      .doc(printer.id)
-                      .update({
-                        toners: firebaseClient.firestore.FieldValue.arrayUnion(
-                          tonersUnset.find(toner => toner.code === editToners).id
-                        ),
-                      });
+                    // firebaseClient
+                    //   .firestore()
+                    //   .collection(`printers${user.location}`)
+                    //   .doc(printer.id)
+                    //   .update({
+                    //     toners: firebaseClient.firestore.FieldValue.arrayUnion(
+                    //       tonersUnset.find(toner => toner.code === editToners).id
+                    //     ),
+                    //   });
                   setEditToners('');
                 }}
               >

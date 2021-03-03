@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-const Square = ({p, className, children}) => {
+const Square = ({children, className, p}) => {
   return (
     <div
       className={classNames(

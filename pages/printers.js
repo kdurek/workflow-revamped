@@ -1,80 +1,71 @@
 import {useState, useEffect} from 'react';
 import Head from 'next/head';
-import firebaseClient from 'firebaseClient';
-import {useAuth} from '@/context/AuthContext';
+import Link from 'next/link';
+import {useSession} from 'next-auth/client';
+import axios from 'axios';
+
 import DefaultLayout from '@/layouts/DefaultLayout';
-import TonersPage from '@/templates/PrintersPage';
+import Printers from '@/components/Printers';
 
-const Printers = () => {
-  const {user} = useAuth();
-  // const [newTonersList, setNewTonersList] = useState([]);
-  // console.log(`file: toners.js > line 11 > Toners > newTonersList`, newTonersList);
-  const [tonersList, setTonersList] = useState([]);
+const PrintersPage = () => {
+  const [session, loading] = useSession();
+
   const [printersList, setPrintersList] = useState([]);
-  const [tonersUnsetId, setTonersUnsetId] = useState([]);
 
-  const tonersUnset = tonersList.filter(toner => !tonersUnsetId.includes(toner.id));
+  useEffect(async () => {
+    if (session) {
+      try {
+        const {data} = await axios.get(`printers`);
+        setPrintersList(data.printers);
+      } catch (err) {
+        const errorMessage = err.response.data.message;
+        console.log(errorMessage);
+      }
+    }
+  }, [session]);
 
-  useEffect(() => {
-    firebaseClient
-      .firestore()
-      .collection(`toners${user.location}`)
-      .onSnapshot(snapshot => {
-        const data = [];
-        snapshot.forEach(doc => data.push({...doc.data(), id: doc.id}));
-        setTonersList(data);
+  const onUse = async tonerToUse => {
+    try {
+      const updatedToner = await axios.patch(`toners/${tonerToUse._id}`, {
+        amount: tonerToUse.amount - 1,
       });
 
-    firebaseClient
-      .firestore()
-      .collection(`printers${user.location}`)
-      .onSnapshot(snapshot => {
-        const data = [];
-        snapshot.forEach(doc => data.push({...doc.data(), id: doc.id}));
-        setPrintersList(data);
-      });
+      setPrintersList(
+        printersList.map(printer => {
+          const newToners = printer.toners.map(toner =>
+            toner._id === tonerToUse._id ? updatedToner.data.toner : toner
+          );
+          printer.toners = newToners;
+          return printer;
+        })
+      );
+    } catch (err) {
+      const errorMessage = err.response.data.message;
+      console.log(errorMessage);
+    }
+  };
 
-    firebaseClient
-      .firestore()
-      .collection(`printers${user.location}`)
-      .onSnapshot(snapshot => {
-        const data = [];
-        snapshot.forEach(doc => data.push(...doc.data().toners));
-        setTonersUnsetId(data);
-      });
+  if (loading) {
+    return null;
+  }
 
-    // Solution idea for storing toners within printers
-    // firebaseClient
-    //   .firestore()
-    //   .collection(`printers`)
-    //   .onSnapshot(snapshot => {
-    //     const data = [];
-    //     snapshot.forEach(doc => {
-    //       const tonersData = [];
-    //       firebaseClient
-    //         .firestore()
-    //         .collection(`printers`)
-    //         .doc(doc.id)
-    //         .collection('toners')
-    //         .onSnapshot(snapshot => {
-    //           snapshot.forEach(doc => {
-    //             tonersData.push({...doc.data(), id: doc.id});
-    //           });
-    //         });
-    //       data.push({...doc.data(), id: doc.id, toners: tonersData});
-    //     });
-    //     setNewTonersList(data);
-    //   });
-  }, []);
+  if (!session) {
+    return (
+      <div>
+        You must first sign in to access this page.
+        <Link href={'/login'}>Login</Link>
+      </div>
+    );
+  }
 
   return (
     <DefaultLayout>
       <Head>
         <title>Printers</title>
       </Head>
-      <TonersPage printersList={printersList} tonersList={tonersList} tonersUnset={tonersUnset} />
+      <Printers onUse={onUse} printersList={printersList} />
     </DefaultLayout>
   );
 };
 
-export default Printers;
+export default PrintersPage;

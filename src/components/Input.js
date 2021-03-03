@@ -1,15 +1,15 @@
 import classNames from 'classnames';
 
 const Input = ({
-  type = 'text',
-  fullWidth,
+  className,
   disabled,
-  readOnly,
-  value,
+  fullWidth,
+  label = 'Label',
   onChange,
   onFocus,
-  label = 'Label',
-  className,
+  readOnly,
+  type = 'text',
+  value,
 }) => {
   return (
     <div

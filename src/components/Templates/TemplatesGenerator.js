@@ -1,16 +1,14 @@
 import {useState} from 'react';
-import {useConfig} from '@/context/ConfigContext';
-import Button from '@/elements/Button';
-import TextArea from '@/elements/TextArea';
-import Input from '@/elements/Input';
+
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import TextArea from '@/components/TextArea';
 import copyToClipboard from '@/utils/copyToClipboard';
 import generatePassword from '@/utils/generatePassword';
 import normalizeNumber from '@/utils/normalizeNumber';
 import sendEmail from '@/utils/sendEmail';
 
 const TemplatesGenerator = ({activeTemplate, user}) => {
-  const {config} = useConfig();
-
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -65,7 +63,7 @@ ${user.name}`;
         fullWidth
         onClick={() =>
           sendEmail(
-            `${normalizeNumber(phone)}@${config.sms_domain}`,
+            `${normalizeNumber(phone)}@${process.env.NEXT_PUBLIC_SMS_DOMAIN}`,
             `Credentials to ${activeTemplate.name}`,
             smsPattern
           )

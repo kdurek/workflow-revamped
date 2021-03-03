@@ -2,10 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/elements/*": ["src/components/elements/*"],
-      "@/modules/*": ["src/components/modules/*"],
+      "@/components/*": ["src/components/*"],
       "@/layouts/*": ["src/components/layouts/*"],
-      "@/templates/*": ["src/components/templates/*"],
       "@/context/*": ["src/context/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/styles/*": ["src/styles/*"],
