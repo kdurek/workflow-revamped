@@ -5,7 +5,7 @@ import {useSession} from 'next-auth/client';
 import axios from 'axios';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
-import Templates from 'src/components/Templates';
+import Templates from '@/components/Templates';
 
 const TemplatesPage = () => {
   const [session, loading] = useSession();
