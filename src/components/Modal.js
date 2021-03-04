@@ -2,13 +2,13 @@ import {useState, useRef} from 'react';
 import {Transition} from '@headlessui/react';
 
 import Button from '@/components/Button';
-import useOnClickOutside from '@/hooks/useOnClickOutside';
+import useClickOutside from '@/hooks/useClickOutside';
 
 const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
   const [showModal, setShowModal] = useState(false);
 
   const ref = useRef();
-  useOnClickOutside(ref, () => setShowModal(false));
+  useClickOutside(ref, () => setShowModal(false));
 
   return (
     <div>

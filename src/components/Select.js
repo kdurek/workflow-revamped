@@ -1,14 +1,14 @@
 import {useState, useRef} from 'react';
 import classNames from 'classnames';
 
-import useOnClickOutside from '@/hooks/useOnClickOutside';
+import useClickOutside from '@/hooks/useClickOutside';
 
 const Select = ({fullWidth, label, options, setValue, value}) => {
   const [open, setOpen] = useState(false);
   const [focus, setFocus] = useState(false);
 
   const ref = useRef();
-  useOnClickOutside(ref, () => setOpen(false));
+  useClickOutside(ref, () => setOpen(false));
 
   const onOptionClicked = option => {
     setValue(option);
