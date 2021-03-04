@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import Header from '@/modules/Header';
-import Footer from '@/modules/Footer';
+
+import Footer from '@/layouts/Footer';
+import Header from '@/layouts/Header';
 
 const DefaultLayout = ({children}) => {
   return (

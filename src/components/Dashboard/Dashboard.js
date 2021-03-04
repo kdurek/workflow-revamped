@@ -1,4 +1,4 @@
-import OutOfStock from '@/modules/OutOfStock';
+import OutOfStock from '@/components/Dashboard/OutOfStock';
 
 const Dashboard = ({tonersList}) => {
   return (

@@ -5,18 +5,17 @@ import {useSession} from 'next-auth/client';
 import axios from 'axios';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
-import Templates from 'src/components/Templates';
+import Dashboard from 'src/components/Dashboard';
 
-const TemplatesPage = () => {
+const DashboardPage = () => {
   const [session, loading] = useSession();
-
-  const [cmsList, setCmsList] = useState([]);
+  const [tonersList, setTonersList] = useState([]);
 
   useEffect(async () => {
     if (session) {
       try {
-        const {data} = await axios.get(`templates`);
-        setCmsList(data.templates);
+        const {data} = await axios.get('toners?amount[lte]=1');
+        setTonersList(data.toners);
       } catch (err) {
         const errorMessage = err.response.data.message;
         console.log(errorMessage);
@@ -40,11 +39,11 @@ const TemplatesPage = () => {
   return (
     <DefaultLayout>
       <Head>
-        <title>Templates</title>
+        <title>Dashboard</title>
       </Head>
-      <Templates cmsList={cmsList} user={session.user} />
+      <Dashboard tonersList={tonersList} />
     </DefaultLayout>
   );
 };
 
-export default TemplatesPage;
+export default DashboardPage;

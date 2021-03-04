@@ -11,10 +11,10 @@
   "dependencies": {
     "@headlessui/react": "^0.2.0",
     "autoprefixer": "^10.0.4",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
-    "firebase": "^8.2.2",
-    "firebase-admin": "^9.4.2",
     "next": "10.0.3",
+    "next-auth": "^3.6.0",
     "nookies": "^2.5.2",
     "postcss": "^8.1.14",
     "prop-types": "^15.7.2",

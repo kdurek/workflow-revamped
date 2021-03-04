@@ -1,13 +1,16 @@
-import '@/styles/tailwind.css';
-
+import {Provider} from 'next-auth/client';
 import PropTypes from 'prop-types';
-import {AuthProvider} from '@/context/AuthContext';
+
+import {FetchProvider} from '@/context/FetchContext';
+import '@/styles/tailwind.css';
 
 const CustomApp = ({Component, pageProps}) => {
   return (
-    <AuthProvider>
-      <Component {...pageProps} />
-    </AuthProvider>
+    <Provider session={pageProps.session}>
+      <FetchProvider>
+        <Component {...pageProps} />
+      </FetchProvider>
+    </Provider>
   );
 };
 

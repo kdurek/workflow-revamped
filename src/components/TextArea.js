@@ -5,17 +5,17 @@ const countRows = content => {
 };
 
 const TextArea = ({
-  fullWidth,
-  resizable,
-  rows,
+  className,
   disabled,
-  readOnly,
-  value,
+  fullWidth,
+  label,
   onChange,
   onFocus,
-  label,
   placeholder = 'Placeholder',
-  className,
+  readOnly,
+  resizable,
+  rows,
+  value,
 }) => {
   return (
     <div

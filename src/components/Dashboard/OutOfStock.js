@@ -1,6 +1,6 @@
-import Button from '@/elements/Button';
-import Card from '@/elements/Card';
-import Square from '@/elements/Square';
+import Button from 'src/components/Button';
+import Card from 'src/components/Card';
+import Square from 'src/components/Square';
 import copyToClipboard from '@/utils/copyToClipboard';
 
 const formatToCopyable = tonersList => {
@@ -19,7 +19,7 @@ const OutOfStock = ({tonersList}) => {
       </div>
       <div className="my-4 divide-y divide-coolGray-200 divide-solid">
         {tonersList.map(toner => (
-          <div key={toner.id} className="flex items-center gap-4 py-2">
+          <div key={toner._id} className="flex items-center gap-4 py-2">
             <Square p={4} className="bg-coolGray-200">
               {toner.amount}
             </Square>

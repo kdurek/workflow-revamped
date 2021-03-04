@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-const Button = ({primary, square, fullWidth, onClick, type, className, children}) => {
+const Button = ({children, className, fullWidth, onClick, primary, square, type}) => {
   return (
     <button
       onClick={onClick}

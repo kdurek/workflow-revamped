@@ -1,10 +1,9 @@
 import {useState} from 'react';
 import classNames from 'classnames';
-import firebaseClient from 'firebaseClient';
-import {useAuth} from '@/context/AuthContext';
-import Card from '@/elements/Card';
-import Modal from '@/elements/Modal';
-import Square from '@/elements/Square';
+
+import Card from '@/components/Card';
+import Modal from '@/components/Modal';
+import Square from '@/components/Square';
 
 const getColor = color => {
   switch (color) {
@@ -22,25 +21,12 @@ const getColor = color => {
   }
 };
 
-const Toner = ({toner}) => {
-  const {user} = useAuth();
-
+const Toner = ({toner, onUse}) => {
   const [cardHover, setCardHover] = useState(false);
-
-  const onUse = id => {
-    if (user.role === 'admin') {
-      const decrement = firebaseClient.firestore.FieldValue.increment(-1);
-      firebaseClient
-        .firestore()
-        .collection(`toners${user.location}`)
-        .doc(id)
-        .update({amount: decrement});
-    }
-  };
 
   return (
     <Modal
-      submit={() => onUse(toner.id)}
+      submit={() => onUse(toner)}
       submitLabel={'yes'}
       buttonLabel={
         <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
