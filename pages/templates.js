@@ -2,10 +2,10 @@ import {useState, useEffect} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {useSession} from 'next-auth/client';
-import axios from 'axios';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Templates from '@/components/Templates';
+import templateService from 'src/services/templateService';
 
 const TemplatesPage = () => {
   const [session, loading] = useSession();
@@ -15,7 +15,7 @@ const TemplatesPage = () => {
   useEffect(async () => {
     if (session) {
       try {
-        const {data} = await axios.get(`templates`);
+        const {data} = await templateService.getAll();
         setCmsList(data.templates);
       } catch (err) {
         const errorMessage = err.response.data.message;

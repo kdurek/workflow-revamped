@@ -3,9 +3,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 import {useSession} from 'next-auth/client';
 
+import printerService from '../src/services/printerService';
+import tonerService from '../src/services/tonerService';
+
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Printers from '@/components/Printers';
-import axios from 'axios';
 
 const PrintersPage = () => {
   const [session, loading] = useSession();
@@ -22,7 +24,7 @@ const PrintersPage = () => {
 
   const retrievePrintersList = async () => {
     try {
-      const {data} = await axios.get('/printers');
+      const {data} = await printerService.getAll();
       setPrintersList(data.printers);
     } catch (err) {
       const errorMessage = err.response.data.message;
@@ -36,7 +38,7 @@ const PrintersPage = () => {
 
   const retrieveUncategorizedTonersList = async () => {
     try {
-      const {data} = await axios.get('/toners/uncategorized');
+      const {data} = await tonerService.getAllUncategorized();
       setUncategorizedToners(data.toners);
     } catch (err) {
       const errorMessage = err.response.data.message;
@@ -50,7 +52,7 @@ const PrintersPage = () => {
 
   const updatePrinter = async (printerId, editObject) => {
     try {
-      await axios.patch(`/printers/${printerId}`, editObject);
+      await printerService.update(printerId, editObject);
       refreshPrintersList();
       refreshUncategorizedTonersList();
     } catch (err) {
@@ -61,7 +63,7 @@ const PrintersPage = () => {
 
   const useToner = async toner => {
     try {
-      await axios.patch(`/toners/${toner._id}`, {
+      await tonerService.update(toner._id, {
         amount: toner.amount - 1,
       });
       refreshPrintersList();

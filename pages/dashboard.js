@@ -2,10 +2,10 @@ import {useState, useEffect} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {useSession} from 'next-auth/client';
-import axios from 'axios';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Dashboard from 'src/components/Dashboard';
+import tonerService from 'src/services/tonerService';
 
 const DashboardPage = () => {
   const [session, loading] = useSession();
@@ -14,7 +14,7 @@ const DashboardPage = () => {
   useEffect(async () => {
     if (session) {
       try {
-        const {data} = await axios.get('toners?amount[lte]=1');
+        const {data} = await tonerService.getAll('?amount[lte]=1');
         setTonersList(data.toners);
       } catch (err) {
         const errorMessage = err.response.data.message;
