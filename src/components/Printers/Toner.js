@@ -21,12 +21,12 @@ const getColor = color => {
   }
 };
 
-const Toner = ({toner, onUse}) => {
+const Toner = ({toner, useToner}) => {
   const [cardHover, setCardHover] = useState(false);
 
   return (
     <Modal
-      submit={() => onUse(toner)}
+      submit={() => useToner(toner)}
       submitLabel={'yes'}
       buttonLabel={
         <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>

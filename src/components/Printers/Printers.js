@@ -3,7 +3,7 @@ import Printer from '@/components/Printers/Printer';
 // import Input from '@/components/Input';
 // import Select from '@/components/Select';
 
-const Printers = ({onUse, printersList}) => {
+const Printers = ({updatePrinter, useToner, printersList, uncategorizedToners}) => {
   // const [filterSearch, setFilterSearch] = useState('');
   // const [filterBrand, setFilterBrand] = useState('');
   // const [filterColor, setFilterColor] = useState('');
@@ -33,7 +33,13 @@ const Printers = ({onUse, printersList}) => {
 
       <div className="flex flex-col gap-4 mt-4">
         {printersList.map(printer => (
-          <Printer key={printer._id} onUse={onUse} printer={printer} />
+          <Printer
+            key={printer._id}
+            updatePrinter={updatePrinter}
+            useToner={useToner}
+            printer={printer}
+            uncategorizedToners={uncategorizedToners}
+          />
         ))}
       </div>
     </div>

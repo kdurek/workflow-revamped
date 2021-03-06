@@ -2,43 +2,69 @@ import {useState, useEffect} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {useSession} from 'next-auth/client';
-import axios from 'axios';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Printers from '@/components/Printers';
+import axios from 'axios';
 
 const PrintersPage = () => {
   const [session, loading] = useSession();
 
   const [printersList, setPrintersList] = useState([]);
+  const [uncategorizedToners, setUncategorizedToners] = useState([]);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (session) {
-      try {
-        const {data} = await axios.get(`printers`);
-        setPrintersList(data.printers);
-      } catch (err) {
-        const errorMessage = err.response.data.message;
-        console.log(errorMessage);
-      }
+      retrievePrintersList();
+      retrieveUncategorizedTonersList();
     }
   }, [session]);
 
-  const onUse = async tonerToUse => {
+  const retrievePrintersList = async () => {
     try {
-      const updatedToner = await axios.patch(`toners/${tonerToUse._id}`, {
-        amount: tonerToUse.amount - 1,
-      });
+      const {data} = await axios.get('/printers');
+      setPrintersList(data.printers);
+    } catch (err) {
+      const errorMessage = err.response.data.message;
+      console.log(errorMessage);
+    }
+  };
 
-      setPrintersList(
-        printersList.map(printer => {
-          const newToners = printer.toners.map(toner =>
-            toner._id === tonerToUse._id ? updatedToner.data.toner : toner
-          );
-          printer.toners = newToners;
-          return printer;
-        })
-      );
+  const refreshPrintersList = () => {
+    retrievePrintersList();
+  };
+
+  const retrieveUncategorizedTonersList = async () => {
+    try {
+      const {data} = await axios.get('/toners/uncategorized');
+      setUncategorizedToners(data.toners);
+    } catch (err) {
+      const errorMessage = err.response.data.message;
+      console.log(errorMessage);
+    }
+  };
+
+  const refreshUncategorizedTonersList = () => {
+    retrieveUncategorizedTonersList();
+  };
+
+  const updatePrinter = async (printerId, editObject) => {
+    try {
+      await axios.patch(`/printers/${printerId}`, editObject);
+      refreshPrintersList();
+      refreshUncategorizedTonersList();
+    } catch (err) {
+      const errorMessage = err.response.data.message;
+      console.log(errorMessage);
+    }
+  };
+
+  const useToner = async toner => {
+    try {
+      await axios.patch(`/toners/${toner._id}`, {
+        amount: toner.amount - 1,
+      });
+      refreshPrintersList();
     } catch (err) {
       const errorMessage = err.response.data.message;
       console.log(errorMessage);
@@ -63,7 +89,12 @@ const PrintersPage = () => {
       <Head>
         <title>Printers</title>
       </Head>
-      <Printers onUse={onUse} printersList={printersList} />
+      <Printers
+        updatePrinter={updatePrinter}
+        useToner={useToner}
+        printersList={printersList}
+        uncategorizedToners={uncategorizedToners}
+      />
     </DefaultLayout>
   );
 };
