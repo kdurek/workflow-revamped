@@ -5,8 +5,8 @@ import {useSession} from 'next-auth/client';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Printers from '@/components/Printers';
-import {getPrinters} from 'src/services/printerService';
-import {getUncatToners, updateToner} from 'src/services/tonerService';
+import {getPrinters} from '@/services/printerService';
+import {getUncatToners, updateToner} from '@/services/tonerService';
 
 const PrintersPage = () => {
   const [session, loading] = useSession();

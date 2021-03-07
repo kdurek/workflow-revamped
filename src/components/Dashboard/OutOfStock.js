@@ -1,6 +1,6 @@
-import Button from 'src/components/Button';
-import Card from 'src/components/Card';
-import Square from 'src/components/Square';
+import Button from '@/components/Button';
+import Card from '@/components/Card';
+import Square from '@/components/Square';
 import copyToClipboard from '@/utils/copyToClipboard';
 
 const formatToCopyable = tonersList => {

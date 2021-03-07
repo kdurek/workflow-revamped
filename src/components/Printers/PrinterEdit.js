@@ -6,7 +6,7 @@ import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
 import Square from '@/components/Square';
-import {updatePrinter} from 'src/services/printerService';
+import {updatePrinter} from '@/services/printerService';
 
 const getColor = color => {
   switch (color) {

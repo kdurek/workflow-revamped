@@ -4,7 +4,7 @@ import {useSession} from 'next-auth/client';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Templates from '@/components/Templates';
-import {getTemplates} from 'src/services/templateService';
+import {getTemplates} from '@/services/templateService';
 import {useQuery} from 'react-query';
 
 const TemplatesPage = () => {

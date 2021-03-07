@@ -3,8 +3,8 @@ import Link from 'next/link';
 import {useSession} from 'next-auth/client';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
-import Dashboard from 'src/components/Dashboard';
-import {getOutOfStockToners} from 'src/services/tonerService';
+import Dashboard from '@/components/Dashboard';
+import {getOutOfStockToners} from '@/services/tonerService';
 import {useQuery} from 'react-query';
 
 const DashboardPage = () => {
