@@ -1,6 +1,6 @@
 import React, {createContext} from 'react';
-import {useSession} from 'next-auth/client';
 import axios from 'axios';
+import {useSession} from 'next-auth/client';
 
 const FetchContext = createContext();
 

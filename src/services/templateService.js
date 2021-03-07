@@ -1,14 +1,6 @@
 import axios from 'axios';
 
-const getAll = (query = '') => {
-  return axios.get(`/templates${query}`);
-};
-
-const create = data => {
-  return axios.post('/templates', data);
-};
-
-export default {
-  getAll,
-  create,
+export const getTemplates = async () => {
+  const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/templates`);
+  return data.templates;
 };

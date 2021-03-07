@@ -1,34 +1,19 @@
 import axios from 'axios';
 
-const getAll = (query = '') => {
-  return axios.get(`/toners${query}`);
+export const getOutOfStockToners = async () => {
+  const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners?amount[lte]=1`);
+  return data.toners;
 };
 
-const getAllUncategorized = () => {
-  return axios.get(`/toners/uncategorized`);
+export const getUncatToners = async () => {
+  const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners/uncategorized`);
+  return data.toners;
 };
 
-const get = id => {
-  return axios.get(`/toners/${id}`);
-};
-
-const create = data => {
-  return axios.post('/toners', data);
-};
-
-const update = (id, data) => {
-  return axios.patch(`/toners/${id}`, data);
-};
-
-const remove = id => {
-  return axios.delete(`/toners/${id}`);
-};
-
-export default {
-  getAll,
-  getAllUncategorized,
-  get,
-  create,
-  update,
-  remove,
+export const updateToner = async arg => {
+  const {data} = await axios.patch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/toners/${arg.id}`,
+    arg.updatedToner
+  );
+  return data;
 };

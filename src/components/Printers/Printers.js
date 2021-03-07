@@ -1,12 +1,14 @@
-import Printer from '@/components/Printers/Printer';
-// import Card from '@/components/Card';
+import Card from '@/components/Card';
+import PrinterEdit from '@/components/Printers/PrinterEdit';
+import Toner from '@/components/Printers/Toner';
 // import Input from '@/components/Input';
 // import Select from '@/components/Select';
 
-const Printers = ({updatePrinter, useToner, printersList, uncategorizedToners}) => {
+const Printers = ({printersList, session, uncategorizedToners, useToner}) => {
   // const [filterSearch, setFilterSearch] = useState('');
   // const [filterBrand, setFilterBrand] = useState('');
   // const [filterColor, setFilterColor] = useState('');
+
   return (
     <div>
       {/* <Card className="flex flex-col gap-4 md:flex-row">
@@ -32,17 +34,45 @@ const Printers = ({updatePrinter, useToner, printersList, uncategorizedToners}) 
       </Card> */}
 
       <div className="flex flex-col gap-4 mt-4">
-        {printersList.map(printer => (
+        {printersList?.map(printer => (
           <Printer
             key={printer._id}
-            updatePrinter={updatePrinter}
-            useToner={useToner}
             printer={printer}
+            session={session}
             uncategorizedToners={uncategorizedToners}
+            useToner={useToner}
           />
         ))}
       </div>
     </div>
+  );
+};
+
+const Printer = ({printer, session, uncategorizedToners, useToner}) => {
+  return (
+    <Card className="flex flex-col gap-4">
+      <div className="flex items-center justify-between">
+        <span className="text-4xl font-bold">{`${printer.brand} ${printer.model}`}</span>
+        {session.user.role === 'admin' && (
+          <PrinterEdit printer={printer} uncategorizedToners={uncategorizedToners} />
+        )}
+      </div>
+      {printer.toners.length ? (
+        <div className="flex flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+          {printer.toners
+            // .sort((a, b) =>
+            //   a.color > b.color ? 1 : a.color === b.color ? (a.size > b.size ? 1 : -1) : -1
+            // )
+            .map(toner => (
+              <Toner key={toner._id} useToner={useToner} toner={toner} />
+            ))}
+        </div>
+      ) : (
+        <p className="text-xl font-medium">
+          No toners are associated to this printer, assign some!
+        </p>
+      )}
+    </Card>
   );
 };
 

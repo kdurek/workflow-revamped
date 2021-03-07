@@ -1,76 +1,36 @@
-import {useState, useEffect} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import {useMutation, useQuery, useQueryClient} from 'react-query';
 import {useSession} from 'next-auth/client';
-
-import printerService from '../src/services/printerService';
-import tonerService from '../src/services/tonerService';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Printers from '@/components/Printers';
+import {getPrinters} from 'src/services/printerService';
+import {getUncatToners, updateToner} from 'src/services/tonerService';
 
 const PrintersPage = () => {
   const [session, loading] = useSession();
 
-  const [printersList, setPrintersList] = useState([]);
-  const [uncategorizedToners, setUncategorizedToners] = useState([]);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    if (session) {
-      retrievePrintersList();
-      retrieveUncategorizedTonersList();
-    }
-  }, [session]);
+  const {data: printersList} = useQuery('printers', getPrinters, {
+    enabled: !!session,
+  });
+  const {data: uncategorizedToners} = useQuery('uncategorized-toners', getUncatToners, {
+    enabled: !!session,
+  });
 
-  const retrievePrintersList = async () => {
-    try {
-      const {data} = await printerService.getAll();
-      setPrintersList(data.printers);
-    } catch (err) {
-      const errorMessage = err.response.data.message;
-      console.log(errorMessage);
-    }
-  };
-
-  const refreshPrintersList = () => {
-    retrievePrintersList();
-  };
-
-  const retrieveUncategorizedTonersList = async () => {
-    try {
-      const {data} = await tonerService.getAllUncategorized();
-      setUncategorizedToners(data.toners);
-    } catch (err) {
-      const errorMessage = err.response.data.message;
-      console.log(errorMessage);
-    }
-  };
-
-  const refreshUncategorizedTonersList = () => {
-    retrieveUncategorizedTonersList();
-  };
-
-  const updatePrinter = async (printerId, editObject) => {
-    try {
-      await printerService.update(printerId, editObject);
-      refreshPrintersList();
-      refreshUncategorizedTonersList();
-    } catch (err) {
-      const errorMessage = err.response.data.message;
-      console.log(errorMessage);
-    }
-  };
+  const updateMutation = useMutation(arg => updateToner(arg), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('printers');
+    },
+  });
 
   const useToner = async toner => {
-    try {
-      await tonerService.update(toner._id, {
-        amount: toner.amount - 1,
-      });
-      refreshPrintersList();
-    } catch (err) {
-      const errorMessage = err.response.data.message;
-      console.log(errorMessage);
-    }
+    const updatedToner = {
+      amount: toner.amount - 1,
+    };
+    updateMutation.mutate({id: toner._id, updatedToner});
   };
 
   if (loading) {
@@ -92,10 +52,10 @@ const PrintersPage = () => {
         <title>Printers</title>
       </Head>
       <Printers
-        updatePrinter={updatePrinter}
-        useToner={useToner}
         printersList={printersList}
+        session={session}
         uncategorizedToners={uncategorizedToners}
+        useToner={useToner}
       />
     </DefaultLayout>
   );

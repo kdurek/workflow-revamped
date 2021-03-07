@@ -3,7 +3,7 @@ import classNames from 'classnames';
 const TemplatesMenu = ({activeTemplate, setActiveTemplate, cmsList}) => {
   return (
     <div className="space-y-3">
-      {cmsList.map((cms, i) => (
+      {cmsList?.map((cms, i) => (
         <div
           key={i}
           className={classNames(
