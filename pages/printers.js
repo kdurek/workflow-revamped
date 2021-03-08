@@ -20,8 +20,17 @@ const PrintersPage = () => {
     enabled: !!session,
   });
 
-  const updateMutation = useMutation(arg => updateToner(arg), {
-    onSuccess: () => {
+  const updateTonerMutation = useMutation(updateToner, {
+    onMutate: async newToner => {
+      await queryClient.cancelQueries(['toners', newToner.id]);
+      const previousToner = queryClient.getQueryData(['toners', newToner.id]);
+      queryClient.setQueryData(['toners', newToner.id], newToner);
+      return {previousToner, newToner};
+    },
+    onError: (err, newToner, context) => {
+      queryClient.setQueryData(['toners', context.newToner._id], context.previousToner);
+    },
+    onSettled: () => {
       queryClient.invalidateQueries('printers');
     },
   });
@@ -30,7 +39,7 @@ const PrintersPage = () => {
     const updatedToner = {
       amount: toner.amount - 1,
     };
-    updateMutation.mutate({id: toner._id, updatedToner});
+    updateTonerMutation.mutate({id: toner._id, updatedToner});
   };
 
   if (loading) {

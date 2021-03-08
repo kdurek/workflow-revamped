@@ -35,7 +35,7 @@ const Toner = ({toner, useToner}) => {
               'bg-blue-200': cardHover,
             })}
           >
-            <Square p={4} className={`${getColor(toner.color)}`}>
+            <Square p={4} className={getColor(toner.color)}>
               {toner.amount}
             </Square>
             <span className="text-2xl font-medium">{toner.code}</span>

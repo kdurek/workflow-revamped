@@ -25,35 +25,40 @@ const getColor = color => {
 };
 
 const PrinterEdit = ({printer, uncategorizedToners}) => {
-  const queryClient = useQueryClient();
+  const [editModel, setEditModel] = useState(printer.model);
+  const [editBrand, setEditBrand] = useState(printer.brand);
+  const [editToners, setEditToners] = useState('');
 
-  const updateMutation = useMutation(arg => updatePrinter(arg), {
-    onSuccess: () => {
+  const queryClient = useQueryClient();
+  const updatePrinterMutation = useMutation(updatePrinter, {
+    onMutate: async newPrinter => {
+      await queryClient.cancelQueries(['printers', newPrinter.id]);
+      const previousPrinter = queryClient.getQueryData(['printers', newPrinter.id]);
+      queryClient.setQueryData(['printers', newPrinter.id], newPrinter);
+      return {previousPrinter, newPrinter};
+    },
+    onError: (err, newPrinter, context) => {
+      queryClient.setQueryData(['printers', context.newPrinter._id], context.previousPrinter);
+    },
+    onSettled: () => {
       queryClient.invalidateQueries('printers');
       queryClient.invalidateQueries('uncategorized-toners');
     },
   });
 
-  const [editModel, setEditModel] = useState(printer.model);
-  const [editBrand, setEditBrand] = useState(printer.brand);
-  const [editToners, setEditToners] = useState('');
-
-  const handlePrinterEdit = () => {
+  const handlePrinterEdit = async () => {
     const updatedPrinter = {model: editModel, brand: editBrand};
-    updateMutation.mutate({id: printer._id, updatedPrinter});
+    updatePrinterMutation.mutate({id: printer._id, updatedPrinter});
   };
 
   const handlePullToner = async tonerId => {
-    const updatedToners = printer.toners.map(toner => toner._id);
-    const pullTonerIndex = updatedToners.indexOf(tonerId);
-    updatedToners.splice(pullTonerIndex, 1);
-    updateMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
+    const updatedToners = printer.toners.filter(toner => toner._id !== tonerId);
+    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
   };
 
   const handlePushToner = tonerId => {
-    const updatedToners = printer.toners.map(toner => toner._id);
-    updatedToners.push(tonerId);
-    updateMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
+    const updatedToners = [...printer.toners.map(toner => toner._id), tonerId];
+    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
   };
 
   return (
@@ -81,11 +86,11 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
         {printer.toners.map(toner => (
           <div key={toner._id} className="flex flex-col gap-2 ">
             <div className="flex items-center gap-4">
-              <Square p={4} className="bg-coolGray-200">
+              <Square p={4} className={getColor(toner.color)}>
                 {toner.amount}
               </Square>
 
-              <p className="font-medium">{`${toner.code}`}</p>
+              <p className="font-medium">{toner.code}</p>
               <button onClick={() => handlePullToner(toner._id)}>
                 <span className="p-1 m-1 align-middle rounded-xl material-icons hover:bg-coolGray-50">
                   close
