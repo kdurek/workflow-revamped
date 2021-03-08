@@ -48,7 +48,8 @@ ${user.name}`;
           <span className=" material-icons">cached</span>
         </Button>
       </div>
-      <TextArea fullWidth readOnly label="Preview" value={emailPattern} className="md:col-span-2" />
+      <TextArea fullWidth readOnly label="Preview" value={emailPattern} className="" />
+      <TextArea fullWidth readOnly label="Preview" value={smsPattern} className="" />
       <Input fullWidth label="Email" value={email} onChange={e => setEmail(e.target.value)} />
       <Input fullWidth label="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
       <Button
