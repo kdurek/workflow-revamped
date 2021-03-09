@@ -1,8 +1,8 @@
 import {useState, useRef} from 'react';
 import {Transition} from '@headlessui/react';
 
-import Button from '@/components/Button';
-import useClickOutside from '@/hooks/useClickOutside';
+import Button from './Button';
+import useClickOutside from '../hooks/useClickOutside';
 
 const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
   const [showModal, setShowModal] = useState(false);
