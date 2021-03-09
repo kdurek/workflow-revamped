@@ -21,16 +21,7 @@ const PrintersPage = () => {
   });
 
   const updateTonerMutation = useMutation(updateToner, {
-    onMutate: async newToner => {
-      await queryClient.cancelQueries(['toners', newToner.id]);
-      const previousToner = queryClient.getQueryData(['toners', newToner.id]);
-      queryClient.setQueryData(['toners', newToner.id], newToner);
-      return {previousToner, newToner};
-    },
-    onError: (err, newToner, context) => {
-      queryClient.setQueryData(['toners', context.newToner._id], context.previousToner);
-    },
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries('printers');
     },
   });

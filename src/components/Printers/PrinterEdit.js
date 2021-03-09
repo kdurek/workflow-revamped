@@ -30,17 +30,9 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
   const [editToners, setEditToners] = useState('');
 
   const queryClient = useQueryClient();
+
   const updatePrinterMutation = useMutation(updatePrinter, {
-    onMutate: async newPrinter => {
-      await queryClient.cancelQueries(['printers', newPrinter.id]);
-      const previousPrinter = queryClient.getQueryData(['printers', newPrinter.id]);
-      queryClient.setQueryData(['printers', newPrinter.id], newPrinter);
-      return {previousPrinter, newPrinter};
-    },
-    onError: (err, newPrinter, context) => {
-      queryClient.setQueryData(['printers', context.newPrinter._id], context.previousPrinter);
-    },
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries('printers');
       queryClient.invalidateQueries('uncategorized-toners');
     },
