@@ -6,7 +6,7 @@ export const getPrinters = async () => {
 };
 
 export const updatePrinter = async arg => {
-  const {data} = axios.patch(
+  const {data} = await axios.patch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/printers/${arg.id}`,
     arg.updatedPrinter
   );
