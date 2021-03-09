@@ -7,7 +7,13 @@ import {FetchProvider} from '@/context/FetchContext';
 import '@/styles/tailwind.css';
 
 const CustomApp = ({Component, pageProps}) => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: Infinity,
+      },
+    },
+  });
 
   return (
     <Provider session={pageProps.session}>
