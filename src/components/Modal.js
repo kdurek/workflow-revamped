@@ -17,7 +17,7 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
           {buttonLabel}
         </button>
       ) : (
-        <Button onClick={() => setShowModal(true)}>{buttonLabel}</Button>
+        <Button label={buttonLabel} onClick={() => setShowModal(true)} />
       )}
       <Transition show={showModal}>
         <Transition.Child
@@ -46,18 +46,15 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
               <div className="p-4">{children}</div>
               <div className="flex flex-col gap-4 p-4 border-t sm:flex-row-reverse">
                 <Button
+                  label={submitLabel || 'submit'}
                   fullWidth
                   primary
                   onClick={() => {
                     submit();
                     setShowModal(false);
                   }}
-                >
-                  {submitLabel || 'submit'}
-                </Button>
-                <Button fullWidth onClick={() => setShowModal(false)}>
-                  Cancel
-                </Button>
+                />
+                <Button label={'Cancel'} fullWidth onClick={() => setShowModal(false)} />
               </div>
             </div>
           </Transition.Child>

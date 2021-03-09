@@ -115,6 +115,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
               options={[...new Set(uncategorizedToners?.map(toner => toner.code))]}
             />
             <Button
+              label={'Add'}
               onClick={() => {
                 if (editToners !== '') {
                   const toner = uncategorizedToners.find(toner => toner.code === editToners);
@@ -122,9 +123,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
                   setEditToners('');
                 }
               }}
-            >
-              Add
-            </Button>
+            />
           </div>
         )}
       </div>

@@ -44,9 +44,11 @@ ${user.name}`;
             e.target.select();
           }}
         />
-        <Button square onClick={() => setPassword(generatePassword(true, true, true, true, 15))}>
-          <span className=" material-icons">cached</span>
-        </Button>
+        <Button
+          label={<span className=" material-icons">cached</span>}
+          square
+          onClick={() => setPassword(generatePassword(true, true, true, true, 15))}
+        />
       </div>
       <TextArea fullWidth readOnly label="Preview" value={emailPattern} className="" />
       <TextArea fullWidth readOnly label="Preview" value={smsPattern} className="" />
@@ -55,13 +57,13 @@ ${user.name}`;
       <Button
         primary
         fullWidth
+        label={'Send Email'}
         onClick={() => sendEmail(email, `Credentials to ${activeTemplate.name}`, emailPattern)}
-      >
-        Send Email
-      </Button>
+      />
       <Button
         primary
         fullWidth
+        label={'Send SMS'}
         onClick={() =>
           sendEmail(
             `${normalizeNumber(phone)}@${process.env.NEXT_PUBLIC_SMS_DOMAIN}`,
@@ -69,9 +71,7 @@ ${user.name}`;
             smsPattern
           )
         }
-      >
-        Send SMS
-      </Button>
+      />
     </div>
   );
 };

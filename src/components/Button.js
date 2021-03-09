@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-const Button = ({children, className, fullWidth, onClick, primary, square, type}) => {
+const Button = ({className, fullWidth, label, onClick, primary, square, type}) => {
   return (
     <button
       onClick={onClick}
@@ -16,7 +16,7 @@ const Button = ({children, className, fullWidth, onClick, primary, square, type}
         }
       )}
     >
-      {children}
+      {label}
     </button>
   );
 };

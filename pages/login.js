@@ -47,6 +47,7 @@ const Login = () => {
             className="mt-4"
           />
           <Button
+            label={'Login'}
             primary
             fullWidth
             onClick={e => {
@@ -55,9 +56,7 @@ const Login = () => {
             }}
             type="submit"
             className="mt-4 font-semibold"
-          >
-            Login
-          </Button>
+          />
         </form>
       </div>
     </AuthLayout>
