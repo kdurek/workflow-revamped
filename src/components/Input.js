@@ -1,14 +1,15 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 const Input = ({
   className,
   disabled,
   fullWidth,
-  label = 'Label',
+  label,
   onChange,
   onFocus,
   readOnly,
-  type = 'text',
+  type,
   value,
 }) => {
   return (
@@ -41,6 +42,24 @@ const Input = ({
       </label>
     </div>
   );
+};
+
+Input.propTypes = {
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  label: PropTypes.string,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  onFocus: PropTypes.func,
+  readOnly: PropTypes.bool,
+  type: PropTypes.string,
+  value: PropTypes.string,
+};
+
+Input.defaultProps = {
+  label: 'Label',
+  type: 'text',
 };
 
 export default Input;
