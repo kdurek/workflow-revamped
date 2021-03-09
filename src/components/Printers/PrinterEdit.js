@@ -7,6 +7,7 @@ import Modal from '@/components/Modal';
 import Select from '@/components/Select';
 import Square from '@/components/Square';
 import {updatePrinter} from '@/services/printerService';
+import {useForm} from 'react-hook-form';
 
 const getColor = color => {
   switch (color) {
@@ -29,6 +30,8 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
   const [editBrand, setEditBrand] = useState(printer.brand);
   const [editToners, setEditToners] = useState('');
 
+  const {register, handleSubmit, watch, errors} = useForm();
+
   const queryClient = useQueryClient();
 
   const updatePrinterMutation = useMutation(updatePrinter, {
@@ -38,9 +41,8 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
     },
   });
 
-  const handlePrinterEdit = async () => {
-    const updatedPrinter = {model: editModel, brand: editBrand};
-    updatePrinterMutation.mutate({id: printer._id, updatedPrinter});
+  const handlePrinterEdit = async data => {
+    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: data});
   };
 
   const handlePullToner = async tonerId => {
@@ -52,28 +54,40 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
     const updatedToners = [...printer.toners.map(toner => toner._id), tonerId];
     updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
   };
-
   return (
     <Modal
       buttonLabel={<span className="align-middle material-icons">more_vert</span>}
       buttonClass=" h-12 hover:bg-coolGray-200 transition-all duration-300 rounded-xl"
-      submit={handlePrinterEdit}
+      submit={handleSubmit(handlePrinterEdit)}
     >
       <div className="flex flex-col gap-4">
-        <p className="text-4xl ">Details</p>
-        <Select
-          fullWidth
-          label={'Brand'}
-          value={editBrand}
-          setValue={setEditBrand}
-          options={['Xerox', 'HP']}
-        />
-        <Input
-          fullWidth
-          label={'Model'}
-          value={editModel}
-          onChange={e => setEditModel(e.target.value)}
-        />
+        <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
+          <legend className="text-4xl">Details</legend>
+          <label htmlFor="brand">
+            Brand
+            <select
+              className="block w-48 h-12 px-3 rounded-xl bg-coolGray-200 focus:outline-none"
+              defaultValue={printer.brand}
+              name="brand"
+              ref={register}
+            >
+              <option value="Xerox">Xerox</option>
+              <option value="HP">HP</option>
+            </select>
+          </label>
+          <label htmlFor="model">
+            Model
+            <input
+              autoComplete="off"
+              className="block w-48 h-12 px-3 rounded-xl bg-coolGray-200"
+              defaultValue={printer.model}
+              name="model"
+              ref={register({required: true})}
+            />
+            {errors.model && <span className="block text-red-600">You must provide model</span>}
+          </label>
+        </form>
+
         <p className="text-4xl ">Toners</p>
         {printer.toners.map(toner => (
           <div key={toner._id} className="flex flex-col gap-2 ">
