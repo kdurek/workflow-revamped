@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import {Transition} from '@headlessui/react';
+import {useEffect, useRef, useState} from 'react';
 
 export const Navbar = ({children}) => {
   return (
@@ -19,25 +20,74 @@ export const NavbarItem = ({children, icon}) => {
       >
         <span className="material-icons">{icon}</span>
       </button>
-      {open && children}
+      <Transition
+        show={open}
+        enter="transition-all duration-300 ease-out"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-all duration-300 ease-in"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        {children}
+      </Transition>
     </li>
   );
 };
 
-export const DropdownMenu = ({children}) => {
-  return (
-    <div className="absolute p-4 overflow-hidden transform bg-white shadow-xl right-4 top-20 w-80 rounded-xl">
-      {children}
-    </div>
-  );
-};
+export const DropdownMenu = () => {
+  const [activeMenu, setActiveMenu] = useState('main');
 
-export const DropdownItem = ({children, leftIcon, rightIcon}) => {
+  const DropdownItem = ({children, leftIcon, rightIcon, goToMenu}) => {
+    return (
+      <button
+        onClick={() => goToMenu && setActiveMenu(goToMenu)}
+        className="flex items-center w-full h-12 gap-2 p-2 font-medium transition-all hover:bg-coolGray-200 rounded-xl"
+      >
+        <span className="material-icons">{leftIcon}</span>
+        {children}
+        <span className="ml-auto material-icons">{rightIcon}</span>
+      </button>
+    );
+  };
+
   return (
-    <button className="flex items-center w-full h-12 gap-2 p-2 font-medium transition-colors hover:bg-coolGray-200 rounded-xl">
-      <span className="material-icons">{leftIcon}</span>
-      {children}
-      <span className="ml-auto material-icons">{rightIcon}</span>
-    </button>
+    <div
+      className={`${activeMenu === 'main' && 'h-16'} ${
+        activeMenu === 'settings' && 'h-40'
+      } absolute overflow-hidden transition-all duration-300 ease-in-out bg-white shadow right-4 top-16 w-80 rounded-xl`}
+    >
+      <Transition
+        show={activeMenu === 'main'}
+        enter="transform transition-all duration-300 ease-out"
+        enterFrom="absolute -translate-x-full"
+        enterTo="absolute translate-x-0"
+        leave="transform transition-all duration-300 ease-in"
+        leaveFrom="absolute translate-x-0"
+        leaveTo="absolute -translate-x-full"
+        className="w-full p-2"
+      >
+        <DropdownItem goToMenu={'settings'} leftIcon={'settings'} rightIcon={'chevron_right'}>
+          Settings
+        </DropdownItem>
+      </Transition>
+
+      <Transition
+        show={activeMenu === 'settings'}
+        enter="transform transition-all duration-300 ease-out"
+        enterFrom="absolute translate-x-full"
+        enterTo="absolute translate-x-0"
+        leave="transform transition-all duration-300 ease-in"
+        leaveFrom="absolute translate-x-0"
+        leaveTo="absolute translate-x-full"
+        className="w-full p-2"
+      >
+        <DropdownItem goToMenu={'main'} leftIcon={'chevron_left'}>
+          Go Back
+        </DropdownItem>
+        <DropdownItem leftIcon={'account_circle'}>Go Back</DropdownItem>
+        <DropdownItem leftIcon={'account_circle'}>Go Back</DropdownItem>
+      </Transition>
+    </div>
   );
 };

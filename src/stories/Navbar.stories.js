@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {DropdownItem, DropdownMenu, Navbar, NavbarItem} from '../components/Navbar';
+import {DropdownMenu, Navbar, NavbarItem} from '../components/Navbar';
 
 export default {
   title: 'Reusable/Navbar',
@@ -10,9 +10,7 @@ export default {
 const Template = args => (
   <Navbar {...args}>
     <NavbarItem icon={'expand_more'}>
-      <DropdownMenu>
-        <DropdownItem leftIcon={'settings'}>My Profile</DropdownItem>
-      </DropdownMenu>
+      <DropdownMenu></DropdownMenu>
     </NavbarItem>
   </Navbar>
 );
