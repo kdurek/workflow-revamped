@@ -58,7 +58,7 @@ const Printer = ({printer, session, uncategorizedToners, useToner}) => {
         )}
       </div>
       {printer.toners.length ? (
-        <div className="flex flex-col gap-4 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <div className="flex flex-col gap-6 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {printer.toners
             // .sort((a, b) =>
             //   a.color > b.color ? 1 : a.color === b.color ? (a.size > b.size ? 1 : -1) : -1

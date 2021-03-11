@@ -1,14 +1,12 @@
 import {useState} from 'react';
 import classNames from 'classnames';
 
-import Card from '@/components/Card';
 import Modal from '@/components/Modal';
-import Square from '@/components/Square';
 
 const getColor = color => {
   switch (color) {
     case 'Black':
-      return 'bg-gray-400';
+      return 'bg-gray-300';
     case 'Cyan':
       return 'bg-cyan-200';
     case 'Magenta':
@@ -30,16 +28,21 @@ const Toner = ({toner, useToner}) => {
       submitLabel={'yes'}
       buttonLabel={
         <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
-          <Card
-            className={classNames('flex items-center gap-4 p-8 bg-coolGray-100', {
-              'bg-blue-200': cardHover,
-            })}
+          <div
+            className={classNames(
+              'flex items-center justify-between shadow h-16 bg-coolGray-100 rounded-xl overflow-hidden',
+              {
+                'bg-blue-200': cardHover,
+              }
+            )}
           >
-            <Square p={4} className={getColor(toner.color)}>
-              {toner.amount}
-            </Square>
-            <span className="text-2xl font-medium">{toner.code}</span>
-          </Card>
+            <span className="px-4 text-2xl font-medium">{toner.code}</span>
+            <div
+              className={`w-16 h-16 p-1 flex items-center justify-center ${getColor(toner.color)}`}
+            >
+              <span className="text-2xl font-medium">{toner.amount}</span>
+            </div>
+          </div>
         </div>
       }
       buttonClass="h-full w-full"
