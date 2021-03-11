@@ -107,7 +107,7 @@ export const DropdownMenu = ({setOpen}) => {
   return (
     <div
       ref={ref}
-      className={`absolute overflow-hidden transition-all p-2 duration-300 ease-in-out bg-white shadow-lg right-4 top-16 w-80 rounded-xl ${getHeight()}`}
+      className={`z-40 absolute overflow-hidden transition-all p-2 duration-300 ease-in-out bg-white shadow-lg right-4 top-16 w-80 rounded-xl ${getHeight()}`}
     >
       {/* Main Menu */}
       <Transition
