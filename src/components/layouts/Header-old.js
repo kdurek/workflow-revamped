@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {signOut, useSession} from 'next-auth/client';
 import {Transition} from '@headlessui/react';
 
-import ActiveLink from '@/components/ActiveLink';
+import ActiveLink from '@/components/Navbar/ActiveLink';
 
 const navItems = [
   {

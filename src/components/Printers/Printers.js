@@ -33,7 +33,7 @@ const Printers = ({printersList, session, uncategorizedToners, useToner}) => {
         />
       </Card> */}
 
-      <div className="flex flex-col gap-4 mt-4">
+      <div className="flex flex-col gap-4">
         {printersList?.map(printer => (
           <Printer
             key={printer._id}

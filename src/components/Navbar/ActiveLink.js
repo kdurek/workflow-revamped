@@ -8,7 +8,7 @@ const ActiveLink = ({children, href}) => {
   let className = children.props.className || '';
 
   if (router.pathname === href) {
-    className = `${className} text-3xl md:text-4xl lg:text-5xl font-bold`;
+    className = `${className} bg-coolGray-400`;
   }
 
   return <Link href={href}>{React.cloneElement(children, {className})}</Link>;

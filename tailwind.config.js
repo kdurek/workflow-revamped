@@ -41,6 +41,7 @@ module.exports = {
       gridTemplateRows: {
         pancake: 'auto 1fr auto',
       },
+      translate: {'-3/2': '150%', '3/2': '150%'},
     },
   },
   variants: {
