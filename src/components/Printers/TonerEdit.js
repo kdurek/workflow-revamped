@@ -1,15 +1,15 @@
+import {useForm} from 'react-hook-form';
 import {useQueryClient, useMutation, useQuery} from 'react-query';
 import {useState} from 'react';
-import {useForm} from 'react-hook-form';
 
-import Modal from '@/components/Modal';
-import {updateToner, deleteToner} from '@/services/tonerService';
 import {getToners} from '@/services/tonerService';
+import {updateToner, deleteToner} from '@/services/tonerService';
+import Modal from '@/components/Modal';
 
 const TonerEdit = () => {
   const [selectedTonerId, setSelectedTonerId] = useState();
 
-  const {register, handleSubmit, watch, errors} = useForm();
+  const {register, handleSubmit, errors} = useForm();
 
   const queryClient = useQueryClient();
 
@@ -22,6 +22,10 @@ const TonerEdit = () => {
       queryClient.invalidateQueries('uncategorized-toners');
     },
   });
+  const handleTonerEdit = async data => {
+    updateTonerMutation.mutate({id: selectedTonerId, updatedToner: data});
+    setSelectedTonerId();
+  };
 
   const deleteTonerMutation = useMutation(deleteToner, {
     onSuccess: () => {
@@ -30,12 +34,6 @@ const TonerEdit = () => {
       queryClient.invalidateQueries('uncategorized-toners');
     },
   });
-
-  const handleTonerEdit = async data => {
-    updateTonerMutation.mutate({id: selectedTonerId, updatedToner: data});
-    setSelectedTonerId();
-  };
-
   const handleTonerDelete = async tonerId => {
     deleteTonerMutation.mutate(tonerId);
   };

@@ -10,7 +10,7 @@ export const getOutOfStockToners = async () => {
   return data.toners;
 };
 
-export const getUncatToners = async () => {
+export const getUncategorizedToners = async () => {
   const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners/uncategorized`);
   return data.toners;
 };

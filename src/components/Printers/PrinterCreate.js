@@ -1,10 +1,11 @@
 import {useForm} from 'react-hook-form';
 import {useMutation, useQueryClient} from 'react-query';
-import {createPrinter} from 'src/services/printerService';
-import Modal from '../Modal';
+
+import {createPrinter} from '@/services/printerService';
+import Modal from '@/components/Modal';
 
 const PrinterCreate = () => {
-  const {register, handleSubmit, watch, errors} = useForm();
+  const {register, handleSubmit, errors} = useForm();
 
   const queryClient = useQueryClient();
 
@@ -13,7 +14,6 @@ const PrinterCreate = () => {
       queryClient.invalidateQueries('printers');
     },
   });
-
   const handlePrinterCreate = async data => {
     createPrinterMutation.mutate(data);
   };

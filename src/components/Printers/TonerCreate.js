@@ -1,10 +1,11 @@
 import {useForm} from 'react-hook-form';
 import {useMutation, useQueryClient} from 'react-query';
-import {createToner} from 'src/services/tonerService';
-import Modal from '../Modal';
+
+import {createToner} from '@/services/tonerService';
+import Modal from '@/components/Modal';
 
 const TonerCreate = () => {
-  const {register, handleSubmit, watch, errors} = useForm();
+  const {register, handleSubmit, errors} = useForm();
 
   const queryClient = useQueryClient();
 
@@ -14,7 +15,6 @@ const TonerCreate = () => {
       queryClient.invalidateQueries('uncategorized-toners');
     },
   });
-
   const handleTonerCreate = async data => {
     createTonerMutation.mutate(data);
   };

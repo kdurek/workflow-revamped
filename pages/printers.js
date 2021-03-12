@@ -6,7 +6,7 @@ import {useSession} from 'next-auth/client';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Printers from '@/components/Printers';
 import {getPrinters} from '@/services/printerService';
-import {getUncatToners, updateToner} from '@/services/tonerService';
+import {getUncategorizedToners, updateToner} from '@/services/tonerService';
 
 const PrintersPage = () => {
   const [session, loading] = useSession();
@@ -16,7 +16,7 @@ const PrintersPage = () => {
   const {data: printersList} = useQuery('printers', getPrinters, {
     enabled: !!session,
   });
-  const {data: uncategorizedToners} = useQuery('uncategorized-toners', getUncatToners, {
+  const {data: uncategorizedToners} = useQuery('uncategorized-toners', getUncategorizedToners, {
     enabled: !!session,
   });
 
@@ -25,7 +25,6 @@ const PrintersPage = () => {
       queryClient.invalidateQueries('printers');
     },
   });
-
   const useToner = async toner => {
     const updatedToner = {
       amount: toner.amount - 1,

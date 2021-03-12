@@ -1,9 +1,10 @@
 import Card from '@/components/Card';
+import PrinterCreate from '@/components/Printers/PrinterCreate';
 import PrinterEdit from '@/components/Printers/PrinterEdit';
 import Toner from '@/components/Printers/Toner';
-import PrinterCreate from './PrinterCreate';
-import TonerCreate from './TonerCreate';
-import TonerEdit from './TonerEdit';
+import TonerCreate from '@/components/Printers/TonerCreate';
+import TonerEdit from '@/components/Printers/TonerEdit';
+
 // import Input from '@/components/Input';
 // import Select from '@/components/Select';
 
@@ -67,13 +68,9 @@ const Printer = ({printer, session, uncategorizedToners, useToner}) => {
       </div>
       {printer.toners.length ? (
         <div className="flex flex-col gap-6 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-          {printer.toners
-            // .sort((a, b) =>
-            //   a.color > b.color ? 1 : a.color === b.color ? (a.size > b.size ? 1 : -1) : -1
-            // )
-            .map(toner => (
-              <Toner key={toner._id} useToner={useToner} toner={toner} />
-            ))}
+          {printer.toners.map(toner => (
+            <Toner key={toner._id} useToner={useToner} toner={toner} />
+          ))}
         </div>
       ) : (
         <p className="text-xl font-medium">

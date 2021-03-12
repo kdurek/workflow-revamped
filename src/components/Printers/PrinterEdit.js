@@ -1,13 +1,12 @@
+import {useForm} from 'react-hook-form';
 import {useQueryClient, useMutation} from 'react-query';
 import {useState} from 'react';
 
+import {updatePrinter, deletePrinter} from '@/services/printerService';
 import Button from '@/components/Button';
-import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
 import Square from '@/components/Square';
-import {updatePrinter, deletePrinter} from '@/services/printerService';
-import {useForm} from 'react-hook-form';
 
 const getColor = color => {
   switch (color) {
@@ -26,11 +25,9 @@ const getColor = color => {
 };
 
 const PrinterEdit = ({printer, uncategorizedToners}) => {
-  const [editModel, setEditModel] = useState(printer.model);
-  const [editBrand, setEditBrand] = useState(printer.brand);
   const [editToners, setEditToners] = useState('');
 
-  const {register, handleSubmit, watch, errors} = useForm();
+  const {register, handleSubmit, errors} = useForm();
 
   const queryClient = useQueryClient();
 
@@ -40,6 +37,17 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
       queryClient.invalidateQueries('uncategorized-toners');
     },
   });
+  const handlePrinterEdit = async data => {
+    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: data});
+  };
+  const handlePullToner = async tonerId => {
+    const updatedToners = printer.toners.filter(toner => toner._id !== tonerId);
+    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
+  };
+  const handlePushToner = tonerId => {
+    const updatedToners = [...printer.toners.map(toner => toner._id), tonerId];
+    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
+  };
 
   const deletePrinterMutation = useMutation(deletePrinter, {
     onSuccess: () => {
@@ -47,23 +55,8 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
       queryClient.invalidateQueries('uncategorized-toners');
     },
   });
-
-  const handlePrinterEdit = async data => {
-    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: data});
-  };
-
   const handlePrinterDelete = async printerId => {
     deletePrinterMutation.mutate(printerId);
-  };
-
-  const handlePullToner = async tonerId => {
-    const updatedToners = printer.toners.filter(toner => toner._id !== tonerId);
-    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
-  };
-
-  const handlePushToner = tonerId => {
-    const updatedToners = [...printer.toners.map(toner => toner._id), tonerId];
-    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
   };
 
   return (
