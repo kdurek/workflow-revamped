@@ -1,5 +1,5 @@
 import {Transition} from '@headlessui/react';
-import {useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useSession, signOut} from 'next-auth/client';
 import classNames from 'classnames';
 
@@ -40,9 +40,9 @@ export const NavBar = () => {
   );
 };
 
-const NavButton = ({className, icon, onClick}) => {
+const NavButton = React.forwardRef(function NavButton({className, icon, onClick}, ref) {
   return (
-    <li className="flex items-center justify-center">
+    <li ref={ref} className="flex items-center justify-center">
       <button
         onClick={onClick}
         className={classNames(
@@ -54,7 +54,7 @@ const NavButton = ({className, icon, onClick}) => {
       </button>
     </li>
   );
-};
+});
 
 const NavLink = ({icon, path}) => {
   return (
@@ -68,14 +68,14 @@ const AppMenu = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <li className="flex items-center justify-center">
+    <>
       <NavButton
         className={classNames({'bg-coolGray-400': open})}
         icon={'expand_more'}
         onClick={() => setOpen(!open)}
       />
       {open && <DropdownMenu setOpen={setOpen} />}
-    </li>
+    </>
   );
 };
 
