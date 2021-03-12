@@ -47,7 +47,7 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
           >
             <div
               ref={ref}
-              className="z-50 w-full max-w-xs text-left bg-white shadow-xl sm:max-w-xl rounded-xl"
+              className="z-50 w-full max-w-xs max-h-screen overflow-auto text-left bg-white shadow-xl scrollbar sm:max-w-xl rounded-xl"
             >
               <div className="p-4">{children}</div>
               <div className="flex flex-col gap-4 p-4 border-t sm:flex-row-reverse">
