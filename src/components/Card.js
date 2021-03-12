@@ -1,5 +1,7 @@
+import classNames from 'classnames';
+
 const Card = ({children, className}) => {
-  return <div className={`p-4 rounded-xl bg-white shadow ${className}`}>{children}</div>;
+  return <div className={classNames('p-4 rounded-xl bg-white shadow', className)}>{children}</div>;
 };
 
 export default Card;

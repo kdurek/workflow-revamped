@@ -19,7 +19,7 @@ const TextArea = ({
 }) => {
   return (
     <div
-      className={classNames(`rounded-xl px-3 bg-coolGray-100 shadow-inner ${className}`, {
+      className={classNames('rounded-xl px-3 bg-coolGray-100 shadow-inner', className, {
         'w-full': fullWidth,
         'w-48': !fullWidth,
       })}

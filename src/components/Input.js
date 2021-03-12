@@ -14,7 +14,7 @@ const Input = ({
 }) => {
   return (
     <div
-      className={classNames(`relative floating-input ${className}`, {
+      className={classNames('relative floating-input', className, {
         'w-full': fullWidth,
         'w-full md:w-48': !fullWidth,
       })}

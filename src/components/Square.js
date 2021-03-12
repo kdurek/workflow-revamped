@@ -4,7 +4,8 @@ const Square = ({children, className, p}) => {
   return (
     <div
       className={classNames(
-        `flex items-center justify-center rounded-xl ${p && `p-${p}`} ${className}`,
+        `flex items-center justify-center rounded-xl ${p && `p-${p}`}`,
+        className,
         {
           'p-6': !p,
         }

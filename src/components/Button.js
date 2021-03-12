@@ -7,7 +7,8 @@ const Button = ({className, fullWidth, label, onClick, primary, square, type}) =
       onClick={onClick}
       type={type}
       className={classNames(
-        `flex items-center justify-center rounded-xl h-12 uppercase font-medium duration-300 transition-all focus:ring-2 ${className}`,
+        'flex items-center justify-center rounded-xl h-12 uppercase font-medium duration-300 transition-all focus:ring-2',
+        className,
         {
           'bg-blue-400 text-white hover:bg-blue-500 hover:shadow-lg': primary,
           'bg-coolGray-100 hover:bg-coolGray-200 shadow-inner': !primary,
