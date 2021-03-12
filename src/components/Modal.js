@@ -10,6 +10,12 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
   const ref = useRef();
   useClickOutside(ref, () => setShowModal(false));
 
+  if (showModal) {
+    document.querySelector('body').style.overflow = 'hidden';
+  } else {
+    document.querySelector('body').style.overflow = 'visible';
+  }
+
   return (
     <div>
       {buttonClass ? (
