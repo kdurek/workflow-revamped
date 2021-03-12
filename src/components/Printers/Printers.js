@@ -15,11 +15,13 @@ const Printers = ({printersList, session, uncategorizedToners, useToner}) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex gap-2 p-2 bg-white shadow rounded-xl">
-        <PrinterCreate />
-        <TonerCreate />
-        <TonerEdit />
-      </div>
+      {session.user.role === 'admin' && (
+        <div className="flex gap-2 p-2 bg-white shadow rounded-xl">
+          <PrinterCreate />
+          <TonerCreate />
+          <TonerEdit />
+        </div>
+      )}
       {/* <Card className="flex flex-col gap-4 md:flex-row">
         <Input
           fullWidth
