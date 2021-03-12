@@ -6,7 +6,7 @@ import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
 import Square from '@/components/Square';
-import {updatePrinter} from '@/services/printerService';
+import {updatePrinter, deletePrinter} from '@/services/printerService';
 import {useForm} from 'react-hook-form';
 
 const getColor = color => {
@@ -41,8 +41,19 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
     },
   });
 
+  const deletePrinterMutation = useMutation(deletePrinter, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('printers');
+      queryClient.invalidateQueries('uncategorized-toners');
+    },
+  });
+
   const handlePrinterEdit = async data => {
     updatePrinterMutation.mutate({id: printer._id, updatedPrinter: data});
+  };
+
+  const handlePrinterDelete = async printerId => {
+    deletePrinterMutation.mutate(printerId);
   };
 
   const handlePullToner = async tonerId => {
@@ -54,13 +65,17 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
     const updatedToners = [...printer.toners.map(toner => toner._id), tonerId];
     updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
   };
+
   return (
     <Modal
       buttonLabel={<span className="align-middle material-icons">more_vert</span>}
       buttonClass=" h-12 hover:bg-coolGray-200 transition-all duration-300 rounded-xl"
       submit={handleSubmit(handlePrinterEdit)}
     >
-      <div className="flex flex-col gap-4">
+      <div className="relative flex flex-col gap-4">
+        <button onClick={() => handlePrinterDelete(printer._id)} className="absolute top-0 right-0">
+          <span className="material-icons">close</span>
+        </button>
         <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
           <legend className="text-4xl">Details</legend>
           <label htmlFor="brand">
