@@ -46,7 +46,7 @@ const NavButton = React.forwardRef(function NavButton({className, icon, onClick}
       <button
         onClick={onClick}
         className={classNames(
-          'transition-all w-12 h-12 rounded-full bg-coolGray-200 m-0.5 p-1 flex items-center shadow-inner justify-center hover:bg-coolGray-400',
+          'transition-all w-12 h-12 rounded-full bg-coolGray-200 p-1 flex items-center shadow-inner justify-center hover:bg-coolGray-400',
           className
         )}
       >
