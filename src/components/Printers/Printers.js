@@ -1,6 +1,9 @@
 import Card from '@/components/Card';
 import PrinterEdit from '@/components/Printers/PrinterEdit';
 import Toner from '@/components/Printers/Toner';
+import classNames from 'classnames';
+import Button from '../Button';
+import PrinterCreate from './PrinterCreate';
 // import Input from '@/components/Input';
 // import Select from '@/components/Select';
 
@@ -10,7 +13,10 @@ const Printers = ({printersList, session, uncategorizedToners, useToner}) => {
   // const [filterColor, setFilterColor] = useState('');
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-2 p-2 bg-white shadow rounded-xl">
+        <PrinterCreate />
+      </div>
       {/* <Card className="flex flex-col gap-4 md:flex-row">
         <Input
           fullWidth
