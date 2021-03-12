@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import ActiveLink from '@/components/Navbar/ActiveLink';
 import useClickOutside from '@/hooks/useClickOutside';
 
-const navItems = [
+const navPages = [
   {
     label: 'Dashboard',
     path: '/',
@@ -28,56 +28,70 @@ export const NavBar = () => {
   return (
     <nav className="relative flex justify-between p-2 bg-white shadow rounded-xl">
       <ul className="flex gap-2">
-        {navItems.map((item, i) => (
-          <NavbarLink key={i} icon={item.icon} path={item.path} />
+        {navPages.map((item, i) => (
+          <NavLink key={i} icon={item.icon} path={item.path} />
         ))}
       </ul>
-      <Menu icon={'expand_more'} />
+      <ul className="flex gap-2">
+        {/* {window.location.pathname === '/printers' && <NavButton icon={'settings'} />} */}
+        <AppMenu />
+      </ul>
     </nav>
   );
 };
 
-export const NavbarLink = ({icon, path}) => {
+const NavButton = ({className, icon, onClick}) => {
   return (
     <li className="flex items-center justify-center">
-      <ActiveLink href={path}>
-        <button className="transition-all w-12 h-12 rounded-full bg-coolGray-200 m-0.5 p-1 flex items-center justify-center hover:bg-coolGray-400 shadow-inner">
-          <span className="material-icons">{icon}</span>
-        </button>
-      </ActiveLink>
+      <button
+        onClick={onClick}
+        className={classNames(
+          'transition-all w-12 h-12 rounded-full bg-coolGray-200 m-0.5 p-1 flex items-center shadow-inner justify-center hover:bg-coolGray-400',
+          className
+        )}
+      >
+        <span className="material-icons">{icon}</span>
+      </button>
     </li>
   );
 };
 
-export const Menu = ({icon}) => {
+const NavLink = ({icon, path}) => {
+  return (
+    <ActiveLink href={path}>
+      <NavButton icon={icon} />
+    </ActiveLink>
+  );
+};
+
+const AppMenu = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <li className="flex items-center justify-center">
-      <button
+      <NavButton
+        className={classNames({'bg-coolGray-400': open})}
+        icon={'expand_more'}
         onClick={() => setOpen(!open)}
-        className="transition-all w-12 h-12 rounded-full bg-coolGray-200 m-0.5 p-1 flex items-center shadow-inner justify-center hover:bg-coolGray-400"
-      >
-        <span className="material-icons">{icon}</span>
-      </button>
+      />
       {open && <DropdownMenu setOpen={setOpen} />}
     </li>
   );
 };
 
-export const DropdownMenu = ({setOpen}) => {
+const DropdownMenu = ({setOpen}) => {
   const [activeMenu, setActiveMenu] = useState('main');
   const [session, loading] = useSession();
 
   const ref = useRef();
   useClickOutside(ref, () => setOpen(false));
 
-  const DropdownItem = ({className, onClick, children, leftIcon, rightIcon}) => {
+  const DropdownItem = ({children, className, leftIcon, onClick, rightIcon}) => {
     return (
       <button
         onClick={onClick}
         className={classNames(
-          'flex items-center w-full h-12 gap-2 p-2 font-medium transition-all hover:bg-coolGray-200 rounded-xl',
+          'flex items-center w-full h-12 gap-2 p-2 font-medium transition-all hover:bg-coolGray-300 rounded-xl',
           className
         )}
       >
@@ -107,7 +121,10 @@ export const DropdownMenu = ({setOpen}) => {
   return (
     <div
       ref={ref}
-      className={`z-40 absolute overflow-hidden transition-all p-2 duration-300 ease-in-out bg-white shadow-lg right-4 top-16 w-80 rounded-xl ${getHeight()}`}
+      className={classNames(
+        'z-40 absolute overflow-hidden transition-all p-2 bg-white duration-300 ease-in-out shadow right-4 top-16 w-80 rounded-xl',
+        getHeight()
+      )}
     >
       {/* Main Menu */}
       <Transition
