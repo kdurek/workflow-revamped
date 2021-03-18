@@ -14,6 +14,13 @@ const TemplatesGenerator = ({activeTemplate, user}) => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState(() => generatePassword(true, true, true, true, 15));
 
+  const resetForm = () => {
+    setLogin('');
+    setEmail('');
+    setPhone('');
+    setPassword(generatePassword(true, true, true, true, 15));
+  };
+
   const emailPattern = `(Credentials to ${activeTemplate.name})
 
 Login: ${login || '[XXXXX]'}
@@ -44,11 +51,7 @@ ${user.name}`;
             e.target.select();
           }}
         />
-        <Button
-          label={<span className=" material-icons">cached</span>}
-          square
-          onClick={() => setPassword(generatePassword(true, true, true, true, 15))}
-        />
+        <Button label={<span className="material-icons">cached</span>} square onClick={resetForm} />
       </div>
       <TextArea fullWidth readOnly label="Preview" value={emailPattern} className="" />
       <TextArea fullWidth readOnly label="Preview" value={smsPattern} className="" />
