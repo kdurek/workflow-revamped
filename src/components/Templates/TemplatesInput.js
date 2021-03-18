@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-const Input = ({
+const TemplatesInput = ({
   className,
   disabled,
   fullWidth,
@@ -44,7 +44,7 @@ const Input = ({
   );
 };
 
-Input.propTypes = {
+TemplatesInput.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   fullWidth: PropTypes.bool,
@@ -57,9 +57,9 @@ Input.propTypes = {
   value: PropTypes.string,
 };
 
-Input.defaultProps = {
+TemplatesInput.defaultProps = {
   label: 'Label',
   type: 'text',
 };
 
-export default Input;
+export default TemplatesInput;

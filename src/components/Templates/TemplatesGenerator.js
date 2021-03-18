@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 import Button from '@/components/Button';
-import Input from '@/components/InputOld';
+import TemplatesInput from '@/components/Templates/TemplatesInput';
 import TextArea from '@/components/TextArea';
 import copyToClipboard from '@/utils/copyToClipboard';
 import generatePassword from '@/utils/generatePassword';
@@ -39,9 +39,14 @@ ${user.name}`;
 
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      <Input fullWidth label="Login" value={login} onChange={e => setLogin(e.target.value)} />
+      <TemplatesInput
+        fullWidth
+        label="Login"
+        value={login}
+        onChange={e => setLogin(e.target.value)}
+      />
       <div className="flex gap-2">
-        <Input
+        <TemplatesInput
           fullWidth
           readOnly
           label="Password"
@@ -55,8 +60,18 @@ ${user.name}`;
       </div>
       <TextArea fullWidth readOnly label="Preview" value={emailPattern} className="" />
       <TextArea fullWidth readOnly label="Preview" value={smsPattern} className="" />
-      <Input fullWidth label="Email" value={email} onChange={e => setEmail(e.target.value)} />
-      <Input fullWidth label="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
+      <TemplatesInput
+        fullWidth
+        label="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      />
+      <TemplatesInput
+        fullWidth
+        label="Phone"
+        value={phone}
+        onChange={e => setPhone(e.target.value)}
+      />
       <Button
         primary
         fullWidth
