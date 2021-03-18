@@ -1,28 +1,28 @@
-import {useSession} from 'next-auth/client';
-import {useRouter} from 'next/router';
-import {useState} from 'react';
 import {signIn} from 'next-auth/client';
-import Button from '@/components/Button';
-import Input from '@/components/InputOld';
+import {Controller, useForm} from 'react-hook-form';
+import {useRouter} from 'next/router';
+import {useSession} from 'next-auth/client';
+import {useState} from 'react';
+import Head from 'next/head';
 
 import AuthLayout from '@/layouts/AuthLayout';
-import Head from 'next/head';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
 
 const Login = () => {
   const router = useRouter();
 
   const [session, loading] = useSession();
+  const {control, errors, handleSubmit} = useForm();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const onSubmit = () => {
+  const onSubmit = data => {
     signIn('credentials', {
-      email,
-      password,
+      email: data.email,
+      password: data.password,
       callbackUrl: window.location.pathname,
     });
   };
+
   if (loading) {
     return null;
   }
@@ -37,23 +37,33 @@ const Login = () => {
         <title>Login</title>
       </Head>
       <div className="container">
-        <form>
-          <Input value={email} onChange={e => setEmail(e.target.value)} label={'Email'} />
-          <Input
-            type={'password'}
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            label={'Password'}
-            className="mt-4"
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="email"
+            control={control}
+            defaultValue={''}
+            rules={{required: true}}
+            render={({onChange, value}) => (
+              <Input label={'Email'} setValue={onChange} value={value} />
+            )}
           />
+          {errors.email && <span className="block text-red-600">You must provide email</span>}
+          <Controller
+            name="password"
+            control={control}
+            defaultValue={''}
+            rules={{required: true}}
+            render={({onChange, value}) => (
+              <Input label={'Password'} setValue={onChange} type="password" value={value} />
+            )}
+          />
+          {errors.password && <span className="block text-red-600">You must provide password</span>}
+
           <Button
             label={'Login'}
             primary
             fullWidth
-            onClick={e => {
-              e.preventDefault();
-              onSubmit();
-            }}
+            onClick={handleSubmit(onSubmit)}
             type="submit"
             className="mt-4 font-semibold"
           />
