@@ -62,7 +62,7 @@ const TonerEdit = () => {
               <span className="material-icons">close</span>
             </button>
             <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
-              <legend className="text-4xl">Create Toner</legend>
+              <legend className="text-4xl">Edit Toner</legend>
               <label htmlFor="code">
                 Code
                 <input
