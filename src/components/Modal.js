@@ -12,8 +12,10 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
 
   if (showModal) {
     document.querySelector('body').style.overflow = 'hidden';
+    document.querySelector('body').style.paddingRight = '16px';
   } else {
     document.querySelector('body').style.overflow = 'visible';
+    document.querySelector('body').style.paddingRight = 0;
   }
 
   return (
@@ -33,7 +35,7 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
           leave="duration-200 ease-in"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
-          className="fixed inset-0 z-40"
+          className="fixed inset-0 z-50"
         >
           <div className="fixed inset-0 opacity-75 bg-coolGray-600" />
           <Transition.Child
@@ -47,7 +49,7 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
           >
             <div
               ref={ref}
-              className="z-50 w-full max-w-xs max-h-screen overflow-auto text-left bg-white shadow-xl scrollbar sm:max-w-xl rounded-xl"
+              className="z-50 w-full max-w-xs max-h-screen text-left bg-white shadow-xl rounded-xl sm:max-w-xl"
             >
               <div className="p-4">{children}</div>
               <div className="flex flex-col gap-4 p-4 border-t sm:flex-row-reverse">
