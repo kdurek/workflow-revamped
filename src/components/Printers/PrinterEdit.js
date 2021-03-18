@@ -83,7 +83,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
           <Controller
             name="model"
             control={control}
-            defaultValue={''}
+            defaultValue={printer.model}
             rules={{required: true}}
             render={({onChange, value}) => (
               <Input label={'Model'} setValue={onChange} value={value} />

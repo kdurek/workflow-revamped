@@ -11,7 +11,7 @@ import Input from '../Input';
 const TonerEdit = () => {
   const [selectedToner, setSelectedToner] = useState();
 
-  const {control, errors, handleSubmit, register} = useForm();
+  const {control, errors, handleSubmit} = useForm();
 
   const queryClient = useQueryClient();
 
