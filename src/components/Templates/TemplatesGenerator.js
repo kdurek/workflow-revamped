@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 import Button from '@/components/Button';
-import Input from '@/components/Input';
+import Input from '@/components/InputOld';
 import TextArea from '@/components/TextArea';
 import copyToClipboard from '@/utils/copyToClipboard';
 import generatePassword from '@/utils/generatePassword';

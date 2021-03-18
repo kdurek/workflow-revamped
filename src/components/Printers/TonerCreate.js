@@ -4,9 +4,10 @@ import {useMutation, useQueryClient} from 'react-query';
 import {createToner} from '@/services/tonerService';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
+import Input from '../Input';
 
 const TonerCreate = () => {
-  const {control, errors, handleSubmit, register} = useForm();
+  const {control, errors, handleSubmit} = useForm();
 
   const queryClient = useQueryClient();
 
@@ -21,19 +22,17 @@ const TonerCreate = () => {
   };
 
   return (
-    <Modal buttonLabel={'Add Toner'} submit={handleSubmit(handleTonerCreate)}>
+    <Modal buttonLabel={'Create Toner'} submit={handleSubmit(handleTonerCreate)}>
       <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
         <legend className="text-4xl">Create Toner</legend>
-        <label htmlFor="code">
-          Code
-          <input
-            autoComplete="off"
-            className="block w-48 h-12 px-3 rounded-xl bg-coolGray-200"
-            name="code"
-            ref={register({required: true})}
-          />
-          {errors.code && <span className="block text-red-600">You must provide code</span>}
-        </label>
+        <Controller
+          name="code"
+          control={control}
+          defaultValue={''}
+          rules={{required: true}}
+          render={({onChange, value}) => <Input label={'Code'} setValue={onChange} value={value} />}
+        />
+        {errors.code && <span className="block text-red-600">You must provide code</span>}
         <Controller
           name="color"
           control={control}

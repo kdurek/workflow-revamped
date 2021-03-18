@@ -6,6 +6,7 @@ import {getToners} from '@/services/tonerService';
 import {updateToner, deleteToner} from '@/services/tonerService';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
+import Input from '../Input';
 
 const TonerEdit = () => {
   const [selectedToner, setSelectedToner] = useState();
@@ -63,17 +64,16 @@ const TonerEdit = () => {
             </button>
             <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
               <legend className="text-4xl">Edit Toner</legend>
-              <label htmlFor="code">
-                Code
-                <input
-                  autoComplete="off"
-                  className="block w-48 h-12 px-3 rounded-xl bg-coolGray-200"
-                  name="code"
-                  defaultValue={selectedToner.code}
-                  ref={register({required: true})}
-                />
-                {errors.code && <span className="block text-red-600">You must provide code</span>}
-              </label>
+              <Controller
+                name="code"
+                control={control}
+                defaultValue={selectedToner.code}
+                rules={{required: true}}
+                render={({onChange, value}) => (
+                  <Input label={'Code'} setValue={onChange} value={value} />
+                )}
+              />
+              {errors.code && <span className="block text-red-600">You must provide code</span>}
               <Controller
                 name="color"
                 control={control}

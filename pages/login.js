@@ -3,7 +3,7 @@ import {useRouter} from 'next/router';
 import {useState} from 'react';
 import {signIn} from 'next-auth/client';
 import Button from '@/components/Button';
-import Input from '@/components/Input';
+import Input from '@/components/InputOld';
 
 import AuthLayout from '@/layouts/AuthLayout';
 import Head from 'next/head';

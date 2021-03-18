@@ -1,65 +1,22 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-const Input = ({
-  className,
-  disabled,
-  fullWidth,
-  label,
-  onChange,
-  onFocus,
-  readOnly,
-  type,
-  value,
-}) => {
+const Input = ({label, value, setValue}) => {
   return (
-    <div
-      className={classNames('relative floating-input', className, {
-        'w-full': fullWidth,
-        'w-full md:w-48': !fullWidth,
-      })}
-    >
+    <div className="w-48">
+      <label className="mb-1 text-sm font-medium text-coolGray-600">{label}</label>
       <input
-        type={type}
-        disabled={disabled}
-        readOnly={readOnly}
         value={value}
-        onChange={onChange}
-        onFocus={onFocus}
-        id={label}
-        className={classNames(
-          'h-12 py-4 w-full focus:ring-2 transition-all duration-300 px-3 bg-transparent shadow-inner bg-coolGray-100 rounded-xl focus:outline-none placeholder-transparent'
-        )}
-        placeholder={label}
-        autoComplete="off"
+        onChange={e => setValue(e.target.value)}
+        className="w-full py-2 pl-4 pr-8 bg-white rounded-md shadow ring-1 ring-coolGray-300 ring-opacity-50 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
       />
-
-      <label
-        htmlFor={label}
-        className="absolute top-0 left-0 h-full px-3 py-3 transition-all duration-300 origin-left transform pointer-events-none text-coolGray-400"
-      >
-        {label}
-      </label>
     </div>
   );
 };
 
 Input.propTypes = {
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  fullWidth: PropTypes.bool,
   label: PropTypes.string,
-  onChange: PropTypes.func,
-  onClick: PropTypes.func,
-  onFocus: PropTypes.func,
-  readOnly: PropTypes.bool,
-  type: PropTypes.string,
   value: PropTypes.string,
-};
-
-Input.defaultProps = {
-  label: 'Label',
-  type: 'text',
+  setValue: PropTypes.func,
 };
 
 export default Input;

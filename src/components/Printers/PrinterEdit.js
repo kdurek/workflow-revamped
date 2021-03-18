@@ -7,6 +7,7 @@ import Button from '@/components/Button';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
 import Square from '@/components/Square';
+import Input from '../Input';
 
 const getColor = color => {
   switch (color) {
@@ -79,17 +80,16 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
               <Select label={'Brand'} setValue={onChange} value={value} options={['Xerox', 'HP']} />
             )}
           />
-          <label htmlFor="model">
-            Model
-            <input
-              autoComplete="off"
-              className="block w-48 h-12 px-3 rounded-xl bg-coolGray-200"
-              defaultValue={printer.model}
-              name="model"
-              ref={register({required: true})}
-            />
-            {errors.model && <span className="block text-red-600">You must provide model</span>}
-          </label>
+          <Controller
+            name="model"
+            control={control}
+            defaultValue={''}
+            rules={{required: true}}
+            render={({onChange, value}) => (
+              <Input label={'Model'} setValue={onChange} value={value} />
+            )}
+          />
+          {errors.model && <span className="block text-red-600">You must provide model</span>}
         </form>
 
         <p className="text-4xl ">Toners</p>
