@@ -1,11 +1,12 @@
-import {useForm} from 'react-hook-form';
+import {Controller, useForm} from 'react-hook-form';
 import {useMutation, useQueryClient} from 'react-query';
 
 import {createPrinter} from '@/services/printerService';
 import Modal from '@/components/Modal';
+import Select from '@/components/Select';
 
 const PrinterCreate = () => {
-  const {register, handleSubmit, errors} = useForm();
+  const {control, errors, handleSubmit, register} = useForm();
 
   const queryClient = useQueryClient();
 
@@ -22,17 +23,14 @@ const PrinterCreate = () => {
     <Modal buttonLabel={'Add Printer'} submit={handleSubmit(handlePrinterCreate)}>
       <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
         <legend className="text-4xl">Create Printer</legend>
-        <label htmlFor="brand">
-          Brand
-          <select
-            className="block w-48 h-12 px-3 rounded-xl bg-coolGray-200 focus:outline-none"
-            name="brand"
-            ref={register}
-          >
-            <option value="Xerox">Xerox</option>
-            <option value="HP">HP</option>
-          </select>
-        </label>
+        <Controller
+          name="brand"
+          control={control}
+          defaultValue={'Xerox'}
+          render={({onChange, value}) => (
+            <Select label={'Brand'} setValue={onChange} value={value} options={['Xerox', 'HP']} />
+          )}
+        />
         <label htmlFor="model">
           Model
           <input

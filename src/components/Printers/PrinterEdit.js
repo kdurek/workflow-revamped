@@ -1,5 +1,5 @@
-import {useForm} from 'react-hook-form';
-import {useQueryClient, useMutation} from 'react-query';
+import {Controller, useForm} from 'react-hook-form';
+import {useMutation, useQueryClient} from 'react-query';
 import {useState} from 'react';
 
 import {updatePrinter, deletePrinter} from '@/services/printerService';
@@ -27,7 +27,7 @@ const getColor = color => {
 const PrinterEdit = ({printer, uncategorizedToners}) => {
   const [editToners, setEditToners] = useState('');
 
-  const {register, handleSubmit, errors} = useForm();
+  const {control, errors, handleSubmit, register} = useForm();
 
   const queryClient = useQueryClient();
 
@@ -71,18 +71,14 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
         </button>
         <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
           <legend className="text-4xl">Details</legend>
-          <label htmlFor="brand">
-            Brand
-            <select
-              className="block w-48 h-12 px-3 rounded-xl bg-coolGray-200 focus:outline-none"
-              defaultValue={printer.brand}
-              name="brand"
-              ref={register}
-            >
-              <option value="Xerox">Xerox</option>
-              <option value="HP">HP</option>
-            </select>
-          </label>
+          <Controller
+            name="brand"
+            control={control}
+            defaultValue={printer.brand}
+            render={({onChange, value}) => (
+              <Select label={'Brand'} setValue={onChange} value={value} options={['Xerox', 'HP']} />
+            )}
+          />
           <label htmlFor="model">
             Model
             <input
@@ -103,7 +99,6 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
               <Square p={4} className={getColor(toner.color)}>
                 {toner.amount}
               </Square>
-
               <p className="font-medium">{toner.code}</p>
               <button onClick={() => handlePullToner(toner._id)}>
                 <span className="p-1 m-1 align-middle rounded-xl material-icons hover:bg-coolGray-50">
@@ -116,7 +111,6 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
         {!!uncategorizedToners?.length && (
           <div className="flex gap-4">
             <Select
-              fullWidth
               label={'Add toner'}
               value={editToners}
               setValue={setEditToners}

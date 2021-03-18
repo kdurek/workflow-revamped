@@ -5,14 +5,7 @@ import Toner from '@/components/Printers/Toner';
 import TonerCreate from '@/components/Printers/TonerCreate';
 import TonerEdit from '@/components/Printers/TonerEdit';
 
-// import Input from '@/components/Input';
-// import Select from '@/components/Select';
-
 const Printers = ({printersList, session, uncategorizedToners, useToner}) => {
-  // const [filterSearch, setFilterSearch] = useState('');
-  // const [filterBrand, setFilterBrand] = useState('');
-  // const [filterColor, setFilterColor] = useState('');
-
   return (
     <div className="flex flex-col gap-4">
       {session.user.role === 'admin' && (
@@ -22,27 +15,6 @@ const Printers = ({printersList, session, uncategorizedToners, useToner}) => {
           <TonerEdit />
         </div>
       )}
-      {/* <Card className="flex flex-col gap-4 md:flex-row">
-        <Input
-          fullWidth
-          value={filterSearch}
-          onChange={e => setFilterSearch(e.target.value)}
-          label={'Search for model or code'}
-          className="col-span-2 md:col-span-4"
-        />
-        <Select
-          label={'Brand'}
-          value={filterBrand}
-          setValue={setFilterBrand}
-          options={['Xerox', 'HP']}
-        />
-        <Select
-          label={'Color'}
-          value={filterColor}
-          setValue={setFilterColor}
-          options={['Black', 'Cyan', 'Magenta', 'Yellow']}
-        />
-      </Card> */}
 
       <div className="flex flex-col gap-4">
         {printersList?.map(printer => (
