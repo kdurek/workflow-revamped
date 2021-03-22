@@ -67,9 +67,6 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
       submit={handleSubmit(handlePrinterEdit)}
     >
       <div className="relative flex flex-col gap-4">
-        <button onClick={() => handlePrinterDelete(printer._id)} className="absolute top-0 right-0">
-          <span className="material-icons">close</span>
-        </button>
         <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
           <legend className="text-4xl">Details</legend>
           <Controller
@@ -128,6 +125,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
             />
           </div>
         )}
+        <Button label="Delete" onClick={() => handlePrinterDelete(printer._id)} />
       </div>
     </Modal>
   );

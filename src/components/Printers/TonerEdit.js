@@ -7,6 +7,7 @@ import {updateToner, deleteToner} from '@/services/tonerService';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
 import Input from '../Input';
+import Button from '../Button';
 
 const TonerEdit = () => {
   const [selectedToner, setSelectedToner] = useState();
@@ -59,9 +60,6 @@ const TonerEdit = () => {
         </div>
         {selectedToner && (
           <div key={selectedToner._id}>
-            <button onClick={handleTonerDelete} className="absolute top-0 right-0">
-              <span className="material-icons">close</span>
-            </button>
             <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
               <legend className="text-4xl">Edit Toner</legend>
               <Controller
@@ -97,6 +95,7 @@ const TonerEdit = () => {
                 )}
               />
             </form>
+            <Button className="mt-4" label="Delete" onClick={handleTonerDelete} />
           </div>
         )}
       </div>
