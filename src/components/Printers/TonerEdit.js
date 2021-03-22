@@ -87,6 +87,15 @@ const TonerEdit = () => {
                   />
                 )}
               />
+              <Controller
+                name="amount"
+                control={control}
+                defaultValue={selectedToner.amount}
+                rules={{required: true}}
+                render={({onChange, value}) => (
+                  <Input label={'Amount'} setValue={onChange} value={value} />
+                )}
+              />
             </form>
           </div>
         )}
