@@ -4,10 +4,10 @@ import {useState} from 'react';
 
 import {getToners} from '@/services/tonerService';
 import {updateToner, deleteToner} from '@/services/tonerService';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
-import Input from '../Input';
-import Button from '../Button';
 
 const TonerEdit = () => {
   const [selectedToner, setSelectedToner] = useState();

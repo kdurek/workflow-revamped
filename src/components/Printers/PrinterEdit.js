@@ -4,10 +4,10 @@ import {useState} from 'react';
 
 import {updatePrinter, deletePrinter} from '@/services/printerService';
 import Button from '@/components/Button';
+import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
 import Square from '@/components/Square';
-import Input from '../Input';
 
 const getColor = color => {
   switch (color) {
