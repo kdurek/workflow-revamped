@@ -1,18 +1,12 @@
+import {useSession} from 'next-auth/client';
 import Head from 'next/head';
 import Link from 'next/link';
-import {useSession} from 'next-auth/client';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Templates from '@/components/Templates';
-import {getTemplates} from '@/services/templateService';
-import {useQuery} from 'react-query';
 
 const TemplatesPage = () => {
   const [session, loading] = useSession();
-
-  const {data: cmsList} = useQuery('cms-templates', getTemplates, {
-    enabled: !!session,
-  });
 
   if (loading) {
     return null;
@@ -32,7 +26,7 @@ const TemplatesPage = () => {
       <Head>
         <title>Templates</title>
       </Head>
-      <Templates cmsList={cmsList} user={session.user} />
+      <Templates user={session.user} />
     </DefaultLayout>
   );
 };
