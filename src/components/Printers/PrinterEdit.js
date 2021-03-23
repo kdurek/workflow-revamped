@@ -125,7 +125,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
             />
           </div>
         )}
-        <Button label="Delete" onClick={() => handlePrinterDelete(printer._id)} />
+        <Button variant="danger" label="Delete" onClick={() => handlePrinterDelete(printer._id)} />
       </div>
     </Modal>
   );

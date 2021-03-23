@@ -95,7 +95,7 @@ const TonerEdit = () => {
                 )}
               />
             </form>
-            <Button className="mt-4" label="Delete" onClick={handleTonerDelete} />
+            <Button variant="danger" className="mt-4" label="Delete" onClick={handleTonerDelete} />
           </div>
         )}
       </div>
