@@ -94,7 +94,9 @@ const TonerEdit = () => {
                   <Input label={'Amount'} onChange={onChange} value={value} />
                 )}
               />
-              <Button fullWidth variant="danger" label="Delete" onClick={handleTonerDelete} />
+              <Button fullWidth variant="danger" onClick={handleTonerDelete}>
+                Delete
+              </Button>
             </form>
           </div>
         )}

@@ -25,12 +25,9 @@ const OutOfStock = ({tonersList}) => {
           </div>
         ))}
       </div>
-      <Button
-        fullWidth
-        variant="primary"
-        label={'Copy list'}
-        onClick={() => formatToCopyable(tonersList)}
-      />
+      <Button fullWidth variant="primary" onClick={() => formatToCopyable(tonersList)}>
+        Copy list
+      </Button>
     </Card>
   );
 };

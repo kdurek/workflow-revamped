@@ -114,7 +114,6 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
               options={[...new Set(uncategorizedToners?.map(toner => toner.code))]}
             />
             <Button
-              label={'Add'}
               onClick={() => {
                 if (editToners !== '') {
                   const toner = uncategorizedToners.find(toner => toner.code === editToners);
@@ -122,10 +121,14 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
                   setEditToners('');
                 }
               }}
-            />
+            >
+              Add
+            </Button>
           </div>
         )}
-        <Button variant="danger" label="Delete" onClick={() => handlePrinterDelete(printer._id)} />
+        <Button variant="danger" onClick={() => handlePrinterDelete(printer._id)}>
+          Delete
+        </Button>
       </div>
     </Modal>
   );

@@ -55,7 +55,9 @@ const TemplateCms = ({user}) => {
             href={selectedCms?.link}
             rel="noopener noreferrer"
           >
-            <Button label={<span className="material-icons">chevron_right</span>} square />
+            <Button square>
+              <span className="material-icons">chevron_right</span>
+            </Button>
           </a>
         )}
       </div>
@@ -73,15 +75,12 @@ const TemplateCms = ({user}) => {
             }}
           />
           <div className="flex gap-4">
-            <Button
-              fullWidth
-              label={'Send Login'}
-              onClick={() => sendEmail(email, templateHeader, patternEmail)}
-            />
+            <Button fullWidth onClick={() => sendEmail(email, templateHeader, patternEmail)}>
+              Send Login
+            </Button>
             <Button
               fullWidth
               variant="primary"
-              label={'Send Password'}
               onClick={() =>
                 sendEmail(
                   `${normalizeNumber(phone)}@${process.env.NEXT_PUBLIC_SMS_DOMAIN}`,
@@ -89,12 +88,12 @@ const TemplateCms = ({user}) => {
                   patternSms
                 )
               }
-            />
-            <Button
-              label={<span className="material-icons">cached</span>}
-              square
-              onClick={resetForm}
-            />
+            >
+              Send Password
+            </Button>
+            <Button square onClick={resetForm}>
+              <span className="material-icons">cached</span>
+            </Button>
           </div>
         </div>
       )}

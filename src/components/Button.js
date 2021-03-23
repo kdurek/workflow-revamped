@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-const Button = ({fullWidth, label, onClick, square, type, variant}) => {
+const Button = ({children, fullWidth, onClick, square, type, variant}) => {
   const VARIANT_MAPS = {
     default: 'bg-coolGray-100 hover:bg-coolGray-200 shadow-inner',
     primary: 'bg-blue-400 text-white hover:bg-blue-500 hover:shadow-lg',
@@ -21,14 +21,14 @@ const Button = ({fullWidth, label, onClick, square, type, variant}) => {
         }
       )}
     >
-      {label}
+      {children}
     </button>
   );
 };
 
 Button.propTypes = {
+  children: PropTypes.string,
   fullWidth: PropTypes.bool,
-  label: PropTypes.string,
   onClick: PropTypes.func,
   square: PropTypes.bool,
   type: PropTypes.string,
@@ -36,7 +36,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  label: 'button',
+  children: 'button',
   variant: 'default',
 };
 

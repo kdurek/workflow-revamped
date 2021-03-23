@@ -57,13 +57,9 @@ const Login = () => {
             )}
           />
           {errors.password && <span className="block text-red-600">You must provide password</span>}
-          <Button
-            label={'Login'}
-            variant="primary"
-            fullWidth
-            onClick={handleSubmit(onSubmit)}
-            type="submit"
-          />
+          <Button variant="primary" fullWidth onClick={handleSubmit(onSubmit)} type="submit">
+            Login
+          </Button>
         </form>
       </div>
     </AuthLayout>
