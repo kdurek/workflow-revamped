@@ -43,7 +43,7 @@ const TemplateCms = ({user}) => {
       <div className="flex gap-4">
         <Select
           label="Selected CMS"
-          setValue={setSelectedCms}
+          onChange={setSelectedCms}
           value={selectedCms}
           optionLabel="name"
           options={cmsList}
@@ -61,12 +61,11 @@ const TemplateCms = ({user}) => {
       </div>
       {selectedCms && (
         <div className="space-y-4">
-          <Input label={'Login'} setValue={setLogin} value={login} />
-          <Input label={'Email'} setValue={setEmail} value={email} />
-          <Input label={'Phone'} setValue={setPhone} value={phone} />
+          <Input label={'Login'} onChange={setLogin} value={login} />
+          <Input label={'Email'} onChange={setEmail} value={email} />
+          <Input label={'Phone'} onChange={setPhone} value={phone} />
           <Input
             label={'Password'}
-            setValue={setPhone}
             value={password}
             onClick={e => {
               copyToClipboard(e.target.value);

@@ -74,7 +74,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
             control={control}
             defaultValue={printer.brand}
             render={({onChange, value}) => (
-              <Select label={'Brand'} setValue={onChange} value={value} options={['Xerox', 'HP']} />
+              <Select label={'Brand'} onChange={onChange} value={value} options={['Xerox', 'HP']} />
             )}
           />
           <Controller
@@ -83,7 +83,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
             defaultValue={printer.model}
             rules={{required: true}}
             render={({onChange, value}) => (
-              <Input label={'Model'} setValue={onChange} value={value} />
+              <Input label={'Model'} onChange={onChange} value={value} />
             )}
           />
           {errors.model && <span className="block text-red-600">You must provide model</span>}
@@ -110,7 +110,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
             <Select
               label={'Add toner'}
               value={editToners}
-              setValue={setEditToners}
+              onChange={setEditToners}
               options={[...new Set(uncategorizedToners?.map(toner => toner.code))]}
             />
             <Button

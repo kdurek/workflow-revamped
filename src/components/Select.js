@@ -3,7 +3,7 @@ import {Transition} from '@headlessui/react';
 import {useRef, useState} from 'react';
 import classNames from 'classnames';
 
-const Select = ({label, optionLabel, options, value, setValue}) => {
+const Select = ({label, optionLabel, options, value, onChange}) => {
   const [open, setOpen] = useState(false);
 
   const ref = useRef();
@@ -43,7 +43,7 @@ const Select = ({label, optionLabel, options, value, setValue}) => {
               <button
                 onClick={() => {
                   setOpen(false);
-                  setValue(option);
+                  onChange(option);
                 }}
                 className={classNames(
                   'relative flex items-center w-full py-2 pl-4 pr-10 cursor-default group hover:bg-blue-500',

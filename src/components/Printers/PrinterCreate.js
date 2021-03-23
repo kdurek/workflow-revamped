@@ -29,7 +29,7 @@ const PrinterCreate = () => {
           control={control}
           defaultValue={'Xerox'}
           render={({onChange, value}) => (
-            <Select label={'Brand'} setValue={onChange} value={value} options={['Xerox', 'HP']} />
+            <Select label={'Brand'} onChange={onChange} value={value} options={['Xerox', 'HP']} />
           )}
         />
         <Controller
@@ -38,7 +38,7 @@ const PrinterCreate = () => {
           defaultValue={''}
           rules={{required: true}}
           render={({onChange, value}) => (
-            <Input label={'Model'} setValue={onChange} value={value} />
+            <Input label={'Model'} onChange={onChange} value={value} />
           )}
         />
       </form>

@@ -44,7 +44,7 @@ const Login = () => {
             defaultValue={''}
             rules={{required: true}}
             render={({onChange, value}) => (
-              <Input label={'Email'} setValue={onChange} value={value} />
+              <Input label={'Email'} onChange={onChange} value={value} />
             )}
           />
           {errors.email && <span className="block text-red-600">You must provide email</span>}
@@ -54,7 +54,7 @@ const Login = () => {
             defaultValue={''}
             rules={{required: true}}
             render={({onChange, value}) => (
-              <Input label={'Password'} setValue={onChange} type="password" value={value} />
+              <Input label={'Password'} onChange={onChange} type="password" value={value} />
             )}
           />
           {errors.password && <span className="block text-red-600">You must provide password</span>}

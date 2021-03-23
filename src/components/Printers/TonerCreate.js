@@ -30,7 +30,7 @@ const TonerCreate = () => {
           control={control}
           defaultValue={''}
           rules={{required: true}}
-          render={({onChange, value}) => <Input label={'Code'} setValue={onChange} value={value} />}
+          render={({onChange, value}) => <Input label={'Code'} onChange={onChange} value={value} />}
         />
         {errors.code && <span className="block text-red-600">You must provide code</span>}
         <Controller
@@ -40,7 +40,7 @@ const TonerCreate = () => {
           render={({onChange, value}) => (
             <Select
               label={'Color'}
-              setValue={onChange}
+              onChange={onChange}
               value={value}
               options={['Black', 'Cyan', 'Magenta', 'Yellow']}
             />
