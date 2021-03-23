@@ -10,7 +10,7 @@ const Select = ({label, optionLabel, options, value, setValue}) => {
   useClickOutside(ref, () => setOpen(false));
 
   return (
-    <div ref={ref} className="relative w-48 select-none">
+    <div ref={ref} className="relative select-none">
       <label className="mb-1 text-sm font-medium text-coolGray-600">{label}</label>
       <button
         onClick={() => setOpen(!open)}
