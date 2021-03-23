@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import Square from '@/components/Square';
@@ -30,6 +32,10 @@ const OutOfStock = ({tonersList}) => {
       </Button>
     </Card>
   );
+};
+
+OutOfStock.propTypes = {
+  tonersList: PropTypes.array,
 };
 
 export default OutOfStock;

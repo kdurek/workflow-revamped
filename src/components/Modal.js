@@ -1,5 +1,6 @@
-import {useState, useRef} from 'react';
 import {Transition} from '@headlessui/react';
+import {useState, useRef} from 'react';
+import PropTypes from 'prop-types';
 
 import Button from './Button';
 import useClickOutside from '../hooks/useClickOutside';
@@ -73,6 +74,14 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
       </Transition>
     </div>
   );
+};
+
+Modal.propTypes = {
+  buttonClass: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  buttonLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  children: PropTypes.object,
+  submit: PropTypes.func,
+  submitLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 export default Modal;

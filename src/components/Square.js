@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 const Square = ({children, className, p}) => {
   return (
@@ -14,6 +15,12 @@ const Square = ({children, className, p}) => {
       <div className="absolute font-bold">{children}</div>
     </div>
   );
+};
+
+Square.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  p: PropTypes.number,
 };
 
 export default Square;

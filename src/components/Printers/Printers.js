@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import Card from '@/components/Card';
 import PrinterCreate from '@/components/Printers/PrinterCreate';
 import PrinterEdit from '@/components/Printers/PrinterEdit';
@@ -31,6 +33,13 @@ const Printers = ({printersList, session, uncategorizedToners, useToner}) => {
   );
 };
 
+Printers.propTypes = {
+  printersList: PropTypes.array,
+  session: PropTypes.object,
+  uncategorizedToners: PropTypes.array,
+  useToner: PropTypes.func,
+};
+
 const Printer = ({printer, session, uncategorizedToners, useToner}) => {
   return (
     <Card className="flex flex-col gap-4">
@@ -53,6 +62,13 @@ const Printer = ({printer, session, uncategorizedToners, useToner}) => {
       )}
     </Card>
   );
+};
+
+Printer.propTypes = {
+  printer: PropTypes.object,
+  session: PropTypes.object,
+  uncategorizedToners: PropTypes.array,
+  useToner: PropTypes.func,
 };
 
 export default Printers;

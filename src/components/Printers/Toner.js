@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import Modal from '@/components/Modal';
 
@@ -50,6 +51,11 @@ const Toner = ({toner, useToner}) => {
       <p className="text-2xl text-center ">Are you sure you want to use {toner.code}?</p>
     </Modal>
   );
+};
+
+Toner.propTypes = {
+  toner: PropTypes.object,
+  useToner: PropTypes.func,
 };
 
 export default Toner;

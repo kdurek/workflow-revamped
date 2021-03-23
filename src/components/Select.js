@@ -1,7 +1,8 @@
-import useClickOutside from '../hooks/useClickOutside';
 import {Transition} from '@headlessui/react';
 import {useRef, useState} from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import useClickOutside from '../hooks/useClickOutside';
 
 const Select = ({label, optionLabel, options, value, onChange}) => {
   const [open, setOpen] = useState(false);
@@ -65,6 +66,14 @@ const Select = ({label, optionLabel, options, value, onChange}) => {
       </Transition>
     </div>
   );
+};
+
+Select.propTypes = {
+  label: PropTypes.string,
+  onChange: PropTypes.func,
+  optionLabel: PropTypes.string,
+  options: PropTypes.array,
+  value: PropTypes.object,
 };
 
 export default Select;

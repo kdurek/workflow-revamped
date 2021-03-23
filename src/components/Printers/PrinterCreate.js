@@ -7,7 +7,7 @@ import Select from '@/components/Select';
 import Input from '../Input';
 
 const PrinterCreate = () => {
-  const {control, errors, handleSubmit, register} = useForm();
+  const {control, errors, handleSubmit} = useForm();
 
   const queryClient = useQueryClient();
 
@@ -41,6 +41,7 @@ const PrinterCreate = () => {
             <Input label={'Model'} onChange={onChange} value={value} />
           )}
         />
+        {errors.model && <span className="block text-red-600">You must provide model</span>}
       </form>
     </Modal>
   );

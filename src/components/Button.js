@@ -27,7 +27,7 @@ const Button = ({children, fullWidth, onClick, square, type, variant}) => {
 };
 
 Button.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   fullWidth: PropTypes.bool,
   onClick: PropTypes.func,
   square: PropTypes.bool,

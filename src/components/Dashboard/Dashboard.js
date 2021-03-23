@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import OutOfStock from '@/components/Dashboard/OutOfStock';
 
 const Dashboard = ({tonersList}) => {
@@ -6,6 +8,10 @@ const Dashboard = ({tonersList}) => {
       <OutOfStock tonersList={tonersList} />
     </div>
   );
+};
+
+Dashboard.propTypes = {
+  tonersList: PropTypes.array,
 };
 
 export default Dashboard;

@@ -1,6 +1,7 @@
 import {Controller, useForm} from 'react-hook-form';
 import {useMutation, useQueryClient} from 'react-query';
 import {useState} from 'react';
+import PropTypes from 'prop-types';
 
 import {updatePrinter, deletePrinter} from '@/services/printerService';
 import Button from '@/components/Button';
@@ -28,7 +29,7 @@ const getColor = color => {
 const PrinterEdit = ({printer, uncategorizedToners}) => {
   const [editToners, setEditToners] = useState('');
 
-  const {control, errors, handleSubmit, register} = useForm();
+  const {control, errors, handleSubmit} = useForm();
 
   const queryClient = useQueryClient();
 
@@ -132,6 +133,11 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
       </div>
     </Modal>
   );
+};
+
+PrinterEdit.propTypes = {
+  printer: PropTypes.object.isRequired,
+  uncategorizedToners: PropTypes.array,
 };
 
 export default PrinterEdit;
