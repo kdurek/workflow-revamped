@@ -60,7 +60,7 @@ const TonerEdit = () => {
         </div>
         {selectedToner && (
           <div key={selectedToner._id}>
-            <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
+            <form className="space-y-4" onSubmit={e => e.preventDefault()}>
               <legend className="text-4xl">Edit Toner</legend>
               <Controller
                 name="code"
@@ -94,8 +94,8 @@ const TonerEdit = () => {
                   <Input label={'Amount'} onChange={onChange} value={value} />
                 )}
               />
+              <Button fullWidth variant="danger" label="Delete" onClick={handleTonerDelete} />
             </form>
-            <Button variant="danger" className="mt-4" label="Delete" onClick={handleTonerDelete} />
           </div>
         )}
       </div>

@@ -2,7 +2,6 @@ import {signIn} from 'next-auth/client';
 import {Controller, useForm} from 'react-hook-form';
 import {useRouter} from 'next/router';
 import {useSession} from 'next-auth/client';
-import {useState} from 'react';
 import Head from 'next/head';
 
 import AuthLayout from '@/layouts/AuthLayout';
@@ -37,7 +36,7 @@ const Login = () => {
         <title>Login</title>
       </Head>
       <div className="container">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="email"
             control={control}
@@ -58,14 +57,12 @@ const Login = () => {
             )}
           />
           {errors.password && <span className="block text-red-600">You must provide password</span>}
-
           <Button
             label={'Login'}
             variant="primary"
             fullWidth
             onClick={handleSubmit(onSubmit)}
             type="submit"
-            className="mt-4 font-semibold"
           />
         </form>
       </div>

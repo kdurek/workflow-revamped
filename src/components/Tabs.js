@@ -2,18 +2,21 @@ import {useState} from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import Button from '@/components/Button';
 import Card from '@/components/Card';
 
 const Tab = ({activeTab, label, onClick}) => {
   return (
-    <Button
-      label={label}
-      className={classNames({'bg-coolGray-400 hover:bg-coolGray-400': activeTab === label})}
+    <button
+      className={classNames(
+        'flex items-center justify-center rounded-xl px-4 py-2 uppercase font-medium duration-300 transition-all focus:ring-2 bg-coolGray-100 hover:bg-coolGray-200 shadow-inner',
+        {
+          'bg-coolGray-400 hover:bg-coolGray-400': activeTab === label,
+        }
+      )}
       onClick={() => onClick(label)}
     >
       {label}
-    </Button>
+    </button>
   );
 };
 

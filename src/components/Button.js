@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-const Button = ({className, fullWidth, label, onClick, square, type, variant}) => {
+const Button = ({fullWidth, label, onClick, square, type, variant}) => {
   const VARIANT_MAPS = {
     default: 'bg-coolGray-100 hover:bg-coolGray-200 shadow-inner',
     primary: 'bg-blue-400 text-white hover:bg-blue-500 hover:shadow-lg',
@@ -14,7 +14,6 @@ const Button = ({className, fullWidth, label, onClick, square, type, variant}) =
       type={type}
       className={classNames(
         'flex items-center justify-center rounded-xl px-4 py-2 uppercase font-medium duration-300 transition-all focus:ring-2',
-        className,
         VARIANT_MAPS[variant],
         {
           'w-full': fullWidth,
@@ -28,7 +27,6 @@ const Button = ({className, fullWidth, label, onClick, square, type, variant}) =
 };
 
 Button.propTypes = {
-  className: PropTypes.string,
   fullWidth: PropTypes.bool,
   label: PropTypes.string,
   onClick: PropTypes.func,
