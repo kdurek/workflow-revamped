@@ -14,5 +14,5 @@ Default.args = {};
 
 export const Primary = Template.bind({});
 Primary.args = {
-  primary: true,
+  variant: 'primary',
 };

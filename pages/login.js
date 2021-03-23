@@ -61,7 +61,7 @@ const Login = () => {
 
           <Button
             label={'Login'}
-            primary
+            variant="primary"
             fullWidth
             onClick={handleSubmit(onSubmit)}
             type="submit"

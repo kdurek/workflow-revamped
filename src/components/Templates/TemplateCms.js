@@ -74,14 +74,13 @@ const TemplateCms = ({user}) => {
           />
           <div className="flex gap-4">
             <Button
-              primary
               fullWidth
               label={'Send Login'}
               onClick={() => sendEmail(email, templateHeader, patternEmail)}
             />
             <Button
-              primary
               fullWidth
+              variant="primary"
               label={'Send Password'}
               onClick={() =>
                 sendEmail(

@@ -56,7 +56,7 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
                 <Button
                   label={submitLabel || 'submit'}
                   fullWidth
-                  primary
+                  variant="primary"
                   onClick={() => {
                     submit();
                     setShowModal(false);
