@@ -73,7 +73,7 @@ Select.propTypes = {
   onChange: PropTypes.func,
   optionLabel: PropTypes.string,
   options: PropTypes.array,
-  value: PropTypes.object,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 export default Select;
