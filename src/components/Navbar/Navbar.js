@@ -1,7 +1,8 @@
 import {Transition} from '@headlessui/react';
-import React, {useRef, useState} from 'react';
 import {useSession, signOut} from 'next-auth/client';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React, {useRef, useState} from 'react';
 
 import ActiveLink from '@/components/Navbar/ActiveLink';
 import useClickOutside from '@/hooks/useClickOutside';
@@ -46,7 +47,7 @@ const NavButton = React.forwardRef(function NavButton({className, icon, onClick}
       <button
         onClick={onClick}
         className={classNames(
-          'transition-all w-12 h-12 rounded-full bg-coolGray-200 p-1 flex items-center shadow-inner justify-center hover:bg-coolGray-400',
+          'transition-all w-12 h-12 rounded-xl bg-coolGray-200 p-1 flex items-center shadow-inner justify-center hover:bg-coolGray-400',
           className
         )}
       >
@@ -56,12 +57,23 @@ const NavButton = React.forwardRef(function NavButton({className, icon, onClick}
   );
 });
 
+NavButton.propTypes = {
+  className: PropTypes.string,
+  icon: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
 const NavLink = ({icon, path}) => {
   return (
     <ActiveLink href={path}>
       <NavButton icon={icon} />
     </ActiveLink>
   );
+};
+
+NavLink.propTypes = {
+  icon: PropTypes.string,
+  path: PropTypes.string,
 };
 
 const AppMenu = () => {
@@ -81,7 +93,7 @@ const AppMenu = () => {
 
 const DropdownMenu = ({setOpen}) => {
   const [activeMenu, setActiveMenu] = useState('main');
-  const [session, loading] = useSession();
+  const [session] = useSession();
 
   const ref = useRef();
   useClickOutside(ref, () => setOpen(false));
@@ -100,6 +112,14 @@ const DropdownMenu = ({setOpen}) => {
         <span className="ml-auto material-icons">{rightIcon}</span>
       </button>
     );
+  };
+
+  DropdownItem.propTypes = {
+    children: PropTypes.string,
+    className: PropTypes.string,
+    leftIcon: PropTypes.string,
+    onClick: PropTypes.func,
+    rightIcon: PropTypes.string,
   };
 
   const getHeight = () => {
@@ -192,4 +212,8 @@ const DropdownMenu = ({setOpen}) => {
       </Transition>
     </div>
   );
+};
+
+DropdownMenu.propTypes = {
+  setOpen: PropTypes.func,
 };
