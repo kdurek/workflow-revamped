@@ -68,8 +68,13 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
       submit={handleSubmit(handlePrinterEdit)}
     >
       <div className="relative flex flex-col gap-4">
-        <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
-          <legend className="text-4xl">Details</legend>
+        <form className="space-y-4" onSubmit={e => e.preventDefault()}>
+          <div className="flex justify-between">
+            <legend className="text-4xl">Details</legend>
+            <Button variant="danger" onClick={() => handlePrinterDelete(printer._id)}>
+              Delete
+            </Button>
+          </div>
           <Controller
             name="brand"
             control={control}
@@ -127,9 +132,6 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
             </Button>
           </div>
         )}
-        <Button variant="danger" onClick={() => handlePrinterDelete(printer._id)}>
-          Delete
-        </Button>
       </div>
     </Modal>
   );
