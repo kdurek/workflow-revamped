@@ -67,8 +67,9 @@ const TemplateCms = ({user}) => {
           <Input label={'Email'} onChange={setEmail} value={email} />
           <Input label={'Phone'} onChange={setPhone} value={phone} />
           <Input
+            readOnly
             label={'Password'}
-            value={password}
+            defaultValue={password}
             onClick={e => {
               copyToClipboard(e.target.value);
               e.target.select();
