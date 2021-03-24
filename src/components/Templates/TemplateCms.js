@@ -76,19 +76,29 @@ const TemplateCms = ({user}) => {
             }}
           />
           <div className="flex gap-4">
-            <Button fullWidth onClick={() => sendEmail(email, templateHeader, patternEmail)}>
+            <Button
+              fullWidth
+              variant="primary"
+              onClick={() => {
+                if (normalizeNumber(phone).length === 9) {
+                  sendEmail(email, templateHeader, patternEmail);
+                }
+              }}
+            >
               Send Login
             </Button>
             <Button
               fullWidth
               variant="primary"
-              onClick={() =>
-                sendEmail(
-                  `${normalizeNumber(phone)}@${process.env.NEXT_PUBLIC_SMS_DOMAIN}`,
-                  templateHeader,
-                  patternSms
-                )
-              }
+              onClick={() => {
+                if (normalizeNumber(phone).length === 9) {
+                  sendEmail(
+                    `${normalizeNumber(phone)}@${process.env.NEXT_PUBLIC_SMS_DOMAIN}`,
+                    templateHeader,
+                    patternSms
+                  );
+                }
+              }}
             >
               Send Password
             </Button>
