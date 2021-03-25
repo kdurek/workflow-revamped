@@ -8,7 +8,6 @@
 
 - [NextJS](https://nextjs.org/)
 - [Tailwind](https://tailwindcss.com/)
-  <!-- - [Storybook](https://storybook.js.org/) -->
 
 <!-- HOW TO USE -->
 
