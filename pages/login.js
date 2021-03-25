@@ -35,33 +35,31 @@ const Login = () => {
       <Head>
         <title>Login</title>
       </Head>
-      <div className="container">
-        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="email"
-            control={control}
-            defaultValue={''}
-            rules={{required: true}}
-            render={({onChange, value}) => (
-              <Input label={'Email'} onChange={onChange} value={value} />
-            )}
-          />
-          {errors.email && <span className="block text-red-600">You must provide email</span>}
-          <Controller
-            name="password"
-            control={control}
-            defaultValue={''}
-            rules={{required: true}}
-            render={({onChange, value}) => (
-              <Input label={'Password'} onChange={onChange} type="password" value={value} />
-            )}
-          />
-          {errors.password && <span className="block text-red-600">You must provide password</span>}
-          <Button variant="primary" fullWidth onClick={handleSubmit(onSubmit)} type="submit">
-            Login
-          </Button>
-        </form>
-      </div>
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name="email"
+          control={control}
+          defaultValue={''}
+          rules={{required: true}}
+          render={({onChange, value}) => (
+            <Input label={'Email'} onChange={onChange} value={value} />
+          )}
+        />
+        {errors.email && <span className="block text-red-600">You must provide email</span>}
+        <Controller
+          name="password"
+          control={control}
+          defaultValue={''}
+          rules={{required: true}}
+          render={({onChange, value}) => (
+            <Input label={'Password'} onChange={onChange} type="password" value={value} />
+          )}
+        />
+        {errors.password && <span className="block text-red-600">You must provide password</span>}
+        <Button variant="primary" fullWidth onClick={handleSubmit(onSubmit)} type="submit">
+          Login
+        </Button>
+      </form>
     </AuthLayout>
   );
 };

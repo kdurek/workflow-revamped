@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 
 import Footer from '@/layouts/Footer';
+import Card from '../Card';
 
 const AuthLayout = ({children}) => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div className="p-4 md:bg-white md:shadow-2xl md:rounded-xl">
+    <div className="flex items-center justify-center w-screen h-screen">
+      <Card className="p-4">
         {children}
         <Footer />
-      </div>
+      </Card>
     </div>
   );
 };

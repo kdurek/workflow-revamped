@@ -7,7 +7,7 @@ const DefaultLayout = ({children}) => {
   return (
     <div className="container grid min-h-screen gap-4 p-4 mx-auto grid-rows-pancake">
       <NavBar />
-      <div className="h-full">{children}</div>
+      <div>{children}</div>
       <Footer />
     </div>
   );

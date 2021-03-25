@@ -15,7 +15,7 @@ const Select = ({label, optionLabel, options, value, onChange}) => {
       <label className="mb-1 text-sm font-medium text-coolGray-600">{label}</label>
       <button
         onClick={() => setOpen(!open)}
-        className="relative w-full py-2 pl-4 pr-8 text-left bg-white rounded-md shadow cursor-default ring-1 ring-coolGray-300 ring-opacity-50 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+        className="relative w-full py-2 pl-4 pr-8 text-left bg-white rounded-md shadow cursor-default ring-1 ring-coolGray-300 ring-opacity-50 focus:ring-blue-500 focus:border-blue-500"
       >
         {value ? (
           <span className="flex items-center">
