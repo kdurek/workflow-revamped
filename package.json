@@ -43,5 +43,12 @@
     "prettier": "^2.2.1",
     "tailwind-scrollbar": "^1.2.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
-  }
+  },
+  "browserslist": [
+    "last 3 and_chr versions",
+    "last 3 chrome versions",
+    "last 3 opera versions",
+    "last 3 ios_saf versions",
+    "last 3 safari versions"
+  ]
 }
