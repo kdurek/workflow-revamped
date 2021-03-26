@@ -1,18 +1,18 @@
-import {useSession} from 'next-auth/client';
 import PropTypes from 'prop-types';
 
 import Card from '@/components/Card';
 import PrinterEdit from '@/components/Printers/PrinterEdit';
 import Toner from '@/components/Printers/Toner';
+import Protect from '../Protect';
 
 const Printer = ({printer}) => {
-  const [session] = useSession();
-
   return (
     <Card className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <span className="text-4xl font-bold">{`${printer.brand} ${printer.model}`}</span>
-        {session.user.role === 'admin' && <PrinterEdit printer={printer} />}
+        <Protect>
+          <PrinterEdit printer={printer} />
+        </Protect>
       </div>
       {printer.toners.length ? (
         <div className="flex flex-col gap-6 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
