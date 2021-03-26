@@ -1,61 +1,41 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import {useMutation, useQuery, useQueryClient} from 'react-query';
+import {useQuery} from 'react-query';
 import {useSession} from 'next-auth/client';
+import Head from 'next/head';
 
-import DefaultLayout from '@/layouts/DefaultLayout';
-import Printers from '@/components/Printers';
 import {getPrinters} from '@/services/printerService';
-import {getUncategorizedToners, updateToner} from '@/services/tonerService';
+import {getTonersUncategorized} from '@/services/tonerService';
+import Card from '@/components/Card';
+import DefaultLayout from '@/layouts/DefaultLayout';
+import PrinterCreate from '@/components/Printers/PrinterCreate';
+import PrintersList from '@/components/Printers/PrintersList';
+import TonerCreate from '@/components/Printers/TonerCreate';
+import TonerEdit from '@/components/Printers/TonerEdit';
 
 const PrintersPage = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
 
-  const queryClient = useQueryClient();
-
-  const {data: printersList} = useQuery('printers', getPrinters, {
-    enabled: !!session,
-  });
-  const {data: uncategorizedToners} = useQuery('uncategorized-toners', getUncategorizedToners, {
-    enabled: !!session,
-  });
-
-  const updateTonerMutation = useMutation(updateToner, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('printers');
-    },
-  });
-  const useToner = async toner => {
-    const updatedToner = {
-      amount: toner.amount - 1,
-    };
-    updateTonerMutation.mutate({id: toner._id, updatedToner});
-  };
-
-  if (loading) {
-    return null;
-  }
-
-  if (!session) {
-    return (
-      <div>
-        You must first sign in to access this page.
-        <Link href={'/login'}>Login</Link>
-      </div>
-    );
-  }
+  const {data: printersList} = useQuery('printers', getPrinters);
+  const {data: uncategorizedToners} = useQuery('toners-uncategorized', getTonersUncategorized);
 
   return (
     <DefaultLayout>
       <Head>
         <title>Printers</title>
       </Head>
-      <Printers
-        printersList={printersList}
-        session={session}
-        uncategorizedToners={uncategorizedToners}
-        useToner={useToner}
-      />
+      <div className="space-y-4">
+        {session.user.role === 'admin' && (
+          <Card className="flex gap-2">
+            <PrinterCreate />
+            <TonerCreate />
+            <TonerEdit />
+          </Card>
+        )}
+        <PrintersList
+          printersList={printersList}
+          session={session}
+          uncategorizedToners={uncategorizedToners}
+        />
+      </div>
     </DefaultLayout>
   );
 };

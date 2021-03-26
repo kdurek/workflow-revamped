@@ -1,46 +1,29 @@
+import {useMutation, useQueryClient} from 'react-query';
+import {useSession} from 'next-auth/client';
 import PropTypes from 'prop-types';
 
+import {updateToner} from '@/services/tonerService';
 import Card from '@/components/Card';
-import PrinterCreate from '@/components/Printers/PrinterCreate';
 import PrinterEdit from '@/components/Printers/PrinterEdit';
 import Toner from '@/components/Printers/Toner';
-import TonerCreate from '@/components/Printers/TonerCreate';
-import TonerEdit from '@/components/Printers/TonerEdit';
 
-const Printers = ({printersList, session, uncategorizedToners, useToner}) => {
-  return (
-    <div className="flex flex-col gap-4">
-      {session.user.role === 'admin' && (
-        <div className="flex gap-2 p-2 bg-white shadow rounded-xl">
-          <PrinterCreate />
-          <TonerCreate />
-          <TonerEdit />
-        </div>
-      )}
+const Printer = ({printer, uncategorizedToners}) => {
+  const [session] = useSession();
 
-      <div className="flex flex-col gap-4">
-        {printersList?.map(printer => (
-          <Printer
-            key={printer._id}
-            printer={printer}
-            session={session}
-            uncategorizedToners={uncategorizedToners}
-            useToner={useToner}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
+  const queryClient = useQueryClient();
 
-Printers.propTypes = {
-  printersList: PropTypes.array,
-  session: PropTypes.object,
-  uncategorizedToners: PropTypes.array,
-  useToner: PropTypes.func,
-};
+  const updateTonerMutation = useMutation(updateToner, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('printers');
+    },
+  });
+  const useToner = async toner => {
+    const updatedToner = {
+      amount: toner.amount - 1,
+    };
+    updateTonerMutation.mutate({id: toner._id, updatedToner});
+  };
 
-const Printer = ({printer, session, uncategorizedToners, useToner}) => {
   return (
     <Card className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -71,4 +54,4 @@ Printer.propTypes = {
   useToner: PropTypes.func,
 };
 
-export default Printers;
+export default Printer;

@@ -1,7 +1,5 @@
 import {signIn} from 'next-auth/client';
 import {Controller, useForm} from 'react-hook-form';
-import {useRouter} from 'next/router';
-import {useSession} from 'next-auth/client';
 import Head from 'next/head';
 
 import AuthLayout from '@/layouts/AuthLayout';
@@ -9,9 +7,6 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 
 const Login = () => {
-  const router = useRouter();
-
-  const [session, loading] = useSession();
   const {control, errors, handleSubmit} = useForm();
 
   const onSubmit = data => {
@@ -21,15 +16,6 @@ const Login = () => {
       callbackUrl: window.location.pathname,
     });
   };
-
-  if (loading) {
-    return null;
-  }
-
-  if (session) {
-    router.push('/');
-  }
-
   return (
     <AuthLayout>
       <Head>

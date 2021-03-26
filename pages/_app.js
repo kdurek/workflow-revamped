@@ -3,7 +3,7 @@ import {Provider} from 'next-auth/client';
 import PropTypes from 'prop-types';
 import {ReactQueryDevtools} from 'react-query/devtools';
 
-import {FetchProvider} from '@/context/FetchContext';
+import {FetchProvider} from '@/context/AuthContext';
 import '@/styles/tailwind.css';
 
 const CustomApp = ({Component, pageProps}) => {

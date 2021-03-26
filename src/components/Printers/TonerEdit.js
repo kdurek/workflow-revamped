@@ -22,7 +22,7 @@ const TonerEdit = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('printers');
       queryClient.invalidateQueries('toners');
-      queryClient.invalidateQueries('uncategorized-toners');
+      queryClient.invalidateQueries('toners-uncategorized');
     },
   });
   const handleTonerEdit = async data => {
@@ -36,7 +36,7 @@ const TonerEdit = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('printers');
       queryClient.invalidateQueries('toners');
-      queryClient.invalidateQueries('uncategorized-toners');
+      queryClient.invalidateQueries('toners-uncategorized');
     },
   });
   const handleTonerDelete = async () => {

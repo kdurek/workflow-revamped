@@ -1,38 +1,21 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import {useSession} from 'next-auth/client';
-
-import DefaultLayout from '@/layouts/DefaultLayout';
-import Dashboard from '@/components/Dashboard';
-import {getOutOfStockToners} from '@/services/tonerService';
 import {useQuery} from 'react-query';
+import Head from 'next/head';
+
+import {getOutOfStockToners} from '@/services/tonerService';
+import DefaultLayout from '@/layouts/DefaultLayout';
+import OutOfStock from '@/components/Dashboard/OutOfStock';
 
 const DashboardPage = () => {
-  const [session, loading] = useSession();
-
-  const {data: tonersList} = useQuery('outofstock-toners', getOutOfStockToners, {
-    enabled: !!session,
-  });
-
-  if (loading) {
-    return null;
-  }
-
-  if (!session) {
-    return (
-      <div>
-        You must first sign in to access this page.
-        <Link href={'/login'}>Login</Link>
-      </div>
-    );
-  }
+  const {data: tonersList} = useQuery('outofstock-toners', getOutOfStockToners);
 
   return (
     <DefaultLayout>
       <Head>
         <title>Dashboard</title>
       </Head>
-      <Dashboard tonersList={tonersList} />
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <OutOfStock tonersList={tonersList} />
+      </div>
     </DefaultLayout>
   );
 };

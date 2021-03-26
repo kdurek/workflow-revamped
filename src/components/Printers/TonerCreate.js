@@ -14,7 +14,7 @@ const TonerCreate = () => {
   const createTonerMutation = useMutation(createToner, {
     onSuccess: () => {
       queryClient.invalidateQueries('toners');
-      queryClient.invalidateQueries('uncategorized-toners');
+      queryClient.invalidateQueries('toners-uncategorized');
     },
   });
   const handleTonerCreate = async data => {

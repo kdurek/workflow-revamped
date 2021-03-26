@@ -19,7 +19,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
   const updatePrinterMutation = useMutation(updatePrinter, {
     onSuccess: () => {
       queryClient.invalidateQueries('printers');
-      queryClient.invalidateQueries('uncategorized-toners');
+      queryClient.invalidateQueries('toners-uncategorized');
     },
   });
   const handlePrinterEdit = async data => {
@@ -37,7 +37,7 @@ const PrinterEdit = ({printer, uncategorizedToners}) => {
   const deletePrinterMutation = useMutation(deletePrinter, {
     onSuccess: () => {
       queryClient.invalidateQueries('printers');
-      queryClient.invalidateQueries('uncategorized-toners');
+      queryClient.invalidateQueries('toners-uncategorized');
     },
   });
   const handlePrinterDelete = async printerId => {
