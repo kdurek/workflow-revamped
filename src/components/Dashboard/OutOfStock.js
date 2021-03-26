@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import copyToClipboard from '@/utils/copyToClipboard';
+import useTonersOutOfStock from '@/hooks/useTonersOutOfStock';
 
 const formatToCopyable = tonersList => {
   let data = [];
@@ -12,7 +13,9 @@ const formatToCopyable = tonersList => {
   copyToClipboard(data.join('\n'));
 };
 
-const OutOfStock = ({tonersList}) => {
+const OutOfStock = () => {
+  const {data: tonersList} = useTonersOutOfStock();
+
   return (
     <Card className="p-4">
       <div className="text-xl font-medium text-center">Nearly or out of stock, please resupply</div>

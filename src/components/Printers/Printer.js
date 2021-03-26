@@ -7,7 +7,7 @@ import Card from '@/components/Card';
 import PrinterEdit from '@/components/Printers/PrinterEdit';
 import Toner from '@/components/Printers/Toner';
 
-const Printer = ({printer, uncategorizedToners}) => {
+const Printer = ({printer}) => {
   const [session] = useSession();
 
   const queryClient = useQueryClient();
@@ -28,9 +28,7 @@ const Printer = ({printer, uncategorizedToners}) => {
     <Card className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <span className="text-4xl font-bold">{`${printer.brand} ${printer.model}`}</span>
-        {session.user.role === 'admin' && (
-          <PrinterEdit printer={printer} uncategorizedToners={uncategorizedToners} />
-        )}
+        {session.user.role === 'admin' && <PrinterEdit printer={printer} />}
       </div>
       {printer.toners.length ? (
         <div className="flex flex-col gap-6 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">

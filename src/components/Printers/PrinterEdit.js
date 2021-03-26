@@ -8,13 +8,16 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
+import useTonersUncategorized from '@/hooks/useTonersUncategorized';
 
-const PrinterEdit = ({printer, uncategorizedToners}) => {
+const PrinterEdit = ({printer}) => {
   const [editToners, setEditToners] = useState('');
 
   const {control, errors, handleSubmit} = useForm();
 
   const queryClient = useQueryClient();
+
+  const {data: uncategorizedToners} = useTonersUncategorized();
 
   const updatePrinterMutation = useMutation(updatePrinter, {
     onSuccess: () => {

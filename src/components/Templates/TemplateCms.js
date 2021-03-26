@@ -1,8 +1,6 @@
-import {useQuery} from 'react-query';
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 
-import {getCms} from '@/services/templateService';
 import Button from '@/components/Button';
 import copyToClipboard from '@/utils/copyToClipboard';
 import generatePassword from '@/utils/generatePassword';
@@ -10,9 +8,10 @@ import Input from '@/components/Input';
 import normalizeNumber from '@/utils/normalizeNumber';
 import Select from '@/components/Select';
 import sendEmail from '@/utils/sendEmail';
+import useCms from '@/hooks/useCms';
 
 const TemplateCms = ({user}) => {
-  const {data: cmsList} = useQuery('template-cms', getCms);
+  const {data: cmsList} = useCms();
 
   const [selectedCms, setSelectedCms] = useState();
 

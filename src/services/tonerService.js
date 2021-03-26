@@ -1,20 +1,5 @@
 import axios from 'axios';
 
-export const getToners = async () => {
-  const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners`);
-  return data.toners;
-};
-
-export const getOutOfStockToners = async () => {
-  const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners?amount[lte]=1`);
-  return data.toners;
-};
-
-export const getTonersUncategorized = async () => {
-  const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners/uncategorized`);
-  return data.toners;
-};
-
 export const createToner = async newToner => {
   const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners`, newToner);
   return data;

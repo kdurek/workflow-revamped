@@ -1,13 +1,13 @@
 import {Controller, useForm} from 'react-hook-form';
-import {useMutation, useQuery, useQueryClient} from 'react-query';
+import {useMutation, useQueryClient} from 'react-query';
 import {useState} from 'react';
 
-import {getToners} from '@/services/tonerService';
 import {updateToner, deleteToner} from '@/services/tonerService';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
+import useToners from '@/hooks/useToners';
 
 const TonerEdit = () => {
   const [selectedToner, setSelectedToner] = useState();
@@ -16,7 +16,7 @@ const TonerEdit = () => {
 
   const queryClient = useQueryClient();
 
-  const {data: tonersList} = useQuery('toners', getToners);
+  const {data: tonersList} = useToners();
 
   const updateTonerMutation = useMutation(updateToner, {
     onSuccess: () => {
