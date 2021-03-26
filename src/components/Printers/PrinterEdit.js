@@ -6,9 +6,9 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
-import useTonersUncategorized from '@/hooks/useTonersUncategorized';
-import usePrinterUpdate from '@/hooks/usePrinterUpdate';
 import usePrinterDelete from '@/hooks/usePrinterDelete';
+import usePrinterUpdate from '@/hooks/usePrinterUpdate';
+import useTonersUncategorized from '@/hooks/useTonersUncategorized';
 
 const PrinterEdit = ({printer}) => {
   const {control, errors, handleSubmit} = useForm();
@@ -67,7 +67,7 @@ const PrinterEdit = ({printer}) => {
               <Input label={'Model'} onChange={onChange} value={value} />
             )}
           />
-          {errors.model && <span className="block text-red-600">You must provide model</span>}
+          {errors.model && <span className="text-red-500">You must provide model</span>}
         </form>
 
         <div className="space-y-4">

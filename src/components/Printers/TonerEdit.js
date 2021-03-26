@@ -5,9 +5,9 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
+import useTonerDelete from '@/hooks/useTonerDelete';
 import useToners from '@/hooks/useToners';
 import useTonerUpdate from '@/hooks/useTonerUpdate';
-import useTonerDelete from '@/hooks/useTonerDelete';
 
 const TonerEdit = () => {
   const {control, errors, handleSubmit} = useForm();
@@ -61,7 +61,7 @@ const TonerEdit = () => {
                   <Input label={'Code'} onChange={onChange} value={value} />
                 )}
               />
-              {errors.code && <span className="block text-red-600">You must provide code</span>}
+              {errors.code && <span className="text-red-500">You must provide code</span>}
               <Controller
                 name="color"
                 control={control}

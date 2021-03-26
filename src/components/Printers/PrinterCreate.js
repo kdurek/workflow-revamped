@@ -1,8 +1,8 @@
 import {Controller, useForm} from 'react-hook-form';
 
+import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
-import Input from '../Input';
 import useCreatePrinter from '@/hooks/usePrinterCreate';
 
 const PrinterCreate = () => {
@@ -34,7 +34,7 @@ const PrinterCreate = () => {
             <Input label={'Model'} onChange={onChange} value={value} />
           )}
         />
-        {errors.model && <span className="block text-red-600">You must provide model</span>}
+        {errors.model && <span className="text-red-500">You must provide model</span>}
       </form>
     </Modal>
   );

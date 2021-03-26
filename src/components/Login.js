@@ -1,5 +1,5 @@
-import {signIn} from 'next-auth/client';
 import {Controller, useForm} from 'react-hook-form';
+import {signIn} from 'next-auth/client';
 import Head from 'next/head';
 
 import AuthLayout from '@/layouts/AuthLayout';
@@ -31,7 +31,7 @@ const Login = () => {
             <Input label={'Email'} onChange={onChange} value={value} />
           )}
         />
-        {errors.email && <span className="block text-red-600">You must provide email</span>}
+        {errors.email && <span className="text-red-500">You must provide email</span>}
         <Controller
           name="password"
           control={control}
@@ -41,7 +41,7 @@ const Login = () => {
             <Input label={'Password'} onChange={onChange} type="password" value={value} />
           )}
         />
-        {errors.password && <span className="block text-red-600">You must provide password</span>}
+        {errors.password && <span className="text-red-500">You must provide password</span>}
         <Button variant="primary" fullWidth onClick={handleSubmit(onSubmit)} type="submit">
           Login
         </Button>

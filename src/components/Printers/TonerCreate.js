@@ -1,8 +1,8 @@
 import {Controller, useForm} from 'react-hook-form';
 
+import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
-import Input from '../Input';
 import useTonerCreate from '@/hooks/useTonerCreate';
 
 const TonerCreate = () => {
@@ -24,7 +24,7 @@ const TonerCreate = () => {
           rules={{required: true}}
           render={({onChange, value}) => <Input label={'Code'} onChange={onChange} value={value} />}
         />
-        {errors.code && <span className="block text-red-600">You must provide code</span>}
+        {errors.code && <span className="text-red-500">You must provide code</span>}
         <Controller
           name="color"
           control={control}
