@@ -1,7 +1,7 @@
 import React, {createContext} from 'react';
 import axios from 'axios';
 import {useSession} from 'next-auth/client';
-import Login from '@/components/Login';
+import Login from '@/components/Login/Login';
 
 const FetchContext = createContext();
 
@@ -16,13 +16,17 @@ const FetchProvider = ({children}) => {
     return null;
   }
 
+  if (!session) {
+    return <Login />;
+  }
+
   return (
     <FetchContext.Provider
       value={{
         axios,
       }}
     >
-      {session ? children : <Login />}
+      {children}
     </FetchContext.Provider>
   );
 };

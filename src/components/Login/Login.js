@@ -1,13 +1,20 @@
 import {Controller, useForm} from 'react-hook-form';
 import {signIn} from 'next-auth/client';
+import {useRouter} from 'next/router';
 import Head from 'next/head';
 
 import AuthLayout from '@/layouts/AuthLayout';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import LoginReset from '@/components/Login/LoginReset';
 
 const Login = () => {
   const {control, errors, handleSubmit} = useForm();
+  const router = useRouter();
+
+  if (router.query.resetToken) {
+    return <LoginReset />;
+  }
 
   const onSubmit = data => {
     signIn('credentials', {
@@ -16,6 +23,7 @@ const Login = () => {
       callbackUrl: window.location.pathname,
     });
   };
+
   return (
     <AuthLayout>
       <Head>
@@ -51,7 +59,7 @@ const Login = () => {
             />
           )}
         />
-        <Button variant="primary" fullWidth onClick={handleSubmit(onSubmit)} type="submit">
+        <Button variant="primary" fullWidth onClick={handleSubmit(onSubmit)}>
           Login
         </Button>
       </form>
