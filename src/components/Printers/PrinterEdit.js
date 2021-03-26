@@ -1,48 +1,37 @@
 import {Controller, useForm} from 'react-hook-form';
-import {useMutation, useQueryClient} from 'react-query';
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 
-import {updatePrinter, deletePrinter} from '@/services/printerService';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
 import useTonersUncategorized from '@/hooks/useTonersUncategorized';
+import usePrinterUpdate from '@/hooks/usePrinterUpdate';
+import usePrinterDelete from '@/hooks/usePrinterDelete';
 
 const PrinterEdit = ({printer}) => {
+  const {control, errors, handleSubmit} = useForm();
+  const {data: uncategorizedToners} = useTonersUncategorized();
+  const updatePrinterMutation = usePrinterUpdate();
+  const deletePrinterMutation = usePrinterDelete();
+
   const [editToners, setEditToners] = useState('');
 
-  const {control, errors, handleSubmit} = useForm();
-
-  const queryClient = useQueryClient();
-
-  const {data: uncategorizedToners} = useTonersUncategorized();
-
-  const updatePrinterMutation = useMutation(updatePrinter, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('printers');
-      queryClient.invalidateQueries('toners-uncategorized');
-    },
-  });
   const handlePrinterEdit = async data => {
     updatePrinterMutation.mutate({id: printer._id, updatedPrinter: data});
   };
+
   const handlePullToner = async tonerId => {
     const updatedToners = printer.toners.filter(toner => toner._id !== tonerId);
     updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
   };
+
   const handlePushToner = tonerId => {
     const updatedToners = [...printer.toners.map(toner => toner._id), tonerId];
     updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
   };
 
-  const deletePrinterMutation = useMutation(deletePrinter, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('printers');
-      queryClient.invalidateQueries('toners-uncategorized');
-    },
-  });
   const handlePrinterDelete = async printerId => {
     deletePrinterMutation.mutate(printerId);
   };
@@ -126,7 +115,6 @@ const PrinterEdit = ({printer}) => {
 
 PrinterEdit.propTypes = {
   printer: PropTypes.object.isRequired,
-  uncategorizedToners: PropTypes.array,
 };
 
 export default PrinterEdit;

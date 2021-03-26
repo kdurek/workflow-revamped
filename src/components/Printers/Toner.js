@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import Modal from '@/components/Modal';
+import useTonerUpdate from '@/hooks/useTonerUpdate';
 
 const getColor = color => {
   switch (color) {
@@ -20,8 +21,17 @@ const getColor = color => {
   }
 };
 
-const Toner = ({toner, useToner}) => {
+const Toner = ({toner}) => {
+  const updateTonerMutation = useTonerUpdate();
+
   const [cardHover, setCardHover] = useState(false);
+
+  const useToner = toner => {
+    const updatedToner = {
+      amount: toner.amount - 1,
+    };
+    updateTonerMutation.mutate({id: toner._id, updatedToner});
+  };
 
   return (
     <Modal
@@ -55,7 +65,6 @@ const Toner = ({toner, useToner}) => {
 
 Toner.propTypes = {
   toner: PropTypes.object,
-  useToner: PropTypes.func,
 };
 
 export default Toner;

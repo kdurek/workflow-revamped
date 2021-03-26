@@ -1,28 +1,12 @@
-import {useMutation, useQueryClient} from 'react-query';
 import {useSession} from 'next-auth/client';
 import PropTypes from 'prop-types';
 
-import {updateToner} from '@/services/tonerService';
 import Card from '@/components/Card';
 import PrinterEdit from '@/components/Printers/PrinterEdit';
 import Toner from '@/components/Printers/Toner';
 
 const Printer = ({printer}) => {
   const [session] = useSession();
-
-  const queryClient = useQueryClient();
-
-  const updateTonerMutation = useMutation(updateToner, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('printers');
-    },
-  });
-  const useToner = async toner => {
-    const updatedToner = {
-      amount: toner.amount - 1,
-    };
-    updateTonerMutation.mutate({id: toner._id, updatedToner});
-  };
 
   return (
     <Card className="flex flex-col gap-4">
@@ -33,7 +17,7 @@ const Printer = ({printer}) => {
       {printer.toners.length ? (
         <div className="flex flex-col gap-6 md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {printer.toners.map(toner => (
-            <Toner key={toner._id} useToner={useToner} toner={toner} />
+            <Toner key={toner._id} toner={toner} />
           ))}
         </div>
       ) : (
@@ -47,9 +31,6 @@ const Printer = ({printer}) => {
 
 Printer.propTypes = {
   printer: PropTypes.object,
-  session: PropTypes.object,
-  uncategorizedToners: PropTypes.array,
-  useToner: PropTypes.func,
 };
 
 export default Printer;
