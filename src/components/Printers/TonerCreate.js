@@ -21,10 +21,11 @@ const TonerCreate = () => {
           name="code"
           control={control}
           defaultValue={''}
-          rules={{required: true}}
-          render={({onChange, value}) => <Input label={'Code'} onChange={onChange} value={value} />}
+          rules={{required: {value: true, message: 'Code is required'}}}
+          render={({onChange, value}) => (
+            <Input error={errors?.code?.message} label={'Code'} onChange={onChange} value={value} />
+          )}
         />
-        {errors.code && <span className="text-red-500">You must provide code</span>}
         <Controller
           name="color"
           control={control}

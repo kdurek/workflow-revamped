@@ -51,12 +51,16 @@ const TemplateReset = () => {
           name="phone"
           control={control}
           defaultValue={''}
-          rules={{required: true}}
+          rules={{required: {value: true, message: 'Phone is required'}}}
           render={({onChange, value}) => (
-            <Input label={'Phone'} onChange={onChange} value={value} />
+            <Input
+              error={errors?.phone?.message}
+              label={'Phone'}
+              onChange={onChange}
+              value={value}
+            />
           )}
         />
-        {errors.phone && <span className="text-red-500">You must provide phone</span>}
         <Button fullWidth variant="primary" onClick={handleSubmit(onSubmit)}>
           Send Password
         </Button>

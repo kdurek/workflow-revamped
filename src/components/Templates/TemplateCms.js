@@ -71,32 +71,44 @@ const TemplateCms = () => {
             name="login"
             control={control}
             defaultValue={''}
-            rules={{required: true}}
+            rules={{required: {value: true, message: 'Login is required'}}}
             render={({onChange, value}) => (
-              <Input label={'Login'} onChange={onChange} value={value} />
+              <Input
+                error={errors?.login?.message}
+                label={'Login'}
+                onChange={onChange}
+                value={value}
+              />
             )}
           />
-          {errors.login && <span className="text-red-500">You must provide login</span>}
           <Controller
             name="email"
             control={control}
             defaultValue={''}
-            rules={{required: true}}
+            rules={{required: {value: true, message: 'Email is required'}}}
             render={({onChange, value}) => (
-              <Input label={'Email'} onChange={onChange} value={value} />
+              <Input
+                error={errors?.email?.message}
+                label={'Email'}
+                onChange={onChange}
+                value={value}
+              />
             )}
           />
-          {errors.email && <span className="text-red-500">You must provide email</span>}
           <Controller
             name="phone"
             control={control}
             defaultValue={''}
-            rules={{required: true}}
+            rules={{required: {value: true, message: 'Phone is required'}}}
             render={({onChange, value}) => (
-              <Input label={'Phone'} onChange={onChange} value={value} />
+              <Input
+                error={errors?.phone?.message}
+                label={'Phone'}
+                onChange={onChange}
+                value={value}
+              />
             )}
           />
-          {errors.phone && <span className="text-red-500">You must provide phone</span>}
           <Controller
             name="password"
             control={control}

@@ -56,12 +56,16 @@ const TonerEdit = () => {
                 name="code"
                 control={control}
                 defaultValue={selectedToner.code}
-                rules={{required: true}}
+                rules={{required: {value: true, message: 'Code is required'}}}
                 render={({onChange, value}) => (
-                  <Input label={'Code'} onChange={onChange} value={value} />
+                  <Input
+                    error={errors?.code?.message}
+                    label={'Code'}
+                    onChange={onChange}
+                    value={value}
+                  />
                 )}
               />
-              {errors.code && <span className="text-red-500">You must provide code</span>}
               <Controller
                 name="color"
                 control={control}

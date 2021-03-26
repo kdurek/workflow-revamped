@@ -29,12 +29,16 @@ const PrinterCreate = () => {
           name="model"
           control={control}
           defaultValue={''}
-          rules={{required: true}}
+          rules={{required: {value: true, message: 'Model is required'}}}
           render={({onChange, value}) => (
-            <Input label={'Model'} onChange={onChange} value={value} />
+            <Input
+              error={errors?.model?.message}
+              label={'Model'}
+              onChange={onChange}
+              value={value}
+            />
           )}
         />
-        {errors.model && <span className="text-red-500">You must provide model</span>}
       </form>
     </Modal>
   );
