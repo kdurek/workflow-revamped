@@ -2,32 +2,29 @@ import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
 import axios from 'axios';
 
-const getUserFromTheAPIServer = async token => {
-  const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/getuserfromtoken`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  return data.user;
-};
-
 export default NextAuth({
   providers: [
     Providers.Credentials({
       name: 'Credentials',
       authorize: async credentials => {
-        try {
-          const user = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login`, {
+        const {data} = await axios.post(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login`,
+          {
             password: credentials.password,
             email: credentials.email,
-          });
-          if (user) {
-            return user.data;
+          },
+          {
+            headers: {
+              accept: '*/*',
+              'Content-Type': 'application/json',
+            },
           }
-        } catch (err) {
-          const errorMessage = err.response.data.message;
-          throw new Error(errorMessage + '&email=' + credentials.email);
+        );
+
+        if (data) {
+          return data;
+        } else {
+          return null;
         }
       },
     }),
@@ -43,29 +40,18 @@ export default NextAuth({
     encryption: true,
   },
 
-  pages: {error: '/login'},
-
   callbacks: {
-    async signIn(user, account, profile) {
-      return true;
-    },
-
     async jwt(token, user) {
       if (user) {
         token.accessToken = user.token;
+        token.user = user.user;
       }
-
       return token;
     },
 
     async session(session, token) {
-      const user = await getUserFromTheAPIServer(token.accessToken);
-      if (!user) {
-        return null;
-      }
-
       session.accessToken = token.accessToken;
-      session.user = user;
+      session.user = token.user;
 
       return session;
     },
