@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import Footer from '@/layouts/Footer';
-import {NavBar} from '../Navbar/Navbar';
+import {NavBar} from '@/components/Navbar/Navbar';
 
 const DefaultLayout = ({children}) => {
   return (

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Card from '@/components/Card';
 import PrinterEdit from '@/components/Printers/PrinterEdit';
 import Toner from '@/components/Printers/Toner';
-import Protect from '../Protect';
+import Protect from '@/components/Protect';
 
 const Printer = ({printer}) => {
   return (
