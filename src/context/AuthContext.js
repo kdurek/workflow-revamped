@@ -1,6 +1,8 @@
-import React, {createContext} from 'react';
-import axios from 'axios';
 import {useSession} from 'next-auth/client';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import React, {createContext} from 'react';
+
 import Login from '@/components/Login/Login';
 
 const FetchContext = createContext();
@@ -29,6 +31,10 @@ const FetchProvider = ({children}) => {
       {children}
     </FetchContext.Provider>
   );
+};
+
+FetchProvider.propTypes = {
+  children: PropTypes.object,
 };
 
 export {FetchContext, FetchProvider};
