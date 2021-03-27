@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@headlessui/react": "^0.3.1",
+    "@headlessui/react": "^0.3.1-d519f7d",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "next": "^10.0.9",
