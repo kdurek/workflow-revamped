@@ -1,5 +1,5 @@
 import {Controller, useForm} from 'react-hook-form';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -10,44 +10,59 @@ import useToners from '@/hooks/useToners';
 import useTonerUpdate from '@/hooks/useTonerUpdate';
 
 const TonerEdit = () => {
-  const {control, errors, handleSubmit} = useForm();
+  const {control, errors, handleSubmit, setValue, watch} = useForm();
+  const selectedToner = watch('toner');
+
   const {data: tonersList} = useToners();
   const deleteTonerMutation = useTonerDelete();
   const updateTonerMutation = useTonerUpdate();
 
-  const [selectedToner, setSelectedToner] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    setValue('code', selectedToner?.code);
+    setValue('color', selectedToner?.color);
+    setValue('amount', selectedToner?.amount);
+  }, [selectedToner]);
 
   const handleTonerEdit = async data => {
     if (selectedToner) {
       updateTonerMutation.mutate({id: selectedToner._id, updatedToner: data});
     }
-    setSelectedToner();
+    setModalOpen(false);
   };
 
   const handleTonerDelete = async () => {
     if (selectedToner) {
       deleteTonerMutation.mutate(selectedToner._id);
     }
-    setSelectedToner();
+    setModalOpen(false);
   };
 
   return (
-    <Modal buttonLabel={'Edit Toner'} submit={handleSubmit(handleTonerEdit)}>
-      <div className="relative flex flex-col gap-4">
-        <div>
-          <Select
-            label={'Selected toner'}
-            optionLabel={'code'}
-            options={tonersList}
-            value={selectedToner}
-            onChange={setSelectedToner}
+    <>
+      <Button onClick={() => setModalOpen(true)}>Edit Toner</Button>
+      <Modal open={modalOpen} setOpen={setModalOpen} onSubmit={handleSubmit(handleTonerEdit)}>
+        <form className="space-y-4" onSubmit={handleSubmit(handleTonerEdit)}>
+          <Modal.Title>Edit Toner</Modal.Title>
+          <Controller
+            name="toner"
+            control={control}
+            defaultValue={''}
+            render={({onChange, value}) => (
+              <Select
+                label={'Selected toner'}
+                optionLabel={'code'}
+                options={tonersList}
+                value={value}
+                onChange={onChange}
+              />
+            )}
           />
-        </div>
-        {selectedToner && (
-          <div key={selectedToner._id}>
-            <form className="space-y-4" onSubmit={e => e.preventDefault()}>
+          {selectedToner && (
+            <>
               <div className="flex justify-between">
-                <legend className="text-4xl">Edit Toner</legend>
+                <Modal.Description>Details</Modal.Description>
                 <Button variant="danger" onClick={handleTonerDelete}>
                   Delete
                 </Button>
@@ -88,11 +103,11 @@ const TonerEdit = () => {
                   <Input label={'Amount'} onChange={onChange} value={value} />
                 )}
               />
-            </form>
-          </div>
-        )}
-      </div>
-    </Modal>
+            </>
+          )}
+        </form>
+      </Modal>
+    </>
   );
 };
 

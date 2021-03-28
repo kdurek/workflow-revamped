@@ -25,19 +25,19 @@ const Toner = ({toner}) => {
   const updateTonerMutation = useTonerUpdate();
 
   const [cardHover, setCardHover] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const useToner = toner => {
+  const handleTonerUse = () => {
     const updatedToner = {
       amount: toner.amount - 1,
     };
     updateTonerMutation.mutate({id: toner._id, updatedToner});
+    setModalOpen(false);
   };
 
   return (
-    <Modal
-      submit={() => useToner(toner)}
-      submitLabel={'yes'}
-      buttonLabel={
+    <>
+      <button onClick={() => setModalOpen(true)}>
         <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
           <div
             className={classNames(
@@ -55,11 +55,15 @@ const Toner = ({toner}) => {
             </div>
           </div>
         </div>
-      }
-      buttonClass="h-full w-full"
-    >
-      <p className="text-2xl text-center ">Are you sure you want to use {toner.code}?</p>
-    </Modal>
+      </button>
+
+      <Modal open={modalOpen} setOpen={setModalOpen} onSubmit={handleTonerUse}>
+        <Modal.Title>Use Toner</Modal.Title>
+        <p className="text-2xl text-center ">
+          Are you sure you want to use <span className="font-semibold">{toner.code}</span>?
+        </p>
+      </Modal>
+    </>
   );
 };
 

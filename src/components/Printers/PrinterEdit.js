@@ -12,14 +12,17 @@ import useTonersUncategorized from '@/hooks/useTonersUncategorized';
 
 const PrinterEdit = ({printer}) => {
   const {control, errors, handleSubmit} = useForm();
+
   const {data: uncategorizedToners} = useTonersUncategorized();
   const updatePrinterMutation = usePrinterUpdate();
   const deletePrinterMutation = usePrinterDelete();
 
   const [editToners, setEditToners] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handlePrinterEdit = async data => {
     updatePrinterMutation.mutate({id: printer._id, updatedPrinter: data});
+    setModalOpen(false);
   };
 
   const handlePullToner = async tonerId => {
@@ -34,18 +37,19 @@ const PrinterEdit = ({printer}) => {
 
   const handlePrinterDelete = async printerId => {
     deletePrinterMutation.mutate(printerId);
+    setModalOpen(false);
   };
 
   return (
-    <Modal
-      buttonLabel={<span className="align-middle material-icons">more_vert</span>}
-      buttonClass=" h-12 hover:bg-coolGray-200 transition-all duration-300 rounded-xl"
-      submit={handleSubmit(handlePrinterEdit)}
-    >
-      <div className="relative flex flex-col gap-4">
-        <form className="space-y-4" onSubmit={e => e.preventDefault()}>
+    <>
+      <Button square onClick={() => setModalOpen(true)}>
+        <span className="align-middle material-icons">more_vert</span>
+      </Button>
+      <Modal open={modalOpen} setOpen={setModalOpen} onSubmit={handleSubmit(handlePrinterEdit)}>
+        <Modal.Title>Edit Printer</Modal.Title>
+        <form className="space-y-4" onSubmit={handleSubmit(handlePrinterEdit)}>
           <div className="flex justify-between">
-            <legend className="text-4xl">Details</legend>
+            <Modal.Description>Details</Modal.Description>
             <Button variant="danger" onClick={() => handlePrinterDelete(printer._id)}>
               Delete
             </Button>
@@ -73,9 +77,8 @@ const PrinterEdit = ({printer}) => {
             )}
           />
         </form>
-
         <div className="space-y-4">
-          <p className="text-4xl">Toners</p>
+          <Modal.Description>Toners</Modal.Description>
           <div className="rounded-md ring-2 ring-coolGray-300 ring-opacity-50">
             {printer.toners.map(toner => (
               <div key={toner._id} className="flex items-center gap-2">
@@ -112,8 +115,8 @@ const PrinterEdit = ({printer}) => {
             </div>
           )}
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </>
   );
 };
 
