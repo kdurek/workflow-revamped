@@ -85,7 +85,13 @@ const TemplateCms = () => {
             name="email"
             control={control}
             defaultValue={''}
-            rules={{required: {value: true, message: 'Email is required'}}}
+            rules={{
+              required: {value: true, message: 'Email is required'},
+              pattern: {
+                value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
+                message: 'Email in bad format',
+              },
+            }}
             render={({onChange, value}) => (
               <Input
                 error={errors?.email?.message}
@@ -99,7 +105,13 @@ const TemplateCms = () => {
             name="phone"
             control={control}
             defaultValue={''}
-            rules={{required: {value: true, message: 'Phone is required'}}}
+            rules={{
+              required: {value: true, message: 'Phone is required'},
+              pattern: {
+                value: /^[0-9]{9}$/,
+                message: 'Phone in bad format',
+              },
+            }}
             render={({onChange, value}) => (
               <Input
                 error={errors?.phone?.message}

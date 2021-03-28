@@ -34,7 +34,13 @@ const Login = () => {
           name="email"
           control={control}
           defaultValue={''}
-          rules={{required: {value: true, message: 'Email is required'}}}
+          rules={{
+            required: {value: true, message: 'Email is required'},
+            pattern: {
+              value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
+              message: 'Email in bad format',
+            },
+          }}
           render={({onChange, value}) => (
             <Input
               error={errors?.email?.message}
