@@ -20,7 +20,7 @@ const Login = () => {
     signIn('credentials', {
       email: data.email,
       password: data.password,
-      callbackUrl: window.location.pathname,
+      callbackUrl: window.location.href,
     });
   };
 
