@@ -7,24 +7,27 @@ export default NextAuth({
     Providers.Credentials({
       name: 'Credentials',
       authorize: async credentials => {
-        const {data} = await axios.post(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login`,
-          {
-            password: credentials.password,
-            email: credentials.email,
-          },
-          {
-            headers: {
-              accept: '*/*',
-              'Content-Type': 'application/json',
+        try {
+          const {data} = await axios.post(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login`,
+            {
+              password: credentials.password,
+              email: credentials.email,
             },
-          }
-        );
+            {
+              headers: {
+                accept: '*/*',
+                'Content-Type': 'application/json',
+              },
+            }
+          );
 
-        if (data) {
-          return data;
-        } else {
-          return null;
+          if (data) {
+            return data;
+          }
+        } catch (err) {
+          const errorMessage = err.response.data.message;
+          throw new Error(errorMessage + '&email=' + credentials.email);
         }
       },
     }),
@@ -39,6 +42,8 @@ export default NextAuth({
     secret: process.env.JWT_SECRET,
     encryption: true,
   },
+
+  pages: {error: '/'},
 
   callbacks: {
     async jwt(token, user) {
