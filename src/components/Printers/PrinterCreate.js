@@ -13,6 +13,8 @@ const PrinterCreate = () => {
   const createPrinterMutation = useCreatePrinter();
 
   const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   const handlePrinterCreate = async data => {
     createPrinterMutation.mutate(data);
@@ -21,9 +23,9 @@ const PrinterCreate = () => {
 
   return (
     <>
-      <Button onClick={() => setModalOpen(true)}>Create Printer</Button>
+      <Button onClick={handleModalOpen}>Create Printer</Button>
 
-      <Modal open={modalOpen} setOpen={setModalOpen} onSubmit={handleSubmit(handlePrinterCreate)}>
+      <Modal open={modalOpen} setOpen={setModalOpen}>
         <Modal.Title>Create Printer</Modal.Title>
 
         <form className="space-y-4" onSubmit={handleSubmit(handlePrinterCreate)}>
@@ -50,7 +52,16 @@ const PrinterCreate = () => {
               />
             )}
           />
+          <input type="submit" className="hidden" />
         </form>
+        <Modal.Buttons>
+          <Button fullWidth onClick={handleModalClose}>
+            Cancel
+          </Button>
+          <Button fullWidth variant="primary" onClick={handleSubmit(handlePrinterCreate)}>
+            Submit
+          </Button>
+        </Modal.Buttons>
       </Modal>
     </>
   );

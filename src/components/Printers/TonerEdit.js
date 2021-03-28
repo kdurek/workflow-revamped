@@ -18,6 +18,8 @@ const TonerEdit = () => {
   const updateTonerMutation = useTonerUpdate();
 
   const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   useEffect(() => {
     setValue('code', selectedToner?.code);
@@ -26,47 +28,42 @@ const TonerEdit = () => {
   }, [selectedToner]);
 
   const handleTonerEdit = async data => {
-    if (selectedToner) {
-      updateTonerMutation.mutate({id: selectedToner._id, updatedToner: data});
-    }
+    delete data.toner;
+
+    updateTonerMutation.mutate({id: selectedToner._id, updatedToner: data});
     setModalOpen(false);
   };
 
   const handleTonerDelete = async () => {
-    if (selectedToner) {
-      deleteTonerMutation.mutate(selectedToner._id);
-    }
+    deleteTonerMutation.mutate(selectedToner._id);
     setModalOpen(false);
   };
 
   return (
     <>
-      <Button onClick={() => setModalOpen(true)}>Edit Toner</Button>
-      <Modal open={modalOpen} setOpen={setModalOpen} onSubmit={handleSubmit(handleTonerEdit)}>
+      <Button onClick={handleModalOpen}>Edit Toner</Button>
+      <Modal open={modalOpen} setOpen={setModalOpen}>
+        <Modal.Title>Edit Toner</Modal.Title>
+
         <form className="space-y-4" onSubmit={handleSubmit(handleTonerEdit)}>
-          <Modal.Title>Edit Toner</Modal.Title>
           <Controller
             name="toner"
             control={control}
             defaultValue={''}
             render={({onChange, value}) => (
               <Select
-                label={'Selected toner'}
-                optionLabel={'code'}
-                options={tonersList}
-                value={value}
+                label="Selected Toner"
                 onChange={onChange}
+                value={value}
+                optionLabel="code"
+                options={tonersList}
               />
             )}
           />
+
           {selectedToner && (
             <>
-              <div className="flex justify-between">
-                <Modal.Description>Details</Modal.Description>
-                <Button variant="danger" onClick={handleTonerDelete}>
-                  Delete
-                </Button>
-              </div>
+              <Modal.Description>Details</Modal.Description>
               <Controller
                 name="code"
                 control={control}
@@ -105,7 +102,23 @@ const TonerEdit = () => {
               />
             </>
           )}
+          <input type="submit" className="hidden" />
         </form>
+        <Modal.Buttons>
+          <Button fullWidth onClick={handleModalClose}>
+            Cancel
+          </Button>
+          {selectedToner && (
+            <>
+              <Button fullWidth variant="danger" onClick={handleTonerDelete}>
+                Delete
+              </Button>
+              <Button fullWidth variant="primary" onClick={handleSubmit(handleTonerEdit)}>
+                Submit
+              </Button>
+            </>
+          )}
+        </Modal.Buttons>
       </Modal>
     </>
   );

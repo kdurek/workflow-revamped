@@ -18,7 +18,10 @@ const PrinterEdit = ({printer}) => {
   const deletePrinterMutation = usePrinterDelete();
 
   const [editToners, setEditToners] = useState('');
+
   const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   const handlePrinterEdit = async data => {
     updatePrinterMutation.mutate({id: printer._id, updatedPrinter: data});
@@ -42,18 +45,13 @@ const PrinterEdit = ({printer}) => {
 
   return (
     <>
-      <Button square onClick={() => setModalOpen(true)}>
+      <Button square onClick={handleModalOpen}>
         <span className="align-middle material-icons">more_vert</span>
       </Button>
-      <Modal open={modalOpen} setOpen={setModalOpen} onSubmit={handleSubmit(handlePrinterEdit)}>
+      <Modal open={modalOpen} setOpen={setModalOpen}>
         <Modal.Title>Edit Printer</Modal.Title>
         <form className="space-y-4" onSubmit={handleSubmit(handlePrinterEdit)}>
-          <div className="flex justify-between">
-            <Modal.Description>Details</Modal.Description>
-            <Button variant="danger" onClick={() => handlePrinterDelete(printer._id)}>
-              Delete
-            </Button>
-          </div>
+          <Modal.Description>Details</Modal.Description>
           <Controller
             name="brand"
             control={control}
@@ -76,6 +74,7 @@ const PrinterEdit = ({printer}) => {
               />
             )}
           />
+          <input type="submit" className="hidden" />
         </form>
         <div className="space-y-4">
           <Modal.Description>Toners</Modal.Description>
@@ -115,6 +114,17 @@ const PrinterEdit = ({printer}) => {
             </div>
           )}
         </div>
+        <Modal.Buttons>
+          <Button fullWidth onClick={handleModalClose}>
+            Cancel
+          </Button>
+          <Button fullWidth variant="danger" onClick={handlePrinterDelete}>
+            Delete
+          </Button>
+          <Button fullWidth variant="primary" onClick={handleSubmit(handlePrinterEdit)}>
+            Submit
+          </Button>
+        </Modal.Buttons>
       </Modal>
     </>
   );

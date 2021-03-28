@@ -2,6 +2,7 @@ import {useState} from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
+import Button from '@/components/Button';
 import Modal from '@/components/Modal';
 import useTonerUpdate from '@/hooks/useTonerUpdate';
 
@@ -25,7 +26,10 @@ const Toner = ({toner}) => {
   const updateTonerMutation = useTonerUpdate();
 
   const [cardHover, setCardHover] = useState(false);
+
   const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   const handleTonerUse = () => {
     const updatedToner = {
@@ -37,7 +41,7 @@ const Toner = ({toner}) => {
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)}>
+      <button onClick={handleModalOpen}>
         <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
           <div
             className={classNames(
@@ -62,6 +66,14 @@ const Toner = ({toner}) => {
         <p className="text-2xl text-center ">
           Are you sure you want to use <span className="font-semibold">{toner.code}</span>?
         </p>
+        <Modal.Buttons>
+          <Button fullWidth onClick={handleModalClose}>
+            Cancel
+          </Button>
+          <Button fullWidth variant="primary" onClick={handleTonerUse}>
+            Submit
+          </Button>
+        </Modal.Buttons>
       </Modal>
     </>
   );

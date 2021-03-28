@@ -1,17 +1,19 @@
 import {Controller, useForm} from 'react-hook-form';
 import {useState} from 'react';
 
+import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
 import useTonerCreate from '@/hooks/useTonerCreate';
-import Button from '@/components/Button';
 
 const TonerCreate = () => {
   const {control, errors, handleSubmit} = useForm();
   const createTonerMutation = useTonerCreate();
 
   const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   const handleTonerCreate = async data => {
     createTonerMutation.mutate(data);
@@ -20,8 +22,8 @@ const TonerCreate = () => {
 
   return (
     <>
-      <Button onClick={() => setModalOpen(true)}>Create Toner</Button>
-      <Modal open={modalOpen} setOpen={setModalOpen} onSubmit={handleSubmit(handleTonerCreate)}>
+      <Button onClick={handleModalOpen}>Create Toner</Button>
+      <Modal open={modalOpen} setOpen={setModalOpen}>
         <Modal.Title>Create Toner</Modal.Title>
         <form className="space-y-4" onSubmit={handleSubmit(handleTonerCreate)}>
           <Modal.Description>Details</Modal.Description>
@@ -52,7 +54,16 @@ const TonerCreate = () => {
               />
             )}
           />
+          <input type="submit" className="hidden" />
         </form>
+        <Modal.Buttons>
+          <Button fullWidth onClick={handleModalClose}>
+            Cancel
+          </Button>
+          <Button fullWidth variant="primary" onClick={handleSubmit(handleTonerCreate)}>
+            Submit
+          </Button>
+        </Modal.Buttons>
       </Modal>
     </>
   );

@@ -2,7 +2,6 @@ import {Dialog} from '@headlessui/react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import Button from '@/components/Button';
 import Card from '@/components/Card';
 
 const Title = ({children, className}) => {
@@ -31,24 +30,22 @@ Description.propTypes = {
   className: PropTypes.string,
 };
 
-const Modal = ({children, onCancel, onSubmit, open, setOpen}) => {
+const Buttons = ({children, className}) => {
+  return <div className={classNames('flex gap-4', className)}>{children}</div>;
+};
+
+Buttons.propTypes = {
+  children: PropTypes.array,
+  className: PropTypes.string,
+};
+
+const Modal = ({children, open, setOpen}) => {
   return (
     <Dialog className="fixed inset-0" open={open} onClose={setOpen}>
       <Dialog.Overlay className="fixed inset-0 opacity-75 bg-coolGray-600" />
       <div className="flex items-center justify-center w-screen h-screen">
         <Card className="relative w-full max-w-xs p-4 space-y-4 sm:max-w-sm md:max-w-md">
           {children}
-
-          <div className="flex gap-4">
-            <Button fullWidth onClick={onCancel ? onCancel : () => setOpen(false)}>
-              Cancel
-            </Button>
-            {onSubmit && (
-              <Button fullWidth variant="primary" onClick={onSubmit}>
-                Submit
-              </Button>
-            )}
-          </div>
         </Card>
       </div>
     </Dialog>
@@ -57,11 +54,10 @@ const Modal = ({children, onCancel, onSubmit, open, setOpen}) => {
 
 Modal.Title = Title;
 Modal.Description = Description;
+Modal.Buttons = Buttons;
 
 Modal.propTypes = {
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  onCancel: PropTypes.func,
-  onSubmit: PropTypes.func,
   open: PropTypes.bool,
   setOpen: PropTypes.func,
 };
