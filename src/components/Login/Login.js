@@ -7,14 +7,25 @@ import AuthLayout from '@/layouts/AuthLayout';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import LoginReset from '@/components/Login/LoginReset';
+import {useEffect} from 'react';
 
 const Login = () => {
-  const {control, errors, handleSubmit} = useForm();
+  const {control, errors, handleSubmit, setError, setValue} = useForm();
   const router = useRouter();
 
   if (router.query.resetToken) {
     return <LoginReset />;
   }
+
+  useEffect(() => {
+    if (router.query.error) {
+      setError('credentials', {
+        message: router.query.error,
+        type: 'credentials',
+      });
+      setValue('email', router.query.email);
+    }
+  }, [router]);
 
   const onSubmit = data => {
     signIn('credentials', {
@@ -68,6 +79,11 @@ const Login = () => {
         <Button variant="primary" fullWidth onClick={handleSubmit(onSubmit)}>
           Login
         </Button>
+        {errors.credentials && (
+          <span className="block font-medium text-center text-red-500">
+            {errors.credentials.message}
+          </span>
+        )}
       </form>
     </AuthLayout>
   );
