@@ -1,12 +1,10 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  purge: ['./pages/**/*.js', './src/components/**/*.js'],
+  purge: ['./src/**/*.js'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      // mon: ['Montserrat', 'sans-serif'],
-      // heb: ["Heebo", "sans-serif"],
       sans: ['Poppins', 'sans-serif'],
     },
     colors: {
@@ -46,9 +44,6 @@ module.exports = {
   },
   variants: {
     scrollbar: ['rounded', 'dark'],
-    extend: {
-      borderRadius: ['first', 'last'],
-    },
   },
   plugins: [require('tailwind-scrollbar')],
 };
