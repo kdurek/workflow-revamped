@@ -1,46 +1,16 @@
 import {Controller, useForm} from 'react-hook-form';
-import {useSession} from 'next-auth/client';
 
+import {useTemplateCms} from '@/modules/templates/hooks/useTemplateCms';
 import Button from '@/common/components/Button';
 import copyToClipboard from '@/utils/copyToClipboard';
 import generatePassword from '@/utils/generatePassword';
 import Input from '@/common/components/Input';
-import normalizeNumber from '@/utils/normalizeNumber';
 import Select from '@/common/components/Select';
-import sendEmail from '@/utils/sendEmail';
-import useCms from '@/common/hooks/useCms';
 
 const TemplateCms = () => {
-  const [session] = useSession();
   const {control, errors, handleSubmit, watch, reset} = useForm();
   const selectedCms = watch('cms');
-
-  const {data: cmsList} = useCms();
-
-  const onSubmitEmail = data => {
-    const templateHeader = `(Credentials to ${data.cms.name})\n`;
-    const templateLogin = `Login: ${data.login}\n`;
-    const templateLink = `Link: ${data.cms.link}\n`;
-    const templateFooter = `Best regards\n${session.user.name}`;
-
-    const patternEmail = [templateHeader, templateLogin, templateLink, templateFooter].join('\n');
-
-    sendEmail(data.email, templateHeader, patternEmail);
-  };
-
-  const onSubmitSms = data => {
-    const templateHeader = `(Credentials to ${data.cms.name})\n`;
-    const templatePassword = `Password: ${data.password}\n`;
-    const templateFooter = `Best regards\n${session.user.name}`;
-
-    const patternSms = [templateHeader, templatePassword, templateFooter].join('\n');
-
-    sendEmail(
-      `${normalizeNumber(data.phone)}@${process.env.NEXT_PUBLIC_SMS_DOMAIN}`,
-      templateHeader,
-      patternSms
-    );
-  };
+  const {cmsList, onSubmitEmail, onSubmitSms} = useTemplateCms();
 
   return (
     <form className="space-y-4" onSubmit={e => e.preventDefault()}>
