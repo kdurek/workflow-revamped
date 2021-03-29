@@ -1,7 +1,6 @@
 import {Controller, useForm} from 'react-hook-form';
-import {useEffect} from 'react';
-import {useRouter} from 'next/router';
 import Head from 'next/head';
+import {useRouter} from 'next/router';
 
 import AuthLayout from '@/layouts/auth';
 import Button from '@/common/components/Button';
@@ -11,23 +10,12 @@ import useLogin from '@/modules/login/hooks/useLogin';
 
 const Login = () => {
   const {control, errors, handleSubmit, setError, setValue} = useForm();
+  const {onSubmit} = useLogin({setError, setValue});
   const router = useRouter();
-
-  const {onSubmit} = useLogin();
 
   if (router.query.resetToken) {
     return <PasswordReset />;
   }
-
-  useEffect(() => {
-    if (router.query.error) {
-      setError('credentials', {
-        message: router.query.error,
-        type: 'credentials',
-      });
-      setValue('email', router.query.email);
-    }
-  }, [router]);
 
   return (
     <AuthLayout>

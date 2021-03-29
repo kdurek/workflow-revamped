@@ -8,7 +8,6 @@ import Input from '@/common/components/Input';
 
 const PasswordReset = () => {
   const {control, errors, handleSubmit, getValues} = useForm();
-
   const {onSubmit} = usePasswordReset();
 
   return (
