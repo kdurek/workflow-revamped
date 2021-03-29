@@ -2,16 +2,8 @@ import PropTypes from 'prop-types';
 
 import Button from '@/common/components/Button';
 import Card from '@/common/components/Card';
-import copyToClipboard from '@/utils/copyToClipboard';
+import formatToCopyable from '@/modules/dashboard/utils/formatToCopyable';
 import useTonersOutOfStock from '@/common/hooks/useTonersOutOfStock';
-
-const formatToCopyable = tonersList => {
-  let data = [];
-  tonersList.forEach(toner => {
-    data.push(`${toner.brand} ${toner.code} - ${2 - toner.amount}`);
-  });
-  copyToClipboard(data.join('\n'));
-};
 
 const OutOfStock = () => {
   const {data: tonersList} = useTonersOutOfStock();
