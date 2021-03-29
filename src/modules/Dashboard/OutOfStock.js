@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@/common/components/Button';
 import Card from '@/common/components/Card';
 import formatToCopyable from '@/modules/dashboard/utils/formatToCopyable';
-import useTonersOutOfStock from '@/common/hooks/useTonersOutOfStock';
+import useTonersOutOfStock from '@/modules/reactQuery/queries/useTonersOutOfStock';
 
 const OutOfStock = () => {
   const {data: tonersList} = useTonersOutOfStock();

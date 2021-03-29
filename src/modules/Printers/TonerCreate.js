@@ -5,7 +5,7 @@ import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
 import Select from '@/common/components/Select';
-import useTonerCreate from '@/common/hooks/useTonerCreate';
+import useTonerCreate from '@/modules/reactQuery/mutations/useTonerCreate';
 
 const TonerCreate = () => {
   const {control, errors, handleSubmit} = useForm();

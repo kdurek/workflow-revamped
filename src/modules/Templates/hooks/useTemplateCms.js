@@ -2,7 +2,7 @@ import {useSession} from 'next-auth/client';
 
 import normalizeNumber from '@/utils/normalizeNumber';
 import sendEmail from '@/utils/sendEmail';
-import useCms from '@/common/hooks/useCms';
+import useCms from '@/modules/reactQuery/queries/useCms';
 
 export const useTemplateCms = () => {
   const [session] = useSession();

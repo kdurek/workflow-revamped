@@ -5,9 +5,9 @@ import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
 import Select from '@/common/components/Select';
-import useTonerDelete from '@/common/hooks/useTonerDelete';
-import useToners from '@/common/hooks/useToners';
-import useTonerUpdate from '@/common/hooks/useTonerUpdate';
+import useTonerDelete from '@/modules/reactQuery/mutations/useTonerDelete';
+import useToners from '@/modules/reactQuery/queries/useToners';
+import useTonerUpdate from '@/modules/reactQuery/mutations/useTonerUpdate';
 
 const TonerEdit = () => {
   const {control, errors, handleSubmit, setValue, watch} = useForm();

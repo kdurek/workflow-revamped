@@ -1,5 +1,5 @@
 import Printer from '@/modules/printers/Printer';
-import usePrinters from '@/common/hooks/usePrinters';
+import usePrinters from '@/modules/reactQuery/queries/usePrinters';
 
 const PrintersList = () => {
   const {data: printersList} = usePrinters();

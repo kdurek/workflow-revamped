@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Button from '@/common/components/Button';
 import Modal from '@/common/components/Modal';
-import useTonerUpdate from '@/common/hooks/useTonerUpdate';
+import useTonerUpdate from '@/modules/reactQuery/mutations/useTonerUpdate';
 
 const getColor = color => {
   switch (color) {

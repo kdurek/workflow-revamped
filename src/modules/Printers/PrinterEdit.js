@@ -6,9 +6,9 @@ import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
 import Select from '@/common/components/Select';
-import usePrinterDelete from '@/common/hooks/usePrinterDelete';
-import usePrinterUpdate from '@/common/hooks/usePrinterUpdate';
-import useTonersUncategorized from '@/common/hooks/useTonersUncategorized';
+import usePrinterDelete from '@/modules/reactQuery/mutations/usePrinterDelete';
+import usePrinterUpdate from '@/modules/reactQuery/mutations/usePrinterUpdate';
+import useTonersUncategorized from '@/modules/reactQuery/queries/useTonersUncategorized';
 
 const PrinterEdit = ({printer}) => {
   const {control, errors, handleSubmit} = useForm();

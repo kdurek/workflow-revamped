@@ -5,7 +5,7 @@ import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
 import Select from '@/common/components/Select';
-import useCreatePrinter from '@/common/hooks/usePrinterCreate';
+import useCreatePrinter from '@/modules/reactQuery/mutations/usePrinterCreate';
 
 const PrinterCreate = () => {
   const {control, errors, handleSubmit} = useForm();
