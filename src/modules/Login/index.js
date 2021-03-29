@@ -1,5 +1,4 @@
 import {Controller, useForm} from 'react-hook-form';
-import {signIn} from 'next-auth/client';
 import {useEffect} from 'react';
 import {useRouter} from 'next/router';
 import Head from 'next/head';
@@ -7,14 +6,17 @@ import Head from 'next/head';
 import AuthLayout from '@/layouts/auth';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
-import LoginReset from '@/modules/Login/LoginReset';
+import PasswordReset from '@/modules/Login/PasswordReset';
+import useLogin from '@/modules/Login/hooks/useLogin';
 
 const Login = () => {
   const {control, errors, handleSubmit, setError, setValue} = useForm();
   const router = useRouter();
 
+  const {onSubmit} = useLogin();
+
   if (router.query.resetToken) {
-    return <LoginReset />;
+    return <PasswordReset />;
   }
 
   useEffect(() => {
@@ -26,14 +28,6 @@ const Login = () => {
       setValue('email', router.query.email);
     }
   }, [router]);
-
-  const onSubmit = data => {
-    signIn('credentials', {
-      email: data.email,
-      password: data.password,
-      callbackUrl: window.location.href,
-    });
-  };
 
   return (
     <AuthLayout>

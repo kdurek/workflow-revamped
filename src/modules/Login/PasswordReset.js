@@ -1,39 +1,23 @@
 import {Controller, useForm} from 'react-hook-form';
-import {signIn} from 'next-auth/client';
-import {useRouter} from 'next/router';
-import axios from 'axios';
 import Head from 'next/head';
 
+import {usePasswordReset} from '@/modules/Login/hooks/usePasswordReset';
 import AuthLayout from '@/layouts/auth';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 
-const LoginReset = () => {
+const PasswordReset = () => {
   const {control, errors, handleSubmit, getValues} = useForm();
-  const router = useRouter();
 
-  const onSubmit = async data => {
-    const response = await axios.patch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/resetpassword/${router.query.resetToken}`,
-      data
-    );
-
-    if (response) {
-      signIn('credentials', {
-        email: response.data.email,
-        password: data.password,
-        callbackUrl: window.location.hostname,
-      });
-    }
-  };
+  const {onSubmit} = usePasswordReset();
 
   return (
     <AuthLayout>
       <Head>
-        <title>Change Password</title>
+        <title>Password Reset</title>
       </Head>
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-        <legend className="text-4xl text-center text-coolGray-600">Change Password</legend>
+        <legend className="text-4xl text-center text-coolGray-600">Select your new Password</legend>
         <Controller
           name="password"
           control={control}
@@ -82,4 +66,4 @@ const LoginReset = () => {
   );
 };
 
-export default LoginReset;
+export default PasswordReset;
