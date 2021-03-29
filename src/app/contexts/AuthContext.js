@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, {createContext} from 'react';
 
-import Login from '@/modules/Login';
+import Login from '@/modules/login/Login';
 
 const FetchContext = createContext();
 

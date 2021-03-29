@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import DefaultLayout from '@/layouts/core';
-import OutOfStock from '@/modules/Dashboard/OutOfStock';
+import OutOfStock from '@/modules/dashboard/OutOfStock';
 
 const DashboardPage = () => {
   return (

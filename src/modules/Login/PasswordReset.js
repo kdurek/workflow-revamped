@@ -1,7 +1,7 @@
 import {Controller, useForm} from 'react-hook-form';
 import Head from 'next/head';
 
-import {usePasswordReset} from '@/modules/Login/hooks/usePasswordReset';
+import {usePasswordReset} from '@/modules/login/hooks/usePasswordReset';
 import AuthLayout from '@/layouts/auth';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';

@@ -6,8 +6,8 @@ import Head from 'next/head';
 import AuthLayout from '@/layouts/auth';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
-import PasswordReset from '@/modules/Login/PasswordReset';
-import useLogin from '@/modules/Login/hooks/useLogin';
+import PasswordReset from '@/modules/login/PasswordReset';
+import useLogin from '@/modules/login/hooks/useLogin';
 
 const Login = () => {
   const {control, errors, handleSubmit, setError, setValue} = useForm();

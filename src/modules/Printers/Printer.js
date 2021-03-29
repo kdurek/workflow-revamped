@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
 import Card from '@/common/components/Card';
-import PrinterEdit from '@/modules/Printers/PrinterEdit';
+import PrinterEdit from '@/modules/printers/PrinterEdit';
 import Protect from '@/common/components/Protect';
-import Toner from '@/modules/Printers/Toner';
+import Toner from '@/modules/printers/Toner';
 
 const Printer = ({printer}) => {
   return (

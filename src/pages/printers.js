@@ -2,11 +2,11 @@ import Head from 'next/head';
 
 import Card from '@/common/components/Card';
 import DefaultLayout from '@/layouts/core';
-import PrinterCreate from '@/modules/Printers/PrinterCreate';
-import PrintersList from '@/modules/Printers/PrintersList';
+import PrinterCreate from '@/modules/printers/PrinterCreate';
+import PrintersList from '@/modules/printers/PrintersList';
 import Protect from '@/common/components/Protect';
-import TonerCreate from '@/modules/Printers/TonerCreate';
-import TonerEdit from '@/modules/Printers/TonerEdit';
+import TonerCreate from '@/modules/printers/TonerCreate';
+import TonerEdit from '@/modules/printers/TonerEdit';
 
 const PrintersPage = () => {
   return (

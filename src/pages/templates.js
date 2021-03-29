@@ -2,8 +2,8 @@ import Head from 'next/head';
 
 import DefaultLayout from '@/layouts/core';
 import Tabs from '@/common/components/Tabs';
-import TemplateCms from '@/modules/Templates/TemplateCms';
-import TemplateReset from '@/modules/Templates/TemplateReset';
+import TemplateCms from '@/modules/templates/TemplateCms';
+import TemplateReset from '@/modules/templates/TemplateReset';
 
 const TemplatesPage = () => {
   return (

@@ -1,4 +1,4 @@
-import Printer from '@/modules/Printers/Printer';
+import Printer from '@/modules/printers/Printer';
 import usePrinters from '@/common/hooks/usePrinters';
 
 const PrintersList = () => {
