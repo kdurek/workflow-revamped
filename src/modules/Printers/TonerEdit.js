@@ -1,25 +1,23 @@
 import {Controller, useForm} from 'react-hook-form';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 
+import {useToggle} from '@/common/hooks/useToggle';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
 import Select from '@/common/components/Select';
-import useTonerDelete from '@/modules/reactQuery/mutations/useTonerDelete';
+import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 import useToners from '@/modules/reactQuery/queries/useToners';
-import useTonerUpdate from '@/modules/reactQuery/mutations/useTonerUpdate';
 
 const TonerEdit = () => {
+  const {data: tonersList} = useToners();
+  const [open, toggle] = useToggle(false);
   const {control, errors, handleSubmit, setValue, watch} = useForm();
   const selectedToner = watch('toner');
-
-  const {data: tonersList} = useToners();
-  const deleteTonerMutation = useTonerDelete();
-  const updateTonerMutation = useTonerUpdate();
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalOpen = () => setModalOpen(true);
-  const handleModalClose = () => setModalOpen(false);
+  const {handleTonerEdit, handleTonerDelete} = usePrinterActions({
+    selectedToner,
+    toggle,
+  });
 
   useEffect(() => {
     setValue('code', selectedToner?.code);
@@ -27,24 +25,11 @@ const TonerEdit = () => {
     setValue('amount', selectedToner?.amount);
   }, [selectedToner]);
 
-  const handleTonerEdit = async data => {
-    delete data.toner;
-
-    updateTonerMutation.mutate({id: selectedToner._id, updatedToner: data});
-    setModalOpen(false);
-  };
-
-  const handleTonerDelete = async () => {
-    deleteTonerMutation.mutate(selectedToner._id);
-    setModalOpen(false);
-  };
-
   return (
     <>
-      <Button onClick={handleModalOpen}>Edit Toner</Button>
-      <Modal open={modalOpen} setOpen={setModalOpen}>
+      <Button onClick={toggle}>Edit Toner</Button>
+      <Modal open={open} setOpen={toggle}>
         <Modal.Title>Edit Toner</Modal.Title>
-
         <form className="space-y-4" onSubmit={handleSubmit(handleTonerEdit)}>
           <Controller
             name="toner"
@@ -60,7 +45,6 @@ const TonerEdit = () => {
               />
             )}
           />
-
           {selectedToner && (
             <>
               <Modal.Description>Details</Modal.Description>
@@ -105,7 +89,7 @@ const TonerEdit = () => {
           <input type="submit" className="hidden" />
         </form>
         <Modal.Buttons>
-          <Button fullWidth onClick={handleModalClose}>
+          <Button fullWidth onClick={toggle}>
             Cancel
           </Button>
           {selectedToner && (

@@ -1,73 +1,41 @@
-import {useState} from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
+import {useToggle} from '@/common/hooks/useToggle';
 import Button from '@/common/components/Button';
+import getTonerColor from '@/modules/printers/utils/getTonerColor';
 import Modal from '@/common/components/Modal';
-import useTonerUpdate from '@/modules/reactQuery/mutations/useTonerUpdate';
-
-const getColor = color => {
-  switch (color) {
-    case 'Black':
-      return 'bg-gray-300';
-    case 'Cyan':
-      return 'bg-cyan-200';
-    case 'Magenta':
-      return 'bg-fuchsia-200';
-    case 'Yellow':
-      return 'bg-yellow-200';
-
-    default:
-      return 'bg-transparent';
-  }
-};
+import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 
 const Toner = ({toner}) => {
-  const updateTonerMutation = useTonerUpdate();
-
-  const [cardHover, setCardHover] = useState(false);
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalOpen = () => setModalOpen(true);
-  const handleModalClose = () => setModalOpen(false);
-
-  const handleTonerUse = () => {
-    const updatedToner = {
-      amount: toner.amount - 1,
-    };
-    updateTonerMutation.mutate({id: toner._id, updatedToner});
-    setModalOpen(false);
-  };
+  const [open, toggle] = useToggle(false);
+  const {handleTonerUse} = usePrinterActions({toggle, toner});
 
   return (
     <>
-      <button onClick={handleModalOpen}>
-        <div onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
+      <button onClick={toggle}>
+        <div
+          className={classNames(
+            'flex hover:bg-blue-200 transition items-center justify-between shadow h-16 bg-coolGray-100 rounded-xl overflow-hidden'
+          )}
+        >
+          <span className="px-4 text-2xl font-medium">{toner.code}</span>
           <div
-            className={classNames(
-              'flex items-center justify-between shadow h-16 bg-coolGray-100 rounded-xl overflow-hidden',
-              {
-                'bg-blue-200': cardHover,
-              }
-            )}
+            className={`w-16 h-16 p-1 flex items-center justify-center ${getTonerColor(
+              toner.color
+            )}`}
           >
-            <span className="px-4 text-2xl font-medium">{toner.code}</span>
-            <div
-              className={`w-16 h-16 p-1 flex items-center justify-center ${getColor(toner.color)}`}
-            >
-              <span className="text-2xl font-medium">{toner.amount}</span>
-            </div>
+            <span className="text-2xl font-medium">{toner.amount}</span>
           </div>
         </div>
       </button>
-
-      <Modal open={modalOpen} setOpen={setModalOpen} onSubmit={handleTonerUse}>
+      <Modal open={open} setOpen={toggle} onSubmit={handleTonerUse}>
         <Modal.Title>Use Toner</Modal.Title>
         <p className="text-2xl text-center ">
           Are you sure you want to use <span className="font-semibold">{toner.code}</span>?
         </p>
         <Modal.Buttons>
-          <Button fullWidth onClick={handleModalClose}>
+          <Button fullWidth onClick={toggle}>
             Cancel
           </Button>
           <Button fullWidth variant="primary" onClick={handleTonerUse}>

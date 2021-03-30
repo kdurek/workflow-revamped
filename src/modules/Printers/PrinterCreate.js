@@ -1,33 +1,22 @@
 import {Controller, useForm} from 'react-hook-form';
-import {useState} from 'react';
 
+import {useToggle} from '@/common/hooks/useToggle';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
 import Select from '@/common/components/Select';
-import useCreatePrinter from '@/modules/reactQuery/mutations/usePrinterCreate';
+import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 
 const PrinterCreate = () => {
   const {control, errors, handleSubmit} = useForm();
-
-  const createPrinterMutation = useCreatePrinter();
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalOpen = () => setModalOpen(true);
-  const handleModalClose = () => setModalOpen(false);
-
-  const handlePrinterCreate = async data => {
-    createPrinterMutation.mutate(data);
-    setModalOpen(false);
-  };
+  const [open, toggle] = useToggle(false);
+  const {handlePrinterCreate} = usePrinterActions({toggle});
 
   return (
     <>
-      <Button onClick={handleModalOpen}>Create Printer</Button>
-
-      <Modal open={modalOpen} setOpen={setModalOpen}>
+      <Button onClick={toggle}>Create Printer</Button>
+      <Modal open={open} setOpen={toggle}>
         <Modal.Title>Create Printer</Modal.Title>
-
         <form className="space-y-4" onSubmit={handleSubmit(handlePrinterCreate)}>
           <Modal.Description>Details</Modal.Description>
           <Controller
@@ -55,7 +44,7 @@ const PrinterCreate = () => {
           <input type="submit" className="hidden" />
         </form>
         <Modal.Buttons>
-          <Button fullWidth onClick={handleModalClose}>
+          <Button fullWidth onClick={toggle}>
             Cancel
           </Button>
           <Button fullWidth variant="primary" onClick={handleSubmit(handlePrinterCreate)}>

@@ -2,53 +2,32 @@ import {Controller, useForm} from 'react-hook-form';
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 
+import {useToggle} from '@/common/hooks/useToggle';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
 import Select from '@/common/components/Select';
-import usePrinterDelete from '@/modules/reactQuery/mutations/usePrinterDelete';
-import usePrinterUpdate from '@/modules/reactQuery/mutations/usePrinterUpdate';
+import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 import useTonersUncategorized from '@/modules/reactQuery/queries/useTonersUncategorized';
 
 const PrinterEdit = ({printer}) => {
-  const {control, errors, handleSubmit} = useForm();
-
   const {data: uncategorizedToners} = useTonersUncategorized();
-  const updatePrinterMutation = usePrinterUpdate();
-  const deletePrinterMutation = usePrinterDelete();
-
+  const {control, errors, handleSubmit} = useForm();
+  const [open, toggle] = useToggle(false);
   const [editToners, setEditToners] = useState('');
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalOpen = () => setModalOpen(true);
-  const handleModalClose = () => setModalOpen(false);
-
-  const handlePrinterEdit = async data => {
-    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: data});
-    setModalOpen(false);
-  };
-
-  const handlePullToner = async tonerId => {
-    const updatedToners = printer.toners.filter(toner => toner._id !== tonerId);
-    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
-  };
-
-  const handlePushToner = tonerId => {
-    const updatedToners = [...printer.toners.map(toner => toner._id), tonerId];
-    updatePrinterMutation.mutate({id: printer._id, updatedPrinter: {toners: updatedToners}});
-  };
-
-  const handlePrinterDelete = async printerId => {
-    deletePrinterMutation.mutate(printerId);
-    setModalOpen(false);
-  };
+  const {
+    handlePrinterEdit,
+    handlePrinterDelete,
+    handlePushToner,
+    handlePullToner,
+  } = usePrinterActions({printer, toggle});
 
   return (
     <>
-      <Button square onClick={handleModalOpen}>
+      <Button square onClick={toggle}>
         <span className="align-middle material-icons">more_vert</span>
       </Button>
-      <Modal open={modalOpen} setOpen={setModalOpen}>
+      <Modal open={open} setOpen={toggle}>
         <Modal.Title>Edit Printer</Modal.Title>
         <form className="space-y-4" onSubmit={handleSubmit(handlePrinterEdit)}>
           <Modal.Description>Details</Modal.Description>
@@ -115,7 +94,7 @@ const PrinterEdit = ({printer}) => {
           )}
         </div>
         <Modal.Buttons>
-          <Button fullWidth onClick={handleModalClose}>
+          <Button fullWidth onClick={toggle}>
             Cancel
           </Button>
           <Button fullWidth variant="danger" onClick={handlePrinterDelete}>
