@@ -14,7 +14,7 @@ class CustomDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="bg-coolGray-100 text-coolGray-900">
+        <body className="scrollbar scrollbar-thumb-coolGray-300 scrollbar-thumb-rounded-xl bg-coolGray-100 text-coolGray-900">
           <Main />
           <NextScript />
         </body>
