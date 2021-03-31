@@ -9,7 +9,9 @@ const ActiveLink = ({children, href}) => {
   let className = children.props.className || '';
 
   if (router.pathname === href) {
-    className = `${className} bg-coolGray-400`;
+    className = `${className} transform scale-110 bg-coolGray-400 hover:bg-coolGray-400 shadow-md`;
+  } else {
+    className = `${className} text-coolGray-600`;
   }
 
   return <Link href={href}>{React.cloneElement(children, {className})}</Link>;
