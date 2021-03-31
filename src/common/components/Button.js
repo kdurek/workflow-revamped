@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 const Button = ({children, fullWidth, onClick, square, type, variant}) => {
   const VARIANT_MAPS = {
-    default: 'bg-coolGray-100 hover:bg-coolGray-200 shadow-inner',
-    primary: 'bg-blue-400 text-white hover:bg-blue-500 hover:shadow-lg',
-    danger: 'bg-red-400 text-white hover:bg-red-500 hover:shadow-lg',
+    default: 'bg-coolGray-200 hover:bg-coolGray-300 text-coolGray-600 ring-coolGray-300',
+    primary: 'bg-blue-500 hover:bg-blue-600 text-blue-50 ring-blue-300',
+    danger: ' bg-red-500 hover:bg-red-600 text-red-50 ring-red-300',
   };
 
   return (
@@ -13,7 +13,7 @@ const Button = ({children, fullWidth, onClick, square, type, variant}) => {
       onClick={onClick}
       type={type}
       className={classNames(
-        'flex items-center justify-center rounded-xl px-4 py-2 uppercase font-medium duration-300 transition-all focus:ring-2',
+        'flex items-center justify-center rounded-xl px-4 py-2 uppercase hover:shadow-lg font-medium transition focus:ring-2',
         VARIANT_MAPS[variant],
         {
           'w-full': fullWidth,
