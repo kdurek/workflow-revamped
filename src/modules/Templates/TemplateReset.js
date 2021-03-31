@@ -35,10 +35,6 @@ const TemplateReset = () => {
           defaultValue={''}
           rules={{
             required: {value: true, message: 'Phone is required'},
-            pattern: {
-              value: /^[0-9]{9}$/,
-              message: 'Phone in bad format',
-            },
           }}
           render={({onChange, value}) => (
             <Input
