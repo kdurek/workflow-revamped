@@ -10,7 +10,7 @@ const Input = ({defaultValue, error, label, onChange, onClick, readOnly, type, v
       <input
         id={label}
         className={classNames(
-          'w-full px-4 py-2 transition bg-white rounded-md shadow ring-1 ring-opacity-50 ring-gray-300 focus:ring-blue-300',
+          'w-full px-4 py-2 transition bg-white rounded-md shadow ring-1 ring-opacity-50 ring-gray-300 focus:ring-2 focus:ring-blue-300',
           {'ring-red-300 focus:ring-red-400': error}
         )}
         defaultValue={defaultValue}

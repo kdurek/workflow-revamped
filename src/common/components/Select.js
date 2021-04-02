@@ -9,11 +9,11 @@ const Select = ({label, onChange, optionLabel, options, value}) => {
         <>
           <Listbox.Label className="block text-sm font-medium text-gray-500">{label}</Listbox.Label>
           <div className="relative">
-            <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left transition bg-white rounded-md shadow cursor-default ring-1 ring-opacity-50 ring-gray-300 focus:ring-blue-300">
+            <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left transition bg-white rounded-md shadow cursor-default ring-1 ring-opacity-50 ring-gray-300 focus:ring-2 focus:ring-blue-300">
               <span className="block truncate">
                 {value ? (optionLabel ? value[optionLabel] : value) : 'Click to select...'}
               </span>
-              <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-gray-400 material-icons">
+              <span className="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 pointer-events-none material-icons">
                 unfold_more
               </span>
             </Listbox.Button>

@@ -42,7 +42,7 @@ Buttons.propTypes = {
 const Modal = ({children, open, setOpen}) => {
   return (
     <Dialog className="fixed inset-0" open={open} onClose={setOpen}>
-      <Dialog.Overlay className="fixed inset-0 opacity-75 bg-gray-600" />
+      <Dialog.Overlay className="fixed inset-0 bg-gray-600 opacity-75" />
       <div className="flex items-center justify-center w-screen h-screen">
         <Card className="relative w-full max-w-xs p-4 space-y-4 sm:max-w-sm md:max-w-md">
           {children}
