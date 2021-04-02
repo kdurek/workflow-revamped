@@ -8,9 +8,9 @@ const Tab = ({activeTab, label, onClick}) => {
   return (
     <button
       className={classNames(
-        'flex items-center justify-center rounded-xl px-4 py-2 uppercase font-medium duration-300 transition-all focus:ring-2 bg-coolGray-100 hover:bg-coolGray-200 shadow-inner',
+        'flex items-center justify-center rounded-xl px-4 py-2 uppercase font-medium duration-300 transition-all focus:ring-2 bg-gray-100 hover:bg-gray-200 shadow-inner',
         {
-          'bg-coolGray-400 hover:bg-coolGray-400': activeTab === label,
+          'bg-gray-400 hover:bg-gray-400': activeTab === label,
         }
       )}
       onClick={() => onClick(label)}

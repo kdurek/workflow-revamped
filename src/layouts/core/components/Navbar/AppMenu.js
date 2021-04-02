@@ -12,7 +12,7 @@ const AppMenu = () => {
           <>
             <Menu.Button className="flex items-center justify-center px-2 group">
               <span className="py-3 mr-2">{session.user.name}</span>
-              <span className="p-1 transition rounded-full material-icons group-hover:bg-coolGray-200">
+              <span className="p-1 transition rounded-full material-icons group-hover:bg-gray-200">
                 expand_more
               </span>
             </Menu.Button>
@@ -29,7 +29,7 @@ const AppMenu = () => {
             >
               <Menu.Items
                 static
-                className="absolute right-0 mt-1 overflow-hidden bg-white divide-y rounded-md shadow-lg outline-none w-72 divide-coolGray-100 ring-1 ring-opacity-50 ring-coolGray-300"
+                className="absolute right-0 mt-1 overflow-hidden bg-white divide-y rounded-md shadow-lg outline-none w-72 divide-gray-100 ring-1 ring-opacity-50 ring-gray-300"
               >
                 <div className="px-4 py-3">
                   <p className="text-sm truncate">
@@ -45,7 +45,7 @@ const AppMenu = () => {
                     <Link href="/profile">
                       <button
                         disabled
-                        className={`w-full px-4 py-2 text-sm text-left hover:bg-coolGray-100 cursor-not-allowed`}
+                        className={`w-full px-4 py-2 text-sm text-left hover:bg-gray-100 cursor-not-allowed`}
                       >
                         Profile
                       </button>

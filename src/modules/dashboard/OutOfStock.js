@@ -11,10 +11,10 @@ const OutOfStock = () => {
   return (
     <Card className="p-4">
       <div className="text-xl font-medium text-center">Nearly or out of stock, please resupply</div>
-      <div className="my-4 divide-y divide-coolGray-200 divide-solid">
+      <div className="my-4 divide-y bg-gra divide-gray-200 divide-solid">
         {tonersList?.map(toner => (
           <div key={toner._id} className="flex items-center gap-4 py-2">
-            <div className="flex items-center justify-center w-10 h-10 font-bold shadow-inner rounded-xl bg-coolGray-200">
+            <div className="flex items-center justify-center w-10 h-10 font-bold shadow-inner rounded-xl bg-gray-200">
               {toner.amount}
             </div>
             <span className="text-2xl font-medium">{toner.code}</span>

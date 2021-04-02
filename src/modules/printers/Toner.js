@@ -16,7 +16,7 @@ const Toner = ({toner}) => {
       <button onClick={toggle}>
         <div
           className={classNames(
-            'flex hover:bg-blue-200 transition items-center justify-between shadow h-16 bg-coolGray-100 rounded-xl overflow-hidden'
+            'flex hover:bg-blue-200 transition items-center justify-between shadow h-16 bg-gray-100 rounded-xl overflow-hidden'
           )}
         >
           <span className="px-4 text-2xl font-medium">{toner.code}</span>

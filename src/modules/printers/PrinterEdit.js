@@ -57,11 +57,11 @@ const PrinterEdit = ({printer}) => {
         </form>
         <div className="space-y-4">
           <Modal.Description>Toners</Modal.Description>
-          <div className="divide-y divide-coolGray-300 divide-solid">
+          <div className="divide-y divide-gray-300 divide-solid">
             {printer.toners.map(toner => (
               <div key={toner._id} className="flex items-center gap-2">
                 <button onClick={() => handlePullToner(toner._id)}>
-                  <span className="flex items-center justify-center w-10 h-10 rounded-md material-icons hover:bg-coolGray-200">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-md material-icons hover:bg-gray-200">
                     close
                   </span>
                 </button>

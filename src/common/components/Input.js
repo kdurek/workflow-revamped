@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 const Input = ({defaultValue, error, label, onChange, onClick, readOnly, type, value}) => {
   return (
     <div className="w-full space-y-1">
-      <label htmlFor={label} className="block text-sm font-medium text-coolGray-500">
+      <label htmlFor={label} className="block text-sm font-medium text-gray-500">
         {error ? <span className="text-red-500">{error}</span> : label}
       </label>
       <input
         id={label}
         className={classNames(
-          'w-full px-4 py-2 transition bg-white rounded-md shadow ring-1 ring-opacity-50 ring-coolGray-300 focus:ring-blue-300',
+          'w-full px-4 py-2 transition bg-white rounded-md shadow ring-1 ring-opacity-50 ring-gray-300 focus:ring-blue-300',
           {'ring-red-300 focus:ring-red-400': error}
         )}
         defaultValue={defaultValue}

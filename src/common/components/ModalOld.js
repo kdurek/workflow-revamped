@@ -38,7 +38,7 @@ const Modal = ({buttonClass, buttonLabel, children, submit, submitLabel}) => {
           leaveTo="opacity-0"
           className="fixed inset-0 z-50"
         >
-          <div className="fixed inset-0 opacity-75 bg-coolGray-600" />
+          <div className="fixed inset-0 opacity-75 bg-gray-600" />
           <Transition.Child
             enter="transform transition-all duration-300 ease-out"
             enterFrom="opacity-0 translate-y-36 scale-95"

@@ -7,15 +7,13 @@ const Select = ({label, onChange, optionLabel, options, value}) => {
     <Listbox as="div" className="w-full space-y-1" value={value} onChange={onChange}>
       {({open}) => (
         <>
-          <Listbox.Label className="block text-sm font-medium text-coolGray-500">
-            {label}
-          </Listbox.Label>
+          <Listbox.Label className="block text-sm font-medium text-gray-500">{label}</Listbox.Label>
           <div className="relative">
-            <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left transition bg-white rounded-md shadow cursor-default ring-1 ring-opacity-50 ring-coolGray-300 focus:ring-blue-300">
+            <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left transition bg-white rounded-md shadow cursor-default ring-1 ring-opacity-50 ring-gray-300 focus:ring-blue-300">
               <span className="block truncate">
                 {value ? (optionLabel ? value[optionLabel] : value) : 'Click to select...'}
               </span>
-              <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-coolGray-400 material-icons">
+              <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-gray-400 material-icons">
                 unfold_more
               </span>
             </Listbox.Button>
@@ -25,7 +23,7 @@ const Select = ({label, onChange, optionLabel, options, value}) => {
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              className="absolute z-40 w-full mt-1 bg-white rounded-md shadow-lg ring-1 ring-opacity-50 ring-coolGray-300"
+              className="absolute z-40 w-full mt-1 bg-white rounded-md shadow-lg ring-1 ring-opacity-50 ring-gray-300"
             >
               <Listbox.Options
                 static

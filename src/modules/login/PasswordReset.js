@@ -16,7 +16,7 @@ const PasswordReset = () => {
         <title>Password Reset</title>
       </Head>
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-        <legend className="text-4xl text-center text-coolGray-600">Select your new Password</legend>
+        <legend className="text-4xl text-center text-gray-600">Select your new Password</legend>
         <Controller
           name="password"
           control={control}

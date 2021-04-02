@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Button = ({children, fullWidth, onClick, square, type, variant}) => {
   const VARIANT_MAPS = {
-    default: 'bg-coolGray-200 hover:bg-coolGray-300 text-coolGray-600 ring-coolGray-300',
+    default: 'bg-gray-200 hover:bg-gray-300 text-gray-600 ring-gray-300',
     primary: 'bg-blue-500 hover:bg-blue-600 text-blue-50 ring-blue-300',
     danger: ' bg-red-500 hover:bg-red-600 text-red-50 ring-red-300',
   };

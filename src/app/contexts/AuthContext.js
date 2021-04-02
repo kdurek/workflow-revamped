@@ -15,7 +15,7 @@ const FetchProvider = ({children}) => {
   axios.defaults.headers.post['Content-Type'] = 'application/json';
 
   if (loading) {
-    return <div className="inset-0 bg-coolGray-50" />;
+    return <div className="inset-0 bg-gray-50" />;
   }
 
   if (!session) {
