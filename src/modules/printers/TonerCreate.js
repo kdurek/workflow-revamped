@@ -1,15 +1,14 @@
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
+import {useToggle} from '@/common/hooks/useToggle';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
-import Select from '@/common/components/Select';
-import {useToggle} from '@/common/hooks/useToggle';
-import usePrinterActions from './hooks/usePrinterActions';
+import SelectNative from '@/common/components/SelectNative';
+import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 
 const TonerCreate = () => {
   const {
-    control,
     formState: {errors},
     handleSubmit,
     register,
@@ -29,13 +28,10 @@ const TonerCreate = () => {
             label={'Code'}
             register={register('code', {required: {value: true, message: 'Code is required'}})}
           />
-          <Controller
-            name="color"
-            control={control}
-            defaultValue={'Black'}
-            render={({field}) => (
-              <Select {...field} label={'Color'} options={['Black', 'Cyan', 'Magenta', 'Yellow']} />
-            )}
+          <SelectNative
+            label="Color"
+            options={['Black', 'Cyan', 'Magenta', 'Yellow']}
+            register={register('color')}
           />
           <input type="submit" className="hidden" />
         </form>

@@ -26,8 +26,14 @@ const TemplateCms = () => {
           name="cms"
           control={control}
           defaultValue={''}
-          render={({field}) => (
-            <Select {...field} label="Selected CMS" optionLabel="name" options={cmsList} />
+          render={({field: {onChange, value}}) => (
+            <Select
+              value={value}
+              onChange={onChange}
+              label="Selected CMS"
+              optionLabel="name"
+              options={cmsList}
+            />
           )}
         />
         {selectedCms && (

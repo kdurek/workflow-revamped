@@ -3,15 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  input {
+  input,
+  textarea,
+  button,
+  select {
     @apply outline-none appearance-none focus:outline-none;
-  }
-
-  textarea {
-    @apply outline-none focus:outline-none;
-  }
-
-  button {
-    @apply outline-none focus:outline-none;
   }
 }

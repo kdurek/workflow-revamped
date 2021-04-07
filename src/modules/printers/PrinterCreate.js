@@ -1,15 +1,14 @@
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
 import {useToggle} from '@/common/hooks/useToggle';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
-import Select from '@/common/components/Select';
+import SelectNative from '@/common/components/SelectNative';
 import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 
 const PrinterCreate = () => {
   const {
-    control,
     formState: {errors},
     handleSubmit,
     register,
@@ -24,12 +23,7 @@ const PrinterCreate = () => {
         <Modal.Title>Create Printer</Modal.Title>
         <form className="space-y-4" onSubmit={handleSubmit(handlePrinterCreate)}>
           <Modal.Description>Details</Modal.Description>
-          <Controller
-            name="brand"
-            control={control}
-            defaultValue={'Xerox'}
-            render={({field}) => <Select {...field} label={'Brand'} options={['Xerox', 'HP']} />}
-          />
+          <SelectNative label="Brand" options={['Xerox', 'HP']} register={register('brand')} />
           <Input
             error={errors?.model?.message}
             label={'Model'}

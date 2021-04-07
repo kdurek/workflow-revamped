@@ -1,4 +1,4 @@
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,13 +7,13 @@ import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
 import Select from '@/common/components/Select';
+import SelectNative from '@/common/components/SelectNative';
 import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 import useTonersUncategorized from '@/modules/reactQuery/queries/useTonersUncategorized';
 
 const PrinterEdit = ({printer}) => {
   const {data: uncategorizedToners} = useTonersUncategorized();
   const {
-    control,
     formState: {errors},
     handleSubmit,
     register,
@@ -36,13 +36,12 @@ const PrinterEdit = ({printer}) => {
         <Modal.Title>Edit Printer</Modal.Title>
         <form className="space-y-4" onSubmit={handleSubmit(handlePrinterEdit)}>
           <Modal.Description>Details</Modal.Description>
-          <Controller
-            name="brand"
-            control={control}
+          <SelectNative
+            label="Brand"
             defaultValue={printer.brand}
-            render={({field}) => <Select {...field} label={'Brand'} options={['Xerox', 'HP']} />}
+            options={['Xerox', 'HP']}
+            register={register('brand')}
           />
-
           <Input
             error={errors?.model?.message}
             label={'Model'}
