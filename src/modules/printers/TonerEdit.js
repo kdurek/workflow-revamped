@@ -25,6 +25,7 @@ const TonerEdit = () => {
   const {handleTonerEdit, handleTonerDelete} = usePrinterActions({
     selectedToner,
     toggle,
+    setValue,
   });
 
   useEffect(() => {

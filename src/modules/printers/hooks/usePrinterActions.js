@@ -5,7 +5,7 @@ import useTonerCreate from '@/modules/reactQuery/mutations/useCreateToner';
 import useTonerDelete from '@/modules/reactQuery/mutations/useDeleteToner';
 import useTonerUpdate from '@/modules/reactQuery/mutations/useUpdateToner';
 
-const usePrinterActions = ({printer, selectedToner, toggle, toner}) => {
+const usePrinterActions = ({printer, selectedToner, setValue, toggle, toner}) => {
   const {mutate: createPrinter} = usePrinterCreate();
   const {mutate: createToner} = useTonerCreate();
   const {mutate: deletePrinter} = usePrinterDelete();
@@ -60,6 +60,8 @@ const usePrinterActions = ({printer, selectedToner, toggle, toner}) => {
     delete data.toner;
 
     updateToner({_id: selectedToner._id, data});
+
+    setValue('toner');
 
     toggle();
   };
