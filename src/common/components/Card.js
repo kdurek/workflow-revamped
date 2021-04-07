@@ -6,7 +6,7 @@ const Card = ({children, className}) => {
 };
 
 Card.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 

@@ -36,7 +36,7 @@ const Input = ({
 };
 
 Input.propTypes = {
-  defaultValue: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   error: PropTypes.string,
   label: PropTypes.string,
   onChange: PropTypes.func,
