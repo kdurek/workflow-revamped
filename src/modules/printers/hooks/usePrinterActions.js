@@ -1,9 +1,9 @@
-import usePrinterCreate from '@/modules/reactQuery/mutations/usePrinterCreate';
-import usePrinterDelete from '@/modules/reactQuery/mutations/usePrinterDelete';
-import usePrinterUpdate from '@/modules/reactQuery/mutations/usePrinterUpdate';
-import useTonerCreate from '@/modules/reactQuery/mutations/useTonerCreate';
-import useTonerDelete from '@/modules/reactQuery/mutations/useTonerDelete';
-import useTonerUpdate from '@/modules/reactQuery/mutations/useTonerUpdate';
+import usePrinterCreate from '@/modules/reactQuery/mutations/useCreatePrinter';
+import usePrinterDelete from '@/modules/reactQuery/mutations/useDeletePrinter';
+import usePrinterUpdate from '@/modules/reactQuery/mutations/useUpdatePrinter';
+import useTonerCreate from '@/modules/reactQuery/mutations/useCreateToner';
+import useTonerDelete from '@/modules/reactQuery/mutations/useDeleteToner';
+import useTonerUpdate from '@/modules/reactQuery/mutations/useUpdateToner';
 
 const usePrinterActions = ({printer, selectedToner, toggle, toner}) => {
   const {mutate: createPrinter} = usePrinterCreate();
@@ -20,7 +20,7 @@ const usePrinterActions = ({printer, selectedToner, toggle, toner}) => {
   };
 
   const handlePrinterEdit = data => {
-    updatePrinter({id: printer._id, updatedPrinter: data});
+    updatePrinter({_id: printer._id, data});
 
     toggle();
   };
@@ -33,19 +33,19 @@ const usePrinterActions = ({printer, selectedToner, toggle, toner}) => {
 
   const handlePushToner = tonerId => {
     const updatedToners = [...printer.toners.map(toner => toner._id), tonerId];
-    updatePrinter({id: printer._id, updatedPrinter: {toners: updatedToners}});
+    updatePrinter({_id: printer._id, data: {toners: updatedToners}});
   };
 
   const handlePullToner = tonerId => {
     const updatedToners = printer.toners.filter(toner => toner._id !== tonerId);
-    updatePrinter({id: printer._id, updatedPrinter: {toners: updatedToners}});
+    updatePrinter({_id: printer._id, data: {toners: updatedToners}});
   };
 
   const handleTonerUse = () => {
     const updatedToner = {
       amount: toner.amount - 1,
     };
-    updateToner({id: toner._id, updatedToner});
+    updateToner({_id: toner._id, data: {updatedToner}});
 
     toggle();
   };
@@ -59,7 +59,7 @@ const usePrinterActions = ({printer, selectedToner, toggle, toner}) => {
   const handleTonerEdit = async data => {
     delete data.toner;
 
-    updateToner({id: selectedToner._id, updatedToner: data});
+    updateToner({_id: selectedToner._id, data});
 
     toggle();
   };

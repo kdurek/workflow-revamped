@@ -1,20 +1,21 @@
 import {useMutation, useQueryClient} from 'react-query';
 import axios from 'axios';
 
-const updatePrinter = async arg => {
+const updateToner = async updatedToner => {
   const {data} = await axios.patch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/printers/${arg.id}`,
-    arg.updatedPrinter
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/toners/${updatedToner._id}`,
+    updatedToner.data
   );
   return data;
 };
 
-export default function usePrinterUpdate() {
+export default function useUpdateToner() {
   const queryClient = useQueryClient();
 
-  return useMutation(updatePrinter, {
+  return useMutation(updateToner, {
     onSuccess: () => {
       queryClient.invalidateQueries('printers');
+      queryClient.invalidateQueries('toners');
       queryClient.invalidateQueries('toners-uncategorized');
     },
   });

@@ -1,16 +1,19 @@
 import {useMutation, useQueryClient} from 'react-query';
 import axios from 'axios';
 
-const createToner = async newToner => {
-  const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners`, newToner);
+const deleteToner = async deletedTonerId => {
+  const {data} = await axios.delete(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/toners/${deletedTonerId}`
+  );
   return data;
 };
 
-export default function useTonerCreate() {
+export default function useDeleteToner() {
   const queryClient = useQueryClient();
 
-  return useMutation(createToner, {
+  return useMutation(deleteToner, {
     onSuccess: () => {
+      queryClient.invalidateQueries('printers');
       queryClient.invalidateQueries('toners');
       queryClient.invalidateQueries('toners-uncategorized');
     },
