@@ -8,7 +8,12 @@ import {useToggle} from '@/common/hooks/useToggle';
 import usePrinterActions from './hooks/usePrinterActions';
 
 const TonerCreate = () => {
-  const {control, errors, handleSubmit} = useForm();
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+    register,
+  } = useForm();
   const [open, toggle] = useToggle(false);
   const {handleTonerCreate} = usePrinterActions({toggle});
 
@@ -19,31 +24,17 @@ const TonerCreate = () => {
         <Modal.Title>Create Toner</Modal.Title>
         <form className="space-y-4" onSubmit={handleSubmit(handleTonerCreate)}>
           <Modal.Description>Details</Modal.Description>
-          <Controller
-            name="code"
-            control={control}
-            defaultValue={''}
-            rules={{required: {value: true, message: 'Code is required'}}}
-            render={({onChange, value}) => (
-              <Input
-                error={errors?.code?.message}
-                label={'Code'}
-                onChange={onChange}
-                value={value}
-              />
-            )}
+          <Input
+            error={errors?.code?.message}
+            label={'Code'}
+            register={register('code', {required: {value: true, message: 'Code is required'}})}
           />
           <Controller
             name="color"
             control={control}
             defaultValue={'Black'}
-            render={({onChange, value}) => (
-              <Select
-                label={'Color'}
-                onChange={onChange}
-                value={value}
-                options={['Black', 'Cyan', 'Magenta', 'Yellow']}
-              />
+            render={({field}) => (
+              <Select {...field} label={'Color'} options={['Black', 'Cyan', 'Magenta', 'Yellow']} />
             )}
           />
           <input type="submit" className="hidden" />

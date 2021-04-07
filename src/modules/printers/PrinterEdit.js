@@ -12,7 +12,12 @@ import useTonersUncategorized from '@/modules/reactQuery/queries/useTonersUncate
 
 const PrinterEdit = ({printer}) => {
   const {data: uncategorizedToners} = useTonersUncategorized();
-  const {control, errors, handleSubmit} = useForm();
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+    register,
+  } = useForm();
   const [open, toggle] = useToggle(false);
   const [editToners, setEditToners] = useState('');
   const {
@@ -35,23 +40,14 @@ const PrinterEdit = ({printer}) => {
             name="brand"
             control={control}
             defaultValue={printer.brand}
-            render={({onChange, value}) => (
-              <Select label={'Brand'} onChange={onChange} value={value} options={['Xerox', 'HP']} />
-            )}
+            render={({field}) => <Select {...field} label={'Brand'} options={['Xerox', 'HP']} />}
           />
-          <Controller
-            name="model"
-            control={control}
+
+          <Input
+            error={errors?.model?.message}
+            label={'Model'}
             defaultValue={printer.model}
-            rules={{required: {value: true, message: 'Model is required'}}}
-            render={({onChange, value}) => (
-              <Input
-                error={errors?.model?.message}
-                label={'Model'}
-                onChange={onChange}
-                value={value}
-              />
-            )}
+            register={register('model', {required: {value: true, message: 'Model is required'}})}
           />
           <input type="submit" className="hidden" />
         </form>

@@ -1,4 +1,4 @@
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
 
@@ -9,7 +9,13 @@ import PasswordReset from '@/modules/login/PasswordReset';
 import useLogin from '@/modules/login/hooks/useLogin';
 
 const Login = () => {
-  const {control, errors, handleSubmit, setError, setValue} = useForm();
+  const {
+    formState: {errors},
+    handleSubmit,
+    register,
+    setError,
+    setValue,
+  } = useForm();
   const {onSubmit} = useLogin({setError, setValue});
   const router = useRouter();
 
@@ -23,40 +29,24 @@ const Login = () => {
         <title>Login</title>
       </Head>
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="email"
-          control={control}
-          defaultValue={''}
-          rules={{
+        <Input
+          error={errors?.email?.message}
+          label={'Email'}
+          register={register('email', {
             required: {value: true, message: 'Email is required'},
             pattern: {
               value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
               message: 'Email in bad format',
             },
-          }}
-          render={({onChange, value}) => (
-            <Input
-              error={errors?.email?.message}
-              label={'Email'}
-              onChange={onChange}
-              value={value}
-            />
-          )}
+          })}
         />
-        <Controller
-          name="password"
-          control={control}
-          defaultValue={''}
-          rules={{required: {value: true, message: 'Password is required'}}}
-          render={({onChange, value}) => (
-            <Input
-              error={errors?.password?.message}
-              label={'Password'}
-              onChange={onChange}
-              type="password"
-              value={value}
-            />
-          )}
+        <Input
+          error={errors?.password?.message}
+          label={'Password'}
+          type="password"
+          register={register('password', {
+            required: {value: true, message: 'Password is required'},
+          })}
         />
         <Button variant="primary" fullWidth onClick={handleSubmit(onSubmit)}>
           Login

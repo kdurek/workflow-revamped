@@ -12,7 +12,14 @@ import useToners from '@/modules/reactQuery/queries/useToners';
 const TonerEdit = () => {
   const {data: tonersList} = useToners();
   const [open, toggle] = useToggle(false);
-  const {control, errors, handleSubmit, setValue, watch} = useForm();
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+  } = useForm();
   const selectedToner = watch('toner');
   const {handleTonerEdit, handleTonerDelete} = usePrinterActions({
     selectedToner,
@@ -35,54 +42,38 @@ const TonerEdit = () => {
             name="toner"
             control={control}
             defaultValue={''}
-            render={({onChange, value}) => (
-              <Select
-                label="Selected Toner"
-                onChange={onChange}
-                value={value}
-                optionLabel="code"
-                options={tonersList}
-              />
+            render={({field}) => (
+              <Select {...field} label="Selected Toner" optionLabel="code" options={tonersList} />
             )}
           />
           {selectedToner && (
             <>
               <Modal.Description>Details</Modal.Description>
-              <Controller
-                name="code"
-                control={control}
+              <Input
+                label={'Code'}
                 defaultValue={selectedToner.code}
-                rules={{required: {value: true, message: 'Code is required'}}}
-                render={({onChange, value}) => (
-                  <Input
-                    error={errors?.code?.message}
-                    label={'Code'}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
+                register={register('code', {
+                  required: {value: true, message: 'Code is required'},
+                })}
               />
               <Controller
                 name="color"
                 control={control}
                 defaultValue={selectedToner.color}
-                render={({onChange, value}) => (
+                render={({field}) => (
                   <Select
+                    {...field}
                     label={'Color'}
-                    onChange={onChange}
-                    value={value}
                     options={['Black', 'Cyan', 'Magenta', 'Yellow']}
                   />
                 )}
               />
-              <Controller
-                name="amount"
-                control={control}
+              <Input
+                label={'Amount'}
                 defaultValue={selectedToner.amount}
-                rules={{required: true}}
-                render={({onChange, value}) => (
-                  <Input label={'Amount'} onChange={onChange} value={value} />
-                )}
+                register={register('amount', {
+                  required: {value: true, message: 'Amount is required'},
+                })}
               />
             </>
           )}

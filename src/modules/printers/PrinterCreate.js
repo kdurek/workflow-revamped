@@ -8,7 +8,12 @@ import Select from '@/common/components/Select';
 import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 
 const PrinterCreate = () => {
-  const {control, errors, handleSubmit} = useForm();
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+    register,
+  } = useForm();
   const [open, toggle] = useToggle(false);
   const {handlePrinterCreate} = usePrinterActions({toggle});
 
@@ -23,23 +28,12 @@ const PrinterCreate = () => {
             name="brand"
             control={control}
             defaultValue={'Xerox'}
-            render={({onChange, value}) => (
-              <Select label={'Brand'} onChange={onChange} value={value} options={['Xerox', 'HP']} />
-            )}
+            render={({field}) => <Select {...field} label={'Brand'} options={['Xerox', 'HP']} />}
           />
-          <Controller
-            name="model"
-            control={control}
-            defaultValue={''}
-            rules={{required: {value: true, message: 'Model is required'}}}
-            render={({onChange, value}) => (
-              <Input
-                error={errors?.model?.message}
-                label={'Model'}
-                onChange={onChange}
-                value={value}
-              />
-            )}
+          <Input
+            error={errors?.model?.message}
+            label={'Model'}
+            register={register('model', {required: {value: true, message: 'Model is required'}})}
           />
           <input type="submit" className="hidden" />
         </form>

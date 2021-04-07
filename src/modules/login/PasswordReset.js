@@ -1,4 +1,4 @@
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import Head from 'next/head';
 
 import {usePasswordReset} from '@/modules/login/hooks/usePasswordReset';
@@ -7,7 +7,12 @@ import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 
 const PasswordReset = () => {
-  const {control, errors, handleSubmit, getValues} = useForm();
+  const {
+    formState: {errors},
+    handleSubmit,
+    getValues,
+    register,
+  } = useForm();
   const {onSubmit} = usePasswordReset();
 
   return (
@@ -17,42 +22,24 @@ const PasswordReset = () => {
       </Head>
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <legend className="text-4xl text-center text-gray-500">Select your new Password</legend>
-        <Controller
-          name="password"
-          control={control}
-          defaultValue={''}
-          rules={{
+        <Input
+          error={errors?.password?.message}
+          label={'Password'}
+          type="password"
+          register={register('password', {
             required: {value: true, message: 'Password is required'},
-          }}
-          render={({onChange, value}) => (
-            <Input
-              error={errors?.password?.message}
-              label={'Password'}
-              onChange={onChange}
-              type="password"
-              value={value}
-            />
-          )}
+          })}
         />
-        <Controller
-          name="passwordConfirm"
-          control={control}
-          defaultValue={''}
-          rules={{
-            required: {value: true, message: 'Password confirm is required'},
+        <Input
+          error={errors?.passwordConfirm?.message}
+          label={'Password Confirm'}
+          type="password"
+          register={register('passwordConfirm', {
+            required: {value: true, message: 'Password Confirm is required'},
             validate: {
               passwordEqual: value => value === getValues().password,
             },
-          }}
-          render={({onChange, value}) => (
-            <Input
-              error={errors?.passwordConfirm?.message}
-              label={'Password confirm'}
-              onChange={onChange}
-              type="password"
-              value={value}
-            />
-          )}
+          })}
         />
         {errors.passwordConfirm && (
           <span className="block text-center text-red-500">Passwords must match</span>

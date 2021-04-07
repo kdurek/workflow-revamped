@@ -1,7 +1,17 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-const Input = ({defaultValue, error, label, onChange, onClick, readOnly, type, value}) => {
+const Input = ({
+  defaultValue,
+  error,
+  label,
+  onChange,
+  onClick,
+  readOnly,
+  type,
+  value,
+  register,
+}) => {
   return (
     <div className="w-full space-y-1">
       <label htmlFor={label} className="block text-sm font-medium text-gray-500">
@@ -14,11 +24,12 @@ const Input = ({defaultValue, error, label, onChange, onClick, readOnly, type, v
           {'ring-red-300 focus:ring-red-400': error}
         )}
         defaultValue={defaultValue}
-        onChange={e => onChange(e.target.value)}
+        onChange={onChange}
         onClick={onClick}
         readOnly={readOnly}
         type={type}
         value={value}
+        {...register}
       />
     </div>
   );
@@ -33,6 +44,7 @@ Input.propTypes = {
   readOnly: PropTypes.bool,
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  register: PropTypes.object,
 };
 
 Input.defaultProps = {

@@ -1,4 +1,4 @@
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
 import {useTemplateReset} from '@/modules/templates/hooks/useTemplateReset';
 import Button from '@/common/components/Button';
@@ -7,44 +7,32 @@ import generatePassword from '@/utils/generatePassword';
 import Input from '@/common/components/Input';
 
 const TemplateReset = () => {
-  const {control, errors, handleSubmit} = useForm();
+  const {
+    formState: {errors},
+    handleSubmit,
+    register,
+  } = useForm();
   const {onSubmit} = useTemplateReset();
 
   return (
     <div>
       <form className="space-y-4" onSubmit={e => e.preventDefault()}>
-        <Controller
-          name="password"
-          control={control}
+        <Input
+          readOnly
+          label={'Password'}
           defaultValue={generatePassword(true, true, true, true, 15)}
-          render={({value}) => (
-            <Input
-              readOnly
-              label={'Password'}
-              defaultValue={value}
-              onClick={e => {
-                copyToClipboard(e.target.value);
-                e.target.select();
-              }}
-            />
-          )}
-        />
-        <Controller
-          name="phone"
-          control={control}
-          defaultValue={''}
-          rules={{
-            required: {value: true, message: 'Phone is required'},
+          onClick={e => {
+            copyToClipboard(e.target.value);
+            e.target.select();
           }}
-          render={({onChange, value}) => (
-            <Input
-              error={errors?.phone?.message}
-              label={'Phone'}
-              onChange={onChange}
-              value={value}
-            />
-          )}
+          register={register('password')}
         />
+        <Input
+          error={errors?.phone?.message}
+          label={'Phone'}
+          register={register('phone', {required: {value: true, message: 'Phone is required'}})}
+        />
+
         <Button fullWidth variant="primary" onClick={handleSubmit(onSubmit)}>
           Send Password
         </Button>

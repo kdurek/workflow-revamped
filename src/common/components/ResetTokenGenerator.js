@@ -1,4 +1,4 @@
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {useState} from 'react';
 import axios from 'axios';
 
@@ -9,7 +9,11 @@ import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
 
 const ResetTokenGenerator = () => {
-  const {control, errors, handleSubmit} = useForm();
+  const {
+    formState: {errors},
+    handleSubmit,
+    register,
+  } = useForm();
   const [open, toggle] = useToggle(false);
 
   const [resetTokenLink, setResetTokenLink] = useState();
@@ -36,25 +40,16 @@ const ResetTokenGenerator = () => {
       <Modal open={open} setOpen={toggle}>
         <Modal.Title>Get Reset Token</Modal.Title>
         <form className="space-y-4" onSubmit={handleSubmit(handleResetToken)}>
-          <Controller
-            name="email"
-            control={control}
-            defaultValue=""
-            rules={{
+          <Input
+            error={errors?.email?.message}
+            label={'Email'}
+            register={register('email', {
               required: {value: true, message: 'Email is required'},
               pattern: {
                 value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
                 message: 'Email in bad format',
               },
-            }}
-            render={({onChange, value}) => (
-              <Input
-                error={errors?.email?.message}
-                label={'Email'}
-                onChange={onChange}
-                value={value}
-              />
-            )}
+            })}
           />
           <input type="submit" className="hidden" />
         </form>

@@ -8,7 +8,14 @@ import Input from '@/common/components/Input';
 import Select from '@/common/components/Select';
 
 const TemplateCms = () => {
-  const {control, errors, handleSubmit, watch, reset} = useForm();
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+    register,
+    reset,
+    watch,
+  } = useForm();
   const selectedCms = watch('cms');
   const {cmsList, onSubmitEmail, onSubmitSms} = useTemplateCms();
 
@@ -19,14 +26,8 @@ const TemplateCms = () => {
           name="cms"
           control={control}
           defaultValue={''}
-          render={({onChange, value}) => (
-            <Select
-              label="Selected CMS"
-              onChange={onChange}
-              value={value}
-              optionLabel="name"
-              options={cmsList}
-            />
+          render={({field}) => (
+            <Select {...field} label="Selected CMS" optionLabel="name" options={cmsList} />
           )}
         />
         {selectedCms && (
@@ -37,71 +38,36 @@ const TemplateCms = () => {
       </div>
       {selectedCms && (
         <>
-          <Controller
-            name="login"
-            control={control}
-            defaultValue={''}
-            rules={{required: {value: true, message: 'Login is required'}}}
-            render={({onChange, value}) => (
-              <Input
-                error={errors?.login?.message}
-                label={'Login'}
-                onChange={onChange}
-                value={value}
-              />
-            )}
+          <Input
+            error={errors?.login?.message}
+            label={'Login'}
+            register={register('login', {required: {value: true, message: 'Login is required'}})}
           />
-          <Controller
-            name="email"
-            control={control}
-            defaultValue={''}
-            rules={{
+          <Input
+            error={errors?.email?.message}
+            label={'Email'}
+            register={register('email', {
               required: {value: true, message: 'Email is required'},
               pattern: {
                 value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
                 message: 'Email in bad format',
               },
-            }}
-            render={({onChange, value}) => (
-              <Input
-                error={errors?.email?.message}
-                label={'Email'}
-                onChange={onChange}
-                value={value}
-              />
-            )}
+            })}
           />
-          <Controller
-            name="phone"
-            control={control}
-            defaultValue={''}
-            rules={{
-              required: {value: true, message: 'Phone is required'},
-            }}
-            render={({onChange, value}) => (
-              <Input
-                error={errors?.phone?.message}
-                label={'Phone'}
-                onChange={onChange}
-                value={value}
-              />
-            )}
+          <Input
+            error={errors?.phone?.message}
+            label={'Phone'}
+            register={register('phone', {required: {value: true, message: 'Phone is required'}})}
           />
-          <Controller
-            name="password"
-            control={control}
+          <Input
+            readOnly
+            label={'Password'}
             defaultValue={generatePassword(true, true, true, true, 15)}
-            render={({value}) => (
-              <Input
-                readOnly
-                label={'Password'}
-                defaultValue={value}
-                onClick={e => {
-                  copyToClipboard(e.target.value);
-                  e.target.select();
-                }}
-              />
-            )}
+            onClick={e => {
+              copyToClipboard(e.target.value);
+              e.target.select();
+            }}
+            register={register('password')}
           />
           <div className="flex gap-4">
             <Button fullWidth variant="primary" onClick={handleSubmit(onSubmitEmail)}>
