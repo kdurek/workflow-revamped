@@ -13,7 +13,7 @@ const Toner = ({toner}) => {
 
   return (
     <>
-      <button onClick={toggle}>
+      <button type="button" onClick={toggle}>
         <div
           className={classNames(
             'flex hover:bg-blue-200 transition items-center justify-between shadow h-16 bg-gray-100 rounded-xl overflow-hidden'
@@ -48,7 +48,11 @@ const Toner = ({toner}) => {
 };
 
 Toner.propTypes = {
-  toner: PropTypes.object,
+  toner: PropTypes.shape({
+    amount: PropTypes.number,
+    code: PropTypes.string,
+    color: PropTypes.string,
+  }).isRequired,
 };
 
 export default Toner;

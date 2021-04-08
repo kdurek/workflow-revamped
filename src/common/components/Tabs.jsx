@@ -7,6 +7,7 @@ import Card from '@/common/components/Card';
 const Tab = ({activeTab, label, onClick}) => {
   return (
     <button
+      type="button"
       className={classNames(
         'flex items-center justify-center rounded-xl px-4 py-2 uppercase font-medium duration-300 transition-all focus:ring-2 bg-gray-100 hover:bg-gray-200 shadow-inner',
         {
@@ -52,7 +53,7 @@ const Tabs = ({children}) => {
 };
 
 Tabs.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Tabs;

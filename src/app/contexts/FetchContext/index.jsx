@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, {createContext} from 'react';
 
 import Login from '@/modules/login/Login';
+import Loading from '@/app/contexts/FetchContext/Loading';
 
 const FetchContext = createContext();
 
@@ -11,11 +12,11 @@ const FetchProvider = ({children}) => {
   const [session, loading] = useSession();
 
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
-  axios.defaults.headers.common['Authorization'] = `Bearer ${session?.accessToken}`;
+  axios.defaults.headers.common.Authorization = `Bearer ${session?.accessToken}`;
   axios.defaults.headers.post['Content-Type'] = 'application/json';
 
   if (loading) {
-    return <div className="inset-0 bg-gray-50" />;
+    return <Loading />;
   }
 
   if (!session) {
@@ -34,7 +35,9 @@ const FetchProvider = ({children}) => {
 };
 
 FetchProvider.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.shape({
+    $$typeof: PropTypes.symbol,
+  }).isRequired,
 };
 
 export {FetchContext, FetchProvider};

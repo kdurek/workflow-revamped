@@ -11,7 +11,7 @@ const Select = ({label, onChange, optionLabel, options, value}) => {
           <div className="relative">
             <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left transition bg-white rounded-md shadow cursor-default ring-1 ring-opacity-50 ring-gray-300 focus:ring-2 focus:ring-blue-300">
               <span className="block truncate">
-                {value ? (optionLabel ? value[optionLabel] : value) : 'Click to select...'}
+                {value ? value[optionLabel] : 'Click to select...'}
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 pointer-events-none material-icons">
                 unfold_more
@@ -78,10 +78,16 @@ const Select = ({label, onChange, optionLabel, options, value}) => {
 
 Select.propTypes = {
   label: PropTypes.string,
-  onChange: PropTypes.func,
-  optionLabel: PropTypes.string,
-  options: PropTypes.array,
+  onChange: PropTypes.func.isRequired,
+  optionLabel: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  options: PropTypes.arrayOf(PropTypes.object),
+};
+
+Select.defaultProps = {
+  label: undefined,
+  value: undefined,
+  options: [],
 };
 
 export default Select;

@@ -26,7 +26,7 @@ const PrinterCreate = () => {
           <SelectNative label="Brand" options={['Xerox', 'HP']} register={register('brand')} />
           <Input
             error={errors?.model?.message}
-            label={'Model'}
+            label="Model"
             register={register('model', {required: {value: true, message: 'Model is required'}})}
           />
           <input type="submit" className="hidden" />

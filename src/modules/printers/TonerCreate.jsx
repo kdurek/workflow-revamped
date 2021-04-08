@@ -25,7 +25,7 @@ const TonerCreate = () => {
           <Modal.Description>Details</Modal.Description>
           <Input
             error={errors?.code?.message}
-            label={'Code'}
+            label="Code"
             register={register('code', {required: {value: true, message: 'Code is required'}})}
           />
           <SelectNative

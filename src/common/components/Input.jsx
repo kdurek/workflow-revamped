@@ -42,13 +42,26 @@ Input.propTypes = {
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   readOnly: PropTypes.bool,
+  register: PropTypes.shape({
+    name: PropTypes.string,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
+    ref: PropTypes.func,
+  }),
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  register: PropTypes.object,
 };
 
 Input.defaultProps = {
+  defaultValue: undefined,
+  error: undefined,
+  label: undefined,
+  onChange: undefined,
+  onClick: undefined,
+  readOnly: false,
+  register: {},
   type: 'text',
+  value: undefined,
 };
 
 export default Input;

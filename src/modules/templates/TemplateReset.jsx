@@ -1,6 +1,6 @@
 import {useForm} from 'react-hook-form';
 
-import {useTemplateReset} from '@/modules/templates/hooks/useTemplateReset';
+import useTemplateReset from '@/modules/templates/hooks/useTemplateReset';
 import Button from '@/common/components/Button';
 import copyToClipboard from '@/utils/copyToClipboard';
 import generatePassword from '@/utils/generatePassword';
@@ -19,7 +19,7 @@ const TemplateReset = () => {
       <form className="space-y-4" onSubmit={e => e.preventDefault()}>
         <Input
           readOnly
-          label={'Password'}
+          label="Password"
           defaultValue={generatePassword(true, true, true, true, 15)}
           onClick={e => {
             copyToClipboard(e.target.value);
@@ -29,7 +29,7 @@ const TemplateReset = () => {
         />
         <Input
           error={errors?.phone?.message}
-          label={'Phone'}
+          label="Phone"
           register={register('phone', {required: {value: true, message: 'Phone is required'}})}
         />
 

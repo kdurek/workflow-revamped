@@ -27,8 +27,8 @@ const NavBar = () => {
     <Card>
       <nav className="flex justify-between">
         <ul className="flex gap-2">
-          {navPages.map((item, i) => (
-            <NavLink key={i} icon={item.icon} path={item.path} />
+          {navPages.map(item => (
+            <NavLink key={item.path} icon={item.icon} path={item.path} />
           ))}
         </ul>
         <AppMenu />
@@ -50,9 +50,8 @@ const NavLink = ({icon, path}) => {
 };
 
 NavLink.propTypes = {
-  className: PropTypes.string,
-  icon: PropTypes.string,
-  path: PropTypes.string,
+  icon: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default NavBar;

@@ -13,8 +13,12 @@ const Title = ({children, className}) => {
 };
 
 Title.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.string.isRequired,
   className: PropTypes.string,
+};
+
+Title.defaultProps = {
+  className: undefined,
 };
 
 const Description = ({children, className}) => {
@@ -26,8 +30,12 @@ const Description = ({children, className}) => {
 };
 
 Description.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.string.isRequired,
   className: PropTypes.string,
+};
+
+Description.defaultProps = {
+  className: undefined,
 };
 
 const Buttons = ({children, className}) => {
@@ -35,8 +43,12 @@ const Buttons = ({children, className}) => {
 };
 
 Buttons.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.arrayOf(PropTypes.object).isRequired,
   className: PropTypes.string,
+};
+
+Buttons.defaultProps = {
+  className: undefined,
 };
 
 const Modal = ({children, open, setOpen}) => {
@@ -57,9 +69,9 @@ Modal.Description = Description;
 Modal.Buttons = Buttons;
 
 Modal.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  open: PropTypes.bool,
-  setOpen: PropTypes.func,
+  children: PropTypes.arrayOf(PropTypes.object).isRequired,
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
 };
 
 export default Modal;

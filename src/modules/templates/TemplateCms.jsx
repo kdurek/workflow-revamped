@@ -1,6 +1,6 @@
 import {Controller, useForm} from 'react-hook-form';
 
-import {useTemplateCms} from '@/modules/templates/hooks/useTemplateCms';
+import useTemplateCms from '@/modules/templates/hooks/useTemplateCms';
 import Button from '@/common/components/Button';
 import copyToClipboard from '@/utils/copyToClipboard';
 import generatePassword from '@/utils/generatePassword';
@@ -25,7 +25,7 @@ const TemplateCms = () => {
         <Controller
           name="cms"
           control={control}
-          defaultValue={''}
+          defaultValue=""
           render={({field: {onChange, value}}) => (
             <Select
               value={value}
@@ -46,12 +46,12 @@ const TemplateCms = () => {
         <>
           <Input
             error={errors?.login?.message}
-            label={'Login'}
+            label="Login"
             register={register('login', {required: {value: true, message: 'Login is required'}})}
           />
           <Input
             error={errors?.email?.message}
-            label={'Email'}
+            label="Email"
             register={register('email', {
               required: {value: true, message: 'Email is required'},
               pattern: {
@@ -62,12 +62,12 @@ const TemplateCms = () => {
           />
           <Input
             error={errors?.phone?.message}
-            label={'Phone'}
+            label="Phone"
             register={register('phone', {required: {value: true, message: 'Phone is required'}})}
           />
           <Input
             readOnly
-            label={'Password'}
+            label="Password"
             defaultValue={generatePassword(true, true, true, true, 15)}
             onClick={e => {
               copyToClipboard(e.target.value);

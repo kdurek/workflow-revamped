@@ -31,7 +31,7 @@ const Login = () => {
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <Input
           error={errors?.email?.message}
-          label={'Email'}
+          label="Email"
           register={register('email', {
             required: {value: true, message: 'Email is required'},
             pattern: {
@@ -42,7 +42,7 @@ const Login = () => {
         />
         <Input
           error={errors?.password?.message}
-          label={'Password'}
+          label="Password"
           type="password"
           register={register('password', {
             required: {value: true, message: 'Password is required'},

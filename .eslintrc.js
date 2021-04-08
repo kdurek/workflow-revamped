@@ -19,14 +19,16 @@ module.exports = {
     es6: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended',
+    'airbnb',
+    'airbnb/hooks',
+    'prettier',
     'plugin:prettier/recommended', // Make this the last element so prettier config overrides other formatting rules
   ],
   rules: {
     'prettier/prettier': ['error', {}, {usePrettierrc: true}], // Use our .prettierrc file as source
     'react/react-in-jsx-scope': 'off',
+    'import/no-unresolved': ['error', {ignore: ['^@']}],
+    'no-underscore-dangle': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {

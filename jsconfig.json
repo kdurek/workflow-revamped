@@ -7,9 +7,10 @@
       "@/components/*": ["src/common/components/*"],
       "@/contexts/*": ["src/common/contexts/*"],
       "@/hooks/*": ["src/common/hooks/*"],
-      "@/utils/*": ["src/common/utils/*"],
       "@/layouts/*": ["src/layouts/*"],
-      "@/modules/*": ["src/modules/*"]
+      "@/modules/*": ["src/modules/*"],
+      "@/styles/*": ["src/styles/*"],
+      "@/utils/*": ["src/common/utils/*"]
     }
   }
 }

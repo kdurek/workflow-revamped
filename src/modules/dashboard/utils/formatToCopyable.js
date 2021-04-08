@@ -1,7 +1,7 @@
 import copyToClipboard from '@/utils/copyToClipboard';
 
 const formatToCopyable = tonersList => {
-  let data = [];
+  const data = [];
   tonersList.forEach(toner => {
     data.push(`${toner.brand} ${toner.code} - ${2 - toner.amount}`);
   });

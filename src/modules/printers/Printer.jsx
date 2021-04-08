@@ -30,7 +30,17 @@ const Printer = ({printer}) => {
 };
 
 Printer.propTypes = {
-  printer: PropTypes.object,
+  printer: PropTypes.shape({
+    brand: PropTypes.string,
+    model: PropTypes.string,
+    toners: PropTypes.arrayOf(
+      PropTypes.shape({
+        amount: PropTypes.number,
+        code: PropTypes.string,
+        color: PropTypes.string,
+      })
+    ),
+  }).isRequired,
 };
 
 export default Printer;

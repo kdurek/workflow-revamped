@@ -9,12 +9,25 @@ const CustomError = ({statusCode}) => {
 };
 
 CustomError.getInitialProps = ({res, err}) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+  const statusCode = () => {
+    if (res) {
+      return res.statusCode;
+    }
+    if (err) {
+      return err.statusCode;
+    }
+    return 404;
+  };
+
   return {statusCode};
 };
 
 CustomError.propTypes = {
   statusCode: PropTypes.number,
+};
+
+CustomError.defaultProps = {
+  statusCode: undefined,
 };
 
 export default CustomError;

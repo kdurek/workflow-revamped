@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form';
 import Head from 'next/head';
 
-import {usePasswordReset} from '@/modules/login/hooks/usePasswordReset';
+import usePasswordReset from '@/modules/login/hooks/usePasswordReset';
 import AuthLayout from '@/layouts/auth';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
@@ -24,7 +24,7 @@ const PasswordReset = () => {
         <legend className="text-4xl text-center text-gray-500">Select your new Password</legend>
         <Input
           error={errors?.password?.message}
-          label={'Password'}
+          label="Password"
           type="password"
           register={register('password', {
             required: {value: true, message: 'Password is required'},
@@ -32,7 +32,7 @@ const PasswordReset = () => {
         />
         <Input
           error={errors?.passwordConfirm?.message}
-          label={'Password Confirm'}
+          label="Password Confirm"
           type="password"
           register={register('passwordConfirm', {
             required: {value: true, message: 'Password Confirm is required'},

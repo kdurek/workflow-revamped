@@ -3,7 +3,7 @@ import {useSession} from 'next-auth/client';
 import normalizeNumber from '@/utils/normalizeNumber';
 import sendEmail from '@/utils/sendEmail';
 
-export const useTemplateReset = () => {
+const useTemplateReset = () => {
   const [session] = useSession();
 
   const onSubmit = data => {
@@ -24,3 +24,5 @@ export const useTemplateReset = () => {
 
   return {onSubmit};
 };
+
+export default useTemplateReset;

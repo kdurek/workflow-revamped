@@ -13,7 +13,7 @@ const useLogin = ({setError, setValue}) => {
       });
       setValue('email', router.query.email);
     }
-  }, [router]);
+  }, [router, setError, setValue]);
 
   const onSubmit = data => {
     signIn('credentials', {

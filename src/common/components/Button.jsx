@@ -10,8 +10,9 @@ const Button = ({children, fullWidth, onClick, square, type, variant}) => {
 
   return (
     <button
-      onClick={onClick}
+      // eslint-disable-next-line react/button-has-type
       type={type}
+      onClick={onClick}
       className={classNames(
         'flex items-center justify-center rounded-xl px-4 py-2 uppercase shadow font-medium ring-1 ring-opacity-25 transition focus:ring-2 focus:ring-opacity-100',
         VARIANT_MAPS[variant],
@@ -29,7 +30,7 @@ const Button = ({children, fullWidth, onClick, square, type, variant}) => {
 Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   fullWidth: PropTypes.bool,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
   square: PropTypes.bool,
   type: PropTypes.string,
   variant: PropTypes.string,
@@ -37,6 +38,9 @@ Button.propTypes = {
 
 Button.defaultProps = {
   children: 'button',
+  fullWidth: false,
+  square: false,
+  type: 'button',
   variant: 'default',
 };
 

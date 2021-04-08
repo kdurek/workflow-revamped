@@ -3,8 +3,8 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import {ReactQueryDevtools} from 'react-query/devtools';
 import PropTypes from 'prop-types';
 
-import {FetchProvider} from '@/app/contexts/AuthContext';
-import '@/app/styles/tailwind.css';
+import {FetchProvider} from '@/app/contexts/FetchContext';
+import '@/styles/tailwind.css';
 
 const CustomApp = ({Component, pageProps}) => {
   const queryClient = new QueryClient();
@@ -22,8 +22,12 @@ const CustomApp = ({Component, pageProps}) => {
 };
 
 CustomApp.propTypes = {
-  Component: PropTypes.func,
-  pageProps: PropTypes.object,
+  Component: PropTypes.func.isRequired,
+  pageProps: PropTypes.objectOf(PropTypes.object),
+};
+
+CustomApp.defaultProps = {
+  pageProps: {},
 };
 
 export default CustomApp;

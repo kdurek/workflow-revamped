@@ -29,7 +29,7 @@ const AppMenu = () => {
             >
               <Menu.Items
                 static
-                className="absolute right-0 mt-1 overflow-hidden bg-white divide-y rounded-md shadow-lg outline-none w-72 divide-gray-100 ring-1 ring-opacity-50 ring-gray-300"
+                className="absolute right-0 mt-1 overflow-hidden bg-white divide-y divide-gray-100 rounded-md shadow-lg outline-none w-72 ring-1 ring-opacity-50 ring-gray-300"
               >
                 <div className="px-4 py-3">
                   <p className="text-sm truncate">
@@ -44,8 +44,9 @@ const AppMenu = () => {
                   <Menu.Item>
                     <Link href="/profile">
                       <button
+                        type="button"
                         disabled
-                        className={`w-full px-4 py-2 text-sm text-left hover:bg-gray-100 cursor-not-allowed`}
+                        className="w-full px-4 py-2 text-sm text-left cursor-not-allowed hover:bg-gray-100"
                       >
                         Profile
                       </button>
@@ -56,8 +57,9 @@ const AppMenu = () => {
                 <div className="py-1">
                   <Menu.Item>
                     <button
+                      type="button"
                       onClick={() => signOut()}
-                      className={`w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-red-100`}
+                      className="w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-red-100"
                     >
                       Sign out
                     </button>

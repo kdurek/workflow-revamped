@@ -32,7 +32,7 @@ const TonerEdit = () => {
     setValue('code', selectedToner?.code);
     setValue('color', selectedToner?.color);
     setValue('amount', selectedToner?.amount);
-  }, [selectedToner]);
+  }, [selectedToner, setValue]);
 
   return (
     <>
@@ -43,7 +43,7 @@ const TonerEdit = () => {
           <Controller
             name="toner"
             control={control}
-            defaultValue={''}
+            defaultValue=""
             render={({field: {onChange, value}}) => (
               <Select
                 value={value}
@@ -59,7 +59,7 @@ const TonerEdit = () => {
               <Modal.Description>Details</Modal.Description>
               <Input
                 error={errors?.code?.message}
-                label={'Code'}
+                label="Code"
                 defaultValue={selectedToner.code}
                 register={register('code', {
                   required: {value: true, message: 'Code is required'},
@@ -72,7 +72,7 @@ const TonerEdit = () => {
               />
               <Input
                 error={errors?.amount?.message}
-                label={'Amount'}
+                label="Amount"
                 defaultValue={selectedToner.amount}
                 register={register('amount', {
                   required: {value: true, message: 'Amount is required'},

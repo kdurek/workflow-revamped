@@ -4,7 +4,7 @@ import normalizeNumber from '@/utils/normalizeNumber';
 import sendEmail from '@/utils/sendEmail';
 import useCms from '@/modules/reactQuery/queries/useCms';
 
-export const useTemplateCms = () => {
+const useTemplateCms = () => {
   const [session] = useSession();
   const {data: cmsList} = useCms();
 
@@ -35,3 +35,5 @@ export const useTemplateCms = () => {
 
   return {cmsList, onSubmitEmail, onSubmitSms};
 };
+
+export default useTemplateCms;

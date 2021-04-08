@@ -6,7 +6,6 @@ import {useToggle} from '@/common/hooks/useToggle';
 import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import Modal from '@/common/components/Modal';
-import Select from '@/common/components/Select';
 import SelectNative from '@/common/components/SelectNative';
 import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 import useTonersUncategorized from '@/modules/reactQuery/queries/useTonersUncategorized';
@@ -44,7 +43,7 @@ const PrinterEdit = ({printer}) => {
           />
           <Input
             error={errors?.model?.message}
-            label={'Model'}
+            label="Model"
             defaultValue={printer.model}
             register={register('model', {required: {value: true, message: 'Model is required'}})}
           />
@@ -55,7 +54,7 @@ const PrinterEdit = ({printer}) => {
           <div className="divide-y divide-gray-300 divide-solid">
             {printer.toners.map(toner => (
               <div key={toner._id} className="flex items-center gap-2">
-                <button onClick={() => handlePullToner(toner._id)}>
+                <button type="button" onClick={() => handlePullToner(toner._id)}>
                   <span className="flex items-center justify-center w-10 h-10 rounded-md material-icons hover:bg-gray-200">
                     close
                   </span>
@@ -66,17 +65,18 @@ const PrinterEdit = ({printer}) => {
           </div>
           {!!uncategorizedToners?.length && (
             <div className="flex gap-4">
-              <Select
-                label={'Add toner'}
-                value={editToners}
-                onChange={setEditToners}
+              <SelectNative
+                label="Add toner"
+                onChange={e => setEditToners(e.target.value)}
                 options={[...new Set(uncategorizedToners?.map(toner => toner.code))]}
               />
               <div className="self-end">
                 <Button
                   onClick={() => {
                     if (editToners !== '') {
-                      const toner = uncategorizedToners.find(toner => toner.code === editToners);
+                      const toner = uncategorizedToners.find(
+                        uncategorizedToner => uncategorizedToner.code === editToners
+                      );
                       handlePushToner(toner._id);
                       setEditToners('');
                     }
@@ -105,7 +105,17 @@ const PrinterEdit = ({printer}) => {
 };
 
 PrinterEdit.propTypes = {
-  printer: PropTypes.object.isRequired,
+  printer: PropTypes.shape({
+    brand: PropTypes.string,
+    model: PropTypes.string,
+    toners: PropTypes.arrayOf(
+      PropTypes.shape({
+        amount: PropTypes.number,
+        code: PropTypes.string,
+        color: PropTypes.string,
+      })
+    ),
+  }).isRequired,
 };
 
 export default PrinterEdit;

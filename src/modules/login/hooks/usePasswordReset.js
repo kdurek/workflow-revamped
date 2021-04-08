@@ -2,7 +2,7 @@ import {signIn} from 'next-auth/client';
 import {useRouter} from 'next/router';
 import axios from 'axios';
 
-export const usePasswordReset = () => {
+const usePasswordReset = () => {
   const router = useRouter();
 
   const onSubmit = async data => {
@@ -22,3 +22,5 @@ export const usePasswordReset = () => {
 
   return {onSubmit};
 };
+
+export default usePasswordReset;

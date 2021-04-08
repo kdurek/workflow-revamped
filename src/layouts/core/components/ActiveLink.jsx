@@ -18,8 +18,11 @@ const ActiveLink = ({children, href}) => {
 };
 
 ActiveLink.propTypes = {
-  children: PropTypes.object,
-  href: PropTypes.string,
+  children: PropTypes.shape({
+    $$typeof: PropTypes.symbol,
+    props: PropTypes.objectOf(PropTypes.string),
+  }).isRequired,
+  href: PropTypes.string.isRequired,
 };
 
 export default ActiveLink;

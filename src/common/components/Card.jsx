@@ -6,8 +6,12 @@ const Card = ({children, className}) => {
 };
 
 Card.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]).isRequired,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf(PropTypes.object)]),
+};
+
+Card.defaultProps = {
+  className: undefined,
 };
 
 export default Card;
