@@ -3,7 +3,7 @@ const sendEmail = (to, subject = '', body = '', cc = ' ') => {
     subject
   )}&body=${encodeURIComponent(body)}`;
 
-  window.location.href = compose;
+  window.open(compose, '_blank');
 };
 
 export default sendEmail;
