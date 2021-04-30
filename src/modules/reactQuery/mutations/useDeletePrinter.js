@@ -8,7 +8,7 @@ const deletePrinter = async deletedPrinterId => {
   return data;
 };
 
-export default function useDeletePrinter() {
+const useDeletePrinter = () => {
   const queryClient = useQueryClient();
 
   return useMutation(deletePrinter, {
@@ -17,4 +17,6 @@ export default function useDeletePrinter() {
       queryClient.invalidateQueries('toners-uncategorized');
     },
   });
-}
+};
+
+export default useDeletePrinter;

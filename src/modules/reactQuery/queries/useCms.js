@@ -6,6 +6,8 @@ const getCms = async () => {
   return data.templates;
 };
 
-export default function useCms() {
+const useCms = () => {
   return useQuery('templates-cms', getCms);
-}
+};
+
+export default useCms;

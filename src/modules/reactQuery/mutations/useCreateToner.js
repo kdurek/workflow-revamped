@@ -6,7 +6,7 @@ const createToner = async newTonerData => {
   return data;
 };
 
-export default function useCreateToner() {
+const useCreateToner = () => {
   const queryClient = useQueryClient();
 
   return useMutation(createToner, {
@@ -15,4 +15,6 @@ export default function useCreateToner() {
       queryClient.invalidateQueries('toners-uncategorized');
     },
   });
-}
+};
+
+export default useCreateToner;

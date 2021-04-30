@@ -6,6 +6,8 @@ const getTonersUncategorized = async () => {
   return data.toners;
 };
 
-export default function useTonersUncategorized() {
+const useTonersUncategorized = () => {
   return useQuery('toners-uncategorized', getTonersUncategorized);
-}
+};
+
+export default useTonersUncategorized;

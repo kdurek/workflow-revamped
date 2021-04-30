@@ -9,7 +9,7 @@ const updatePrinter = async updatedPrinter => {
   return data;
 };
 
-export default function useUpdatePrinter() {
+const useUpdatePrinter = () => {
   const queryClient = useQueryClient();
 
   return useMutation(updatePrinter, {
@@ -18,4 +18,6 @@ export default function useUpdatePrinter() {
       queryClient.invalidateQueries('toners-uncategorized');
     },
   });
-}
+};
+
+export default useUpdatePrinter;

@@ -6,6 +6,8 @@ const getTonersOutOfStock = async () => {
   return data.toners;
 };
 
-export default function useTonersOutOfStock() {
+const useTonersOutOfStock = () => {
   return useQuery('toners-outofstock', getTonersOutOfStock);
-}
+};
+
+export default useTonersOutOfStock;

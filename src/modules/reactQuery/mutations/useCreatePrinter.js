@@ -9,7 +9,7 @@ const createPrinter = async newPrinterData => {
   return data;
 };
 
-export default function useCreatePrinter() {
+const useCreatePrinter = () => {
   const queryClient = useQueryClient();
 
   return useMutation(createPrinter, {
@@ -17,4 +17,6 @@ export default function useCreatePrinter() {
       queryClient.invalidateQueries('printers');
     },
   });
-}
+};
+
+export default useCreatePrinter;

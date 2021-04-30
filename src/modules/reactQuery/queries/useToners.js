@@ -6,6 +6,8 @@ const getToners = async () => {
   return data.toners;
 };
 
-export default function useToners() {
+const useToners = () => {
   return useQuery('toners', getToners);
-}
+};
+
+export default useToners;

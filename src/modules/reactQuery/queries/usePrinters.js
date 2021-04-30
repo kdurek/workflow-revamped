@@ -6,6 +6,8 @@ const getPrinters = async () => {
   return data.printers;
 };
 
-export default function usePrinters() {
+const usePrinters = () => {
   return useQuery('printers', getPrinters);
-}
+};
+
+export default usePrinters;

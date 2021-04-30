@@ -9,7 +9,7 @@ const updateToner = async updatedToner => {
   return data;
 };
 
-export default function useUpdateToner() {
+const useUpdateToner = () => {
   const queryClient = useQueryClient();
 
   return useMutation(updateToner, {
@@ -19,4 +19,6 @@ export default function useUpdateToner() {
       queryClient.invalidateQueries('toners-uncategorized');
     },
   });
-}
+};
+
+export default useUpdateToner;

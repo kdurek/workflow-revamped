@@ -8,7 +8,7 @@ const deleteToner = async deletedTonerId => {
   return data;
 };
 
-export default function useDeleteToner() {
+const useDeleteToner = () => {
   const queryClient = useQueryClient();
 
   return useMutation(deleteToner, {
@@ -18,4 +18,6 @@ export default function useDeleteToner() {
       queryClient.invalidateQueries('toners-uncategorized');
     },
   });
-}
+};
+
+export default useDeleteToner;
