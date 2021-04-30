@@ -21,7 +21,6 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
-    'prettier',
     'plugin:prettier/recommended', // Make this the last element so prettier config overrides other formatting rules
   ],
   rules: {
