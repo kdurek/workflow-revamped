@@ -1,4 +1,3 @@
-import {useForm} from 'react-hook-form';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
 
@@ -7,16 +6,15 @@ import Button from '@/common/components/Button';
 import Input from '@/common/components/Input';
 import PasswordReset from '@/modules/login/PasswordReset';
 import useLogin from '@/modules/login/hooks/useLogin';
+import {useForm} from 'react-hook-form';
 
 const Login = () => {
   const {
     formState: {errors},
     handleSubmit,
     register,
-    setError,
-    setValue,
   } = useForm();
-  const {onSubmit} = useLogin({setError, setValue});
+  const {loginUser} = useLogin();
   const router = useRouter();
 
   if (router.query.resetToken) {
@@ -28,7 +26,7 @@ const Login = () => {
       <Head>
         <title>Login</title>
       </Head>
-      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="space-y-4" onSubmit={handleSubmit(loginUser)}>
         <Input
           error={errors?.email?.message}
           label="Email"
@@ -48,7 +46,7 @@ const Login = () => {
             required: {value: true, message: 'Password is required'},
           })}
         />
-        <Button variant="primary" fullWidth onClick={handleSubmit(onSubmit)}>
+        <Button variant="primary" fullWidth onClick={handleSubmit(loginUser)}>
           Login
         </Button>
         {errors.credentials && (

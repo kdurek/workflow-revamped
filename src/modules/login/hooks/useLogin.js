@@ -1,8 +1,11 @@
 import {signIn} from 'next-auth/client';
 import {useEffect} from 'react';
 import {useRouter} from 'next/router';
+import {useForm} from 'react-hook-form';
 
-const useLogin = ({setError, setValue}) => {
+const useLogin = () => {
+  const {setError, setValue} = useForm();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -15,7 +18,7 @@ const useLogin = ({setError, setValue}) => {
     }
   }, [router, setError, setValue]);
 
-  const onSubmit = data => {
+  const loginUser = data => {
     signIn('credentials', {
       email: data.email,
       password: data.password,
@@ -23,7 +26,7 @@ const useLogin = ({setError, setValue}) => {
     });
   };
 
-  return {onSubmit};
+  return {loginUser};
 };
 
 export default useLogin;
