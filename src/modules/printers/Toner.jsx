@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {useToggle} from '@/common/hooks/useToggle';
 import Button from '@/common/components/Button';
-import getTonerColor from '@/modules/printers/utils/getTonerColor';
+import getTonerColor from '@/modules/toners/utils/getTonerColor';
 import useTonerUpdate from '@/modules/reactQuery/mutations/useUpdateToner';
 import Modal from '@/common/components/Modal';
 

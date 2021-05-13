@@ -4,19 +4,18 @@ import {QueryClient} from 'react-query';
 import axios from 'axios';
 import Head from 'next/head';
 
-import Card from '@/common/components/Card';
 import DefaultLayout from '@/layouts/core';
-import TonersList from '@/modules/toners/TonersList';
+import OutOfStock from '@/modules/dashboard/OutOfStock/OutOfStockList';
 
-const TonersListPage = () => {
+const DashboardPage = () => {
   return (
     <DefaultLayout>
       <Head>
-        <title>Toners</title>
+        <title>Dashboard</title>
       </Head>
-      <Card className="flex flex-col gap-4">
-        <TonersList />
-      </Card>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <OutOfStock />
+      </div>
     </DefaultLayout>
   );
 };
@@ -24,17 +23,8 @@ const TonersListPage = () => {
 export const getServerSideProps = async context => {
   const session = await getSession(context);
 
-  if (session.user.role !== 'admin') {
-    return {
-      redirect: {
-        destination: '/printers',
-        permanent: false,
-      },
-    };
-  }
-
-  const getToners = async () => {
-    const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners`, {
+  const getTonersOutOfStock = async () => {
+    const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners?amount[lte]=1`, {
       headers: {
         Authorization: `bearer ${session.accessToken}`,
       },
@@ -44,11 +34,11 @@ export const getServerSideProps = async context => {
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery('toners', getToners);
+  await queryClient.prefetchQuery('toners-outofstock', getTonersOutOfStock);
 
   return {
     props: {dehydratedState: dehydrate(queryClient)},
   };
 };
 
-export default TonersListPage;
+export default DashboardPage;
