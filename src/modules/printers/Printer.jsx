@@ -1,17 +1,26 @@
+import {useRouter} from 'next/router';
 import PropTypes from 'prop-types';
 
+import Button from '@/common/components/Button';
 import Card from '@/common/components/Card';
-import PrinterEdit from '@/modules/printers/PrinterEdit';
 import Protect from '@/common/components/Protect';
 import Toner from '@/modules/printers/Toner';
 
 const Printer = ({printer}) => {
+  const router = useRouter();
+
+  const handleEditPrinterClick = async () => {
+    router.push(`/printers/${printer._id}`);
+  };
+
   return (
     <Card className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <span className="text-4xl font-bold">{`${printer.brand} ${printer.model}`}</span>
         <Protect>
-          <PrinterEdit printer={printer} />
+          <Button square onClick={handleEditPrinterClick}>
+            <span className="align-middle material-icons">more_vert</span>
+          </Button>
         </Protect>
       </div>
       {printer.toners.length ? (
@@ -31,6 +40,7 @@ const Printer = ({printer}) => {
 
 Printer.propTypes = {
   printer: PropTypes.shape({
+    _id: PropTypes.string,
     brand: PropTypes.string,
     model: PropTypes.string,
     toners: PropTypes.arrayOf(

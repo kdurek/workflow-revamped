@@ -4,12 +4,21 @@ import PropTypes from 'prop-types';
 import {useToggle} from '@/common/hooks/useToggle';
 import Button from '@/common/components/Button';
 import getTonerColor from '@/modules/printers/utils/getTonerColor';
+import useTonerUpdate from '@/modules/reactQuery/mutations/useUpdateToner';
 import Modal from '@/common/components/Modal';
-import usePrinterActions from '@/modules/printers/hooks/usePrinterActions';
 
 const Toner = ({toner}) => {
   const [open, toggle] = useToggle(false);
-  const {handleTonerUse} = usePrinterActions({toggle, toner});
+  const {mutate: updateToner} = useTonerUpdate();
+
+  const handleTonerUse = () => {
+    const updatedToner = {
+      amount: toner.amount - 1,
+    };
+    updateToner({_id: toner._id, data: {updatedToner}});
+
+    toggle();
+  };
 
   return (
     <>
@@ -49,6 +58,7 @@ const Toner = ({toner}) => {
 
 Toner.propTypes = {
   toner: PropTypes.shape({
+    _id: PropTypes.string,
     amount: PropTypes.number,
     code: PropTypes.string,
     color: PropTypes.string,
