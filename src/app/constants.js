@@ -19,3 +19,10 @@ export const NAV_ITEMS = [
     icon: 'print',
   },
 ];
+
+export const PROFILE_ITEMS = [
+  {
+    label: 'Profile',
+    path: '/profile',
+  },
+];

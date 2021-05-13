@@ -3,21 +3,21 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const ActiveLink = ({children, href}) => {
+const NavLink = ({children, href}) => {
   const router = useRouter();
 
   let className = children.props.className || '';
 
   if (router.pathname === href) {
-    className = `${className} transform scale-110 bg-gray-400 hover:bg-gray-400 shadow-md`;
+    className = `${className} text-gray-900 bg-gray-300 shadow-inner`;
   } else {
-    className = `${className} text-gray-500`;
+    className = `${className} text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:shadow-inner`;
   }
 
   return <Link href={href}>{React.cloneElement(children, {className})}</Link>;
 };
 
-ActiveLink.propTypes = {
+NavLink.propTypes = {
   children: PropTypes.shape({
     $$typeof: PropTypes.symbol,
     props: PropTypes.objectOf(PropTypes.string),
@@ -25,4 +25,4 @@ ActiveLink.propTypes = {
   href: PropTypes.string.isRequired,
 };
 
-export default ActiveLink;
+export default NavLink;
