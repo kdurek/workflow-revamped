@@ -34,8 +34,7 @@ const PrinterCreate = () => {
       <Head>
         <title>Create printer</title>
       </Head>
-      <Form onSubmit={handleSubmit(handlePrinterCreate)}>
-        <h1 className="text-xl font-medium">Create printer</h1>
+      <Form label="Create printer" onSubmit={handleSubmit(handlePrinterCreate)}>
         <SelectNative label="Brand" options={['Xerox', 'HP']} register={register('brand')} />
         <Input
           error={errors?.model?.message}

@@ -62,8 +62,7 @@ const PrinterEditPage = () => {
       <Head>
         <title>Edit printer</title>
       </Head>
-      <Form onSubmit={handleSubmit(handlePrinterEdit)}>
-        <h1 className="text-xl font-medium">Edit printer</h1>
+      <Form label="Edit printer" onSubmit={handleSubmit(handlePrinterEdit)}>
         <SelectNative
           label="Brand"
           defaultValue={printer.brand}

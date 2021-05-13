@@ -46,8 +46,7 @@ const TonerEditPage = () => {
       <Head>
         <title>Edit toner</title>
       </Head>
-      <Form onSubmit={handleSubmit(handleTonerEdit)}>
-        <h1 className="text-xl font-medium">Edit toner</h1>
+      <Form label="Edit toner" onSubmit={handleSubmit(handleTonerEdit)}>
         <Input
           error={errors?.code?.message}
           label="Code"
