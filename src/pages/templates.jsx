@@ -1,3 +1,7 @@
+import {dehydrate} from 'react-query/hydration';
+import {getSession} from 'next-auth/client';
+import {QueryClient} from 'react-query';
+import axios from 'axios';
 import Head from 'next/head';
 
 import DefaultLayout from '@/layouts/core';
@@ -21,6 +25,30 @@ const TemplatesPage = () => {
       </Tabs>
     </DefaultLayout>
   );
+};
+
+export const getServerSideProps = async context => {
+  const session = await getSession(context);
+
+  const getCms = async () => {
+    const {data} = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/templates?category=cms`,
+      {
+        headers: {
+          Authorization: `bearer ${session.accessToken}`,
+        },
+      }
+    );
+    return data.templates;
+  };
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery('templates-cms', getCms);
+
+  return {
+    props: {dehydratedState: dehydrate(queryClient)},
+  };
 };
 
 export default TemplatesPage;
