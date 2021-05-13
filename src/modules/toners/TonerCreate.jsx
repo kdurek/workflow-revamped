@@ -6,6 +6,7 @@ import Form from '@/common/components/Form';
 import Input from '@/common/components/Input';
 import SelectNative from '@/common/components/SelectNative';
 import useTonerCreate from '@/modules/reactQuery/mutations/useCreateToner';
+import {TONER_COLORS} from '@/app/constants';
 
 const TonerCreate = () => {
   const router = useRouter();
@@ -33,11 +34,7 @@ const TonerCreate = () => {
         label="Code"
         register={register('code', {required: {value: true, message: 'Code is required'}})}
       />
-      <SelectNative
-        label="Color"
-        options={['Black', 'Cyan', 'Magenta', 'Yellow']}
-        register={register('color')}
-      />
+      <SelectNative label="Color" options={TONER_COLORS} register={register('color')} />
       <div className="flex gap-4">
         <Button fullWidth onClick={handleCancel}>
           Cancel

@@ -6,6 +6,7 @@ import Form from '@/common/components/Form';
 import Input from '@/common/components/Input';
 import SelectNative from '@/common/components/SelectNative';
 import usePrinterCreate from '@/modules/reactQuery/mutations/useCreatePrinter';
+import {PRINTER_BRANDS} from '@/app/constants';
 
 const PrinterCreate = () => {
   const router = useRouter();
@@ -29,7 +30,7 @@ const PrinterCreate = () => {
 
   return (
     <Form label="Create printer" onSubmit={handleSubmit(handlePrinterCreate)}>
-      <SelectNative label="Brand" options={['Xerox', 'HP']} register={register('brand')} />
+      <SelectNative label="Brand" options={PRINTER_BRANDS} register={register('brand')} />
       <Input
         error={errors?.model?.message}
         label="Model"

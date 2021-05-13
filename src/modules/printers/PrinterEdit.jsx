@@ -11,6 +11,7 @@ import usePrinter from '@/modules/reactQuery/queries/usePrinter';
 import usePrinterDelete from '@/modules/reactQuery/mutations/useDeletePrinter';
 import usePrinterUpdate from '@/modules/reactQuery/mutations/useUpdatePrinter';
 import useTonersUncategorized from '@/modules/reactQuery/queries/useTonersUncategorized';
+import {PRINTER_BRANDS} from '@/app/constants';
 
 const PrinterEdit = () => {
   const router = useRouter();
@@ -57,7 +58,7 @@ const PrinterEdit = () => {
         <SelectNative
           label="Brand"
           defaultValue={printer.brand}
-          options={['Xerox', 'HP']}
+          options={PRINTER_BRANDS}
           register={register('brand')}
         />
         <Input

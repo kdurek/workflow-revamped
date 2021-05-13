@@ -8,6 +8,7 @@ import SelectNative from '@/common/components/SelectNative';
 import useToner from '@/modules/reactQuery/queries/useToner';
 import useTonerDelete from '@/modules/reactQuery/mutations/useDeleteToner';
 import useTonerUpdate from '@/modules/reactQuery/mutations/useUpdateToner';
+import {TONER_COLORS} from '@/app/constants';
 
 const TonerEdit = () => {
   const router = useRouter();
@@ -48,7 +49,7 @@ const TonerEdit = () => {
       <SelectNative
         label="Color"
         defaultValue={toner.color}
-        options={['Black', 'Cyan', 'Magenta', 'Yellow']}
+        options={TONER_COLORS}
         register={register('color')}
       />
       <Input

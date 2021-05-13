@@ -3,31 +3,14 @@ import PropTypes from 'prop-types';
 import ActiveLink from '@/layouts/core/components/ActiveLink';
 import AppMenu from '@/layouts/core/components/Navbar/AppMenu';
 import Card from '@/common/components/Card';
-
-const navPages = [
-  {
-    label: 'Dashboard',
-    path: '/',
-    icon: 'dashboard',
-  },
-  {
-    label: 'Templates',
-    path: '/templates',
-    icon: 'list_alt',
-  },
-  {
-    label: 'Printers',
-    path: '/printers',
-    icon: 'print',
-  },
-];
+import {NAV_ITEMS} from '@/app/constants';
 
 const NavBar = () => {
   return (
     <Card className="p-2">
       <nav className="flex justify-between">
         <ul className="flex gap-2">
-          {navPages.map(item => (
+          {NAV_ITEMS.map(item => (
             <NavLink key={item.path} icon={item.icon} path={item.path} />
           ))}
         </ul>
