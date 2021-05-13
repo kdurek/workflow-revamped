@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 const Card = ({children, className}) => {
-  return <div className={classNames('p-2 rounded-xl bg-white shadow', className)}>{children}</div>;
+  return <div className={classNames('p-4 rounded-xl bg-white shadow', className)}>{children}</div>;
 };
 
 Card.propTypes = {

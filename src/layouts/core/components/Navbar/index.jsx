@@ -24,7 +24,7 @@ const navPages = [
 
 const NavBar = () => {
   return (
-    <Card>
+    <Card className="p-2">
       <nav className="flex justify-between">
         <ul className="flex gap-2">
           {navPages.map(item => (

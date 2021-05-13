@@ -6,7 +6,7 @@ import formatToCopyable from '@/modules/dashboard/utils/formatToCopyable';
 
 const OutOfStock = ({tonersList}) => {
   return (
-    <Card className="p-4">
+    <Card>
       <div className="text-xl font-medium text-center">Nearly or out of stock, please resupply</div>
       <div className="my-4 divide-y divide-gray-200 bg-gra divide-solid">
         {tonersList?.map(toner => (

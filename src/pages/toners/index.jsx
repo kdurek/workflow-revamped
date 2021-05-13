@@ -54,7 +54,7 @@ const TonersList = () => {
       <Head>
         <title>Toners</title>
       </Head>
-      <Card className="flex flex-col gap-4 p-4">
+      <Card className="flex flex-col gap-4">
         {tonersList.map(toner => (
           <TonerItem key={toner._id} toner={toner} />
         ))}

@@ -28,7 +28,7 @@ const PrintersPage = () => {
         <title>Printers</title>
       </Head>
       <Protect>
-        <Card className="flex gap-2 mb-4">
+        <Card className="flex gap-2 p-2 mb-4">
           <Button onClick={handleCreatePrinter}>Create Printer</Button>
           <Button onClick={handleCreateToner}>Create Toner</Button>
           <Button onClick={handleEditToner}>Edit Toner</Button>

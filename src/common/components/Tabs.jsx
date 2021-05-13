@@ -36,13 +36,13 @@ const Tabs = ({children}) => {
 
   return (
     <div className="space-y-4">
-      <Card className="flex gap-2">
+      <Card className="flex gap-2 p-2">
         {children.map(child => {
           const {label} = child.props;
           return <Tab activeTab={activeTab} key={label} label={label} onClick={onClick} />;
         })}
       </Card>
-      <Card className="p-4">
+      <Card>
         {children.map(child => {
           if (child.props.label !== activeTab) return undefined;
           return child.props.children;

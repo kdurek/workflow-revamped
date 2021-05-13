@@ -5,7 +5,7 @@ import Card from '@/common/components/Card';
 
 const Form = ({children, onSubmit, className}) => {
   return (
-    <Card className="p-4">
+    <Card>
       <form className={classNames('space-y-4', className)} onSubmit={onSubmit}>
         {children}
       </form>
