@@ -23,7 +23,7 @@ const PrinterEdit = () => {
     register,
   } = useForm();
 
-  const [editToners, setEditToners] = useState(uncategorizedToners[0].code);
+  const [editToners, setEditToners] = useState(uncategorizedToners[0]?.code);
 
   const {mutate: updatePrinter} = usePrinterUpdate();
   const {mutate: deletePrinter} = usePrinterDelete();
@@ -122,7 +122,6 @@ const PrinterEdit = () => {
           ))}
         </div>
       </Card>
-      ;
     </>
   );
 };
