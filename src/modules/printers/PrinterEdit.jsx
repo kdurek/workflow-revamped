@@ -3,7 +3,6 @@ import {useRouter} from 'next/router';
 import {useState} from 'react';
 
 import Button from '@/common/components/Button';
-import Card from '@/common/components/Card';
 import Form from '@/common/components/Form';
 import Input from '@/common/components/Input';
 import SelectNative from '@/common/components/SelectNative';
@@ -23,8 +22,6 @@ const PrinterEdit = () => {
     register,
   } = useForm();
 
-  const [editToners, setEditToners] = useState(uncategorizedToners[0]?.code);
-
   const {mutate: updatePrinter} = usePrinterUpdate();
   const {mutate: deletePrinter} = usePrinterDelete();
 
@@ -38,7 +35,11 @@ const PrinterEdit = () => {
     router.push('/printers');
   };
 
-  const handlePushToner = tonerId => {
+  const handlePushToner = data => {
+    const {_id: tonerId} = uncategorizedToners.find(
+      uncategorizedToner => uncategorizedToner.code === data.toner
+    );
+
     const updatedToners = [...printer.toners.map(toner => toner._id), tonerId];
     updatePrinter({_id: printer._id, data: {toners: updatedToners}});
   };
@@ -84,26 +85,16 @@ const PrinterEdit = () => {
           </Button>
         </div>
       </Form>
-      <Card className="mt-4 space-y-4">
+      <Form label="Toners" className="mt-4" onSubmit={handleSubmit(handlePushToner)}>
         {!!uncategorizedToners?.length && (
           <div className="flex gap-4">
             <SelectNative
-              label="Add toner"
-              onChange={e => setEditToners(e.target.value)}
-              options={[...new Set(uncategorizedToners?.map(toner => toner.code))]}
+              label="Toner"
+              options={uncategorizedToners?.map(toner => toner.code)}
+              register={register('toner')}
             />
             <div className="self-end">
-              <Button
-                onClick={() => {
-                  if (editToners !== '') {
-                    const toner = uncategorizedToners.find(
-                      uncategorizedToner => uncategorizedToner.code === editToners
-                    );
-                    handlePushToner(toner._id);
-                    setEditToners('');
-                  }
-                }}
-              >
+              <Button type="submit" onClick={handleSubmit(handlePushToner)}>
                 Add
               </Button>
             </div>
@@ -121,7 +112,7 @@ const PrinterEdit = () => {
             </div>
           ))}
         </div>
-      </Card>
+      </Form>
     </>
   );
 };
