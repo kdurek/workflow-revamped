@@ -1,18 +1,17 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import Card from '@/common/components/Card';
-
 const Form = ({children, onSubmit, className, label}) => {
   return (
-    <Card>
-      <form className={classNames('space-y-4', className)} onSubmit={onSubmit}>
-        <>
-          <span className="text-xl font-medium select-none">{label}</span>
-          {children}
-        </>
-      </form>
-    </Card>
+    <form
+      className={classNames('space-y-4 p-4 rounded-xl bg-white shadow', className)}
+      onSubmit={onSubmit}
+    >
+      <>
+        <span className="text-xl font-medium select-none">{label}</span>
+        {children}
+      </>
+    </form>
   );
 };
 
