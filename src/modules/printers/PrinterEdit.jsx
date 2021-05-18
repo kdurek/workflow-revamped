@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {useRouter} from 'next/router';
-import {useState} from 'react';
 
+import {PRINTER_BRANDS} from '@/app/constants';
 import Button from '@/common/components/Button';
 import Form from '@/common/components/Form';
 import Input from '@/common/components/Input';
@@ -10,12 +10,14 @@ import usePrinter from '@/modules/reactQuery/queries/usePrinter';
 import usePrinterDelete from '@/modules/reactQuery/mutations/useDeletePrinter';
 import usePrinterUpdate from '@/modules/reactQuery/mutations/useUpdatePrinter';
 import useTonersUncategorized from '@/modules/reactQuery/queries/useTonersUncategorized';
-import {PRINTER_BRANDS} from '@/app/constants';
 
 const PrinterEdit = () => {
   const router = useRouter();
-  const {data: printer} = usePrinter();
-  const {data: uncategorizedToners} = useTonersUncategorized();
+  const {data: printer, isLoading: isLoadingPrinter} = usePrinter();
+  const {
+    data: uncategorizedToners,
+    isLoading: isLoadingTonersUncategorized,
+  } = useTonersUncategorized();
   const {
     formState: {errors},
     handleSubmit,
@@ -53,6 +55,10 @@ const PrinterEdit = () => {
     router.push('/printers');
   };
 
+  if (isLoadingPrinter || isLoadingTonersUncategorized) {
+    return null;
+  }
+
   return (
     <>
       <Form label="Edit printer" onSubmit={handleSubmit(handlePrinterEdit)}>
@@ -86,11 +92,11 @@ const PrinterEdit = () => {
         </div>
       </Form>
       <Form label="Toners" className="mt-4" onSubmit={handleSubmit(handlePushToner)}>
-        {!!uncategorizedToners?.length && (
+        {!!uncategorizedToners.length && (
           <div className="flex gap-4">
             <SelectNative
               label="Toner"
-              options={uncategorizedToners?.map(toner => toner.code)}
+              options={uncategorizedToners.map(toner => toner.code)}
               register={register('toner')}
             />
             <div className="self-end">

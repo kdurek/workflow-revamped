@@ -1,4 +1,3 @@
-import {getSession} from 'next-auth/client';
 import Head from 'next/head';
 
 import DefaultLayout from '@/layouts/core';
@@ -13,23 +12,6 @@ const TonerCreatePage = () => {
       <TonerCreate />
     </DefaultLayout>
   );
-};
-
-export const getServerSideProps = async context => {
-  const session = await getSession(context);
-
-  if (session.user.role !== 'admin') {
-    return {
-      redirect: {
-        destination: '/printers',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
 };
 
 export default TonerCreatePage;

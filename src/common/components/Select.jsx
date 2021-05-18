@@ -29,7 +29,7 @@ const Select = ({label, onChange, optionLabel, options, value}) => {
                 static
                 className="w-full py-1 overflow-auto rounded-md max-h-60 focus:outline-none"
               >
-                {options?.map(option => (
+                {options.map(option => (
                   <Listbox.Option
                     className="focus:outline-none"
                     key={optionLabel ? option._id : option}
@@ -81,13 +81,12 @@ Select.propTypes = {
   onChange: PropTypes.func.isRequired,
   optionLabel: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  options: PropTypes.arrayOf(PropTypes.object),
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 Select.defaultProps = {
   label: undefined,
   value: undefined,
-  options: [],
 };
 
 export default Select;

@@ -11,10 +11,6 @@ const FetchContext = createContext();
 const FetchProvider = ({children}) => {
   const [session, loading] = useSession();
 
-  axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
-  axios.defaults.headers.common.Authorization = `Bearer ${session?.accessToken}`;
-  axios.defaults.headers.post['Content-Type'] = 'application/json';
-
   if (loading) {
     return <Loading />;
   }
@@ -22,6 +18,10 @@ const FetchProvider = ({children}) => {
   if (!session) {
     return <Login />;
   }
+
+  axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+  axios.defaults.headers.common.Authorization = `Bearer ${session.accessToken}`;
+  axios.defaults.headers.post['Content-Type'] = 'application/json';
 
   return (
     <FetchContext.Provider

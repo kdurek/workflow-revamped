@@ -1,13 +1,16 @@
 import {Controller, useForm} from 'react-hook-form';
 
-import useTemplateCms from '@/modules/templates/hooks/useTemplateCms';
 import Button from '@/common/components/Button';
 import copyToClipboard from '@/utils/copyToClipboard';
 import generatePassword from '@/utils/generatePassword';
 import Input from '@/common/components/Input';
 import Select from '@/common/components/Select';
+import useCms from '@/modules/reactQuery/queries/useCms';
+import useTemplateCms from '@/modules/templates/hooks/useTemplateCms';
 
 const TemplateCms = () => {
+  const {data: cmsList, isLoading: isLoadingCms} = useCms();
+
   const {
     control,
     formState: {errors},
@@ -18,12 +21,15 @@ const TemplateCms = () => {
   } = useForm();
   const selectedCms = watch('cms');
   const {
-    cmsList,
     onSubmitEmail,
     onSubmitSmsPhone,
     onSubmitSmsSubject,
     onSubmitSmsMessage,
   } = useTemplateCms();
+
+  if (isLoadingCms) {
+    return null;
+  }
 
   return (
     <form className="space-y-4" onSubmit={e => e.preventDefault()}>

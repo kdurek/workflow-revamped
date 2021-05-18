@@ -2,12 +2,10 @@ import {useSession} from 'next-auth/client';
 
 import normalizeNumber from '@/utils/normalizeNumber';
 import sendEmail from '@/utils/sendEmail';
-import useCms from '@/modules/reactQuery/queries/useCms';
 import copyToClipboard from '@/common/utils/copyToClipboard';
 
 const useTemplateCms = () => {
   const [session] = useSession();
-  const {data: cmsList} = useCms();
 
   const onSubmitEmail = data => {
     const templateHeader = `(Credentials to ${data.cms.name})\n`;
@@ -51,7 +49,7 @@ const useTemplateCms = () => {
     copyToClipboard(patternMessage);
   };
 
-  return {cmsList, onSubmitEmail, onSubmitSmsPhone, onSubmitSmsSubject, onSubmitSmsMessage};
+  return {onSubmitEmail, onSubmitSmsPhone, onSubmitSmsSubject, onSubmitSmsMessage};
 };
 
 export default useTemplateCms;

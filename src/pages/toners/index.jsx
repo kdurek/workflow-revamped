@@ -1,7 +1,3 @@
-import {dehydrate} from 'react-query/hydration';
-import {getSession} from 'next-auth/client';
-import {QueryClient} from 'react-query';
-import axios from 'axios';
 import Head from 'next/head';
 
 import Card from '@/common/components/Card';
@@ -19,36 +15,6 @@ const TonersListPage = () => {
       </Card>
     </DefaultLayout>
   );
-};
-
-export const getServerSideProps = async context => {
-  const session = await getSession(context);
-
-  if (session.user.role !== 'admin') {
-    return {
-      redirect: {
-        destination: '/printers',
-        permanent: false,
-      },
-    };
-  }
-
-  const getToners = async () => {
-    const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/toners`, {
-      headers: {
-        Authorization: `bearer ${session.accessToken}`,
-      },
-    });
-    return data.toners;
-  };
-
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery('toners', getToners);
-
-  return {
-    props: {dehydratedState: dehydrate(queryClient)},
-  };
 };
 
 export default TonersListPage;

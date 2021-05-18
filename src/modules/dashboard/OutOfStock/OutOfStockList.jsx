@@ -5,12 +5,16 @@ import OutOfStockItem from '@/modules/dashboard/OutOfStock/OutOfStockItem';
 import useTonersOutOfStock from '@/modules/reactQuery/queries/useTonersOutOfStock';
 
 const OutOfStock = () => {
-  const {data: tonersList} = useTonersOutOfStock();
+  const {data: tonersList, isLoading: isLoadingTonersOutOfStock} = useTonersOutOfStock();
+
+  if (isLoadingTonersOutOfStock) {
+    return null;
+  }
 
   return (
     <Card>
       <div className="text-xl font-medium text-center">Nearly or out of stock, please resupply</div>
-      <div className="my-4 divide-y divide-gray-200 bg-gra divide-solid">
+      <div className="my-4 divide-y divide-gray-200 divide-solid">
         {tonersList.map(toner => (
           <OutOfStockItem key={toner._id} toner={toner} />
         ))}

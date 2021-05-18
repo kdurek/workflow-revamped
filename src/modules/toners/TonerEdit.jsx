@@ -12,7 +12,7 @@ import {TONER_COLORS} from '@/app/constants';
 
 const TonerEdit = () => {
   const router = useRouter();
-  const {data: toner} = useToner();
+  const {data: toner, isLoading: isLoadingToner} = useToner();
   const {
     formState: {errors},
     handleSubmit,
@@ -35,6 +35,10 @@ const TonerEdit = () => {
   const handleCancel = () => {
     router.push('/toners');
   };
+
+  if (isLoadingToner) {
+    return null;
+  }
 
   return (
     <Form label="Edit toner" onSubmit={handleSubmit(handleTonerEdit)}>
