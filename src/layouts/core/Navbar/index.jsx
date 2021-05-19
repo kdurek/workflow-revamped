@@ -2,6 +2,7 @@ import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Fragment} from 'react';
 import {signOut, useSession} from 'next-auth/client';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 import {NAV_ITEMS, PROFILE_ITEMS} from '@/app/constants';
 import NavLink from '@/layouts/core/Navbar/NavLink';
@@ -44,9 +45,9 @@ const NavBar = () => {
                     {({open}) => (
                       <>
                         <div>
-                          <Menu.Button className="flex items-center max-w-xs bg-gray-300 rounded-full shadow-inner focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900">
+                          <Menu.Button className="flex items-center max-w-xs bg-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900">
                             <span className="sr-only">Open user menu</span>
-                            <span className="flex items-center justify-center w-10 h-10 font-medium rounded-full">
+                            <span className="flex items-center justify-center w-10 h-10 font-medium rounded-full shadow-inner">
                               {getInitials(session.user.name)}
                             </span>
                           </Menu.Button>
@@ -68,14 +69,15 @@ const NavBar = () => {
                             {PROFILE_ITEMS.map(item => (
                               <Menu.Item key={item}>
                                 {({active}) => (
-                                  <a
-                                    href={item.path}
-                                    className={classNames('block px-4 py-2', {
-                                      'bg-gray-100': active,
-                                    })}
-                                  >
-                                    {item.label}
-                                  </a>
+                                  <Link href={item.path}>
+                                    <a
+                                      className={classNames('block px-4 py-2 hover:bg-gray-100', {
+                                        'bg-gray-100': active,
+                                      })}
+                                    >
+                                      {item.label}
+                                    </a>
+                                  </Link>
                                 )}
                               </Menu.Item>
                             ))}
