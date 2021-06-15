@@ -133,7 +133,7 @@ const NavBar = () => {
                 <div className="ml-3">
                   <div className="text-base font-medium leading-none">{session.user.name}</div>
                   <div className="text-sm font-medium leading-none">{session.user.email}</div>
-                  <div className="text-sm leading-none">{`${session.user.role} in ${session.user.location}`}</div>
+                  <div className="text-sm leading-none">{`${session.user.role} in ${session.user.location.city}`}</div>
                 </div>
               </div>
               <div className="px-2 mt-3 space-y-1">

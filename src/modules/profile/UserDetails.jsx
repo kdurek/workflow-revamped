@@ -17,7 +17,7 @@ const UserDetails = () => {
       <Input readOnly defaultValue={user.email} label="Email" />
       <Input readOnly defaultValue={user.name} label="Name" />
       <Input readOnly defaultValue={user.role} label="Role" />
-      <Input readOnly defaultValue={user.location} label="Location" />
+      <Input readOnly defaultValue={user.location.city} label="Location" />
     </Card>
   );
 };
