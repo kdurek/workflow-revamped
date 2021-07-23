@@ -68,11 +68,6 @@ const TemplateCms = () => {
             })}
           />
           <Input
-            error={errors?.phone?.message}
-            label="Phone"
-            register={register('phone', {required: {value: true, message: 'Phone is required'}})}
-          />
-          <Input
             readOnly
             label="Password"
             defaultValue={generatePassword(true, true, true, true, 15)}
