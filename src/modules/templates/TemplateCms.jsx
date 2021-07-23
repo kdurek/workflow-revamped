@@ -20,12 +20,7 @@ const TemplateCms = () => {
     watch,
   } = useForm();
   const selectedCms = watch('cms');
-  const {
-    onSubmitEmail,
-    onSubmitSmsPhone,
-    onSubmitSmsSubject,
-    onSubmitSmsMessage,
-  } = useTemplateCms();
+  const {onSubmitEmail} = useTemplateCms();
 
   if (isLoadingCms) {
     return null;
@@ -93,17 +88,6 @@ const TemplateCms = () => {
             </Button>
             <Button square onClick={reset}>
               <span className="material-icons">cached</span>
-            </Button>
-          </div>
-          <div className="flex gap-4">
-            <Button fullWidth variant="primary" onClick={handleSubmit(onSubmitSmsPhone)}>
-              Copy Phone@Email
-            </Button>
-            <Button fullWidth variant="primary" onClick={handleSubmit(onSubmitSmsSubject)}>
-              Copy Subject
-            </Button>
-            <Button fullWidth variant="primary" onClick={handleSubmit(onSubmitSmsMessage)}>
-              Copy Message
             </Button>
           </div>
         </>
